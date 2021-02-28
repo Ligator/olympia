@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get 'orders/checkout'
   get 'orders/thank_you'
   resources :products
-  resources :stores
+  resources :stores do
+    resources :products
+  end
   devise_for :users
   get "statics/home"
   get "statics/test_email"
