@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'awesome_print'
 gem 'pg'
+gem 'cloudinary'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

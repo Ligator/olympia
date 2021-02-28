@@ -1,0 +1,13 @@
+production:
+  cloud_name: ENV["CLOUDINARY_CLOUD_NAME"]
+  api_key: ENV["CLOUDINARY_API_KEY"]
+  api_secret: ENV["CLOUDINARY_API_SECRET"]
+  secure: true
+  cdn_subdomain: true
+
+#development:
+#  cloud_name: ""
+#  api_key: ""
+#  api_secret: ""
+#  secure: true
+#  cdn_subdomain: true
