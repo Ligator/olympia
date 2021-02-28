@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @store = Store.find_by(user_id: current_user.id)
+    @store = current_user.store
     @products = @store.products
   end
 
@@ -14,19 +14,19 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @store = Store.find_by(user_id: current_user.id)
+    @store = current_user.store
     @product = @store.products.build
   end
 
   # GET /products/1/edit
   def edit
-    @store = Store.find_by(user_id: current_user.id)
+    @store = current_user.store
     @product = @store.products.find(params[:id])
   end
 
   # POST /products or /products.json
   def create
-    @store = Store.find_by(user_id: current_user.id)
+    @store = current_user.store
     @product = @store.products.new(product_params)
     respond_to do |format|
       if @product.save
@@ -54,8 +54,8 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1 or /products/1.json
   def destroy
-    store = Store.find_by(user_id: current_user.id)
-    @product = store.products.find(params[:id])
+    @store = current_user.store
+    @product = @store.products.find(params[:id])
     @product.destroy
     respond_to do |format|
       format.html { redirect_to products_url, notice: "Product was successfully destroyed." }

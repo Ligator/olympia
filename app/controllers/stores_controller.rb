@@ -3,7 +3,7 @@ class StoresController < ApplicationController
 
   # GET /stores or /stores.json
   def index
-    @stores = Store.all
+    @store = current_user.store
   end
 
   # GET /stores/1 or /stores/1.json
@@ -21,16 +21,20 @@ class StoresController < ApplicationController
 
   # POST /stores or /stores.json
   def create
-    @store = Store.new(store_params.merge(user_id: current_user.id))
-
-    respond_to do |format|
-      if @store.save
-        format.html { redirect_to @store, notice: "Store was successfully created." }
-        format.json { render :show, status: :created, location: @store }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+    if current_user.store.nil?
+      @store = current_user.build_store(store_params)
+      respond_to do |format|
+        if @store.save
+          format.html { redirect_to @store, notice: "Store was successfully created." }
+          format.json { render :show, status: :created, location: @store }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = "You have a Store"
+      redirect_to stores_path
     end
   end
 
@@ -59,7 +63,7 @@ class StoresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_store
-      @store = Store.find_by(user_id: current_user.id)
+      @store = current_user.store
     end
 
     # Only allow a list of trusted parameters through.
