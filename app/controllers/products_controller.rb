@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @store = Store.find(params[:store_id])
+    @store = Store.find_by(user_id: current_user.id)
     @products = @store.products
   end
 
@@ -14,19 +14,19 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @store = Store.find(params[:store_id])
+    @store = Store.find_by(user_id: current_user.id)
     @product = @store.products.build
   end
 
   # GET /products/1/edit
   def edit
-    @store = Store.find(params[:store_id])
-    @product = Product.find(params[:id])
+    @store = Store.find_by(user_id: current_user.id)
+    @product = @store.products.find(params[:id])
   end
 
   # POST /products or /products.json
   def create
-    @store = Store.find(params[:store_id])
+    @store = Store.find_by(user_id: current_user.id)
     @product = @store.products.new(product_params)
     respond_to do |format|
       if @product.save
@@ -54,7 +54,8 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1 or /products/1.json
   def destroy
-    @product = Product.find(params[:id])
+    store = Store.find_by(user_id: current_user.id)
+    @product = store.products.find(params[:id])
     @product.destroy
     respond_to do |format|
       format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
@@ -70,6 +71,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :description, :price_in_cents, :size, :quantity, :store_id, images: [])
+      params.require(:product).permit(:name, :description, :price_in_cents, :size, :quantity, images: [])
     end
 end
