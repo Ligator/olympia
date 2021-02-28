@@ -34,5 +34,6 @@
 </p>
 
 <%= link_to 'Edit', edit_store_product_path(@product.store, @product) %> |
-<%= link_to 'Back', store_products_path(@product.store) %>|
+<%= link_to 'Store', store_path(@product.store) %>|
+<%= link_to 'Products', products_path %>|
 <%= link_to 'Destroy', store_product_path(@product.store, @product), method: :delete, data: { confirm: 'Are you sure?' } %>

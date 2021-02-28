@@ -3,13 +3,13 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @store = current_user.store
-    @products = @store.products
+    @products = Product.all
   end
 
   # GET /products/1 or /products/1.json
   def show
-    product = Product.find(params[:id])
+    @store = current_user.store
+    product = @store.products.find(params[:id])
   end
 
   # GET /products/new
@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
     @product = @store.products.new(product_params)
     respond_to do |format|
       if @product.save
-        format.html { redirect_to store_product_path(@product.store, @product), notice: "Product was successfully created." }
+        format.html { redirect_to store_path(@product.store), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }

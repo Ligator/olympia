@@ -3,11 +3,12 @@ class StoresController < ApplicationController
 
   # GET /stores or /stores.json
   def index
-    @store = current_user.store
+    @stores = Store.all
   end
 
   # GET /stores/1 or /stores/1.json
   def show
+    @store = Store.find(params[:id])
   end
 
   # GET /stores/new
@@ -40,14 +41,19 @@ class StoresController < ApplicationController
 
   # PATCH/PUT /stores/1 or /stores/1.json
   def update
-    respond_to do |format|
-      if @store.update(store_params)
-        format.html { redirect_to @store, notice: "Store was successfully updated." }
-        format.json { render :show, status: :ok, location: @store }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+    if current_user.store.eql?(@store)
+      respond_to do |format|
+        if @store.update(store_params)
+          format.html { redirect_to @store, notice: "Store was successfully updated." }
+          format.json { render :show, status: :ok, location: @store }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = "You cannot edit a store that is not yours"
+      render :index
     end
   end
 
