@@ -24,9 +24,9 @@
         <td><%= product.size %></td>
         <td><%= product.quantity %></td>
         <td><%= product.store_id %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', store_product_path(product.store_id, product.id) %></td>
+        <td><%= link_to 'Edit', edit_store_product_path(product.store_id, product.id) %></td>
+        <td><%= link_to 'Destroy', store_product_path(product.store_id, product.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
+<%= link_to 'New Product', new_store_product_path(@store) %>

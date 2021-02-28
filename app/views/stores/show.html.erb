@@ -10,10 +10,7 @@
   <%= @store.description %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @store.user_id %>
-</p>
 
 <%= link_to 'Edit', edit_store_path(@store) %> |
-<%= link_to 'Back', stores_path %>
+<%= link_to 'Back', stores_path %> |
+<%= link_to 'New Product', new_store_product_path(@store) %>

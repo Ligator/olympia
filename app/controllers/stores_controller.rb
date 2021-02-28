@@ -21,7 +21,7 @@ class StoresController < ApplicationController
 
   # POST /stores or /stores.json
   def create
-    @store = Store.new(store_params)
+    @store = Store.new(store_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @store.save
@@ -64,6 +64,6 @@ class StoresController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def store_params
-      params.require(:store).permit(:name, :description, :user_id)
+      params.require(:store).permit(:name, :description)
     end
 end
