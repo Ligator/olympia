@@ -1,1 +1,3 @@
-custom.en.yml
+
+es:
+  empty_cart: "Your cart is empty."
