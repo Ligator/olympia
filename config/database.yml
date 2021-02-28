@@ -10,3 +10,7 @@ default: &default
 development:
   <<: *default
   database: olympia
+
+test:
+  <<: *default
+  database: olympia_test
