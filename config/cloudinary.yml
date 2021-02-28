@@ -4,10 +4,3 @@ production:
   api_secret: ENV["CLOUDINARY_API_SECRET"]
   secure: true
   cdn_subdomain: true
-
-#development:
-#  cloud_name: ""
-#  api_key: ""
-#  api_secret: ""
-#  secure: true
-#  cdn_subdomain: true

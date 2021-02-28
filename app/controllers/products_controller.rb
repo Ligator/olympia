@@ -14,8 +14,8 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
     @store = Store.find(params[:store_id])
+    @product = @store.products.build
   end
 
   # GET /products/1/edit

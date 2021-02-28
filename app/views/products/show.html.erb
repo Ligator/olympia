@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 <% if Rails.env.production? %>
   <div >
-    <%= cl_image_tag @product.image.key%>
+    <%= cl_image_tag @product.image.key %>
   </div>
 <% else %>
   <div >
-    <%= image_tag @product.images.first%>
+    <%= image_tag @product.images.first %>
   </div>
 <% end %>
 <p>
