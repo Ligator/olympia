@@ -18,15 +18,30 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
+        <% if Rails.env.production? %>
+          <td >
+            <div class="d-flex align-items-center mr-3">
+              <%= cl_image_tag product.image.key, class: "card-img-top" %>
+            </div>
+          </td>
+        <% else %>
+          <td >
+            <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
+              <%= image_tag product.images.first, class: "card-img-top" %>
+            </div>
+          </td>
+        <% end %>
         <td><%= product.name %></td>
         <td><%= product.description %></td>
         <td><%= product.price_in_cents %></td>
         <td><%= product.size %></td>
         <td><%= product.quantity %></td>
         <td><%= product.store_id %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', store_product_path(product.store_id, product.id) %></td>
+        <% if current_user.store.eql?(product.store) %>
+          <td><%= link_to 'Edit', edit_store_product_path(product.store_id, product.id) %></td>
+          <td><%= link_to 'Destroy', store_product_path(product.store_id, product.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +49,3 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
