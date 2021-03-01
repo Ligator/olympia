@@ -1,4 +1,11 @@
 
 es:
   empty_cart: "Tu carrito está vacío."
-
+  store_was_created: "La tienda se creó correctamente."
+  store_was_updated: "La tienda se actualizó correctamente."
+  cannot_edit_store: "No puedes editar una tienda que no es tuya."
+  successfully_destroy_store: "La tienda se destruyó con éxito."
+  store_exists: "Ya cuentas con una tienda."
+  product_was_created: "El producto se creó correctamente."
+  product_was_updated: "El producto se actualizó correctamente."
+  successfully_destroy_product: "El producto se destruyó con éxito."

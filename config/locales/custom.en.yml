@@ -1,3 +1,11 @@
 
-es:
+en:
   empty_cart: "Your cart is empty."
+  store_was_created: "Store was successfully created."
+  store_was_updated: "Store was successfully updated."
+  cannot_edit_store: "You cannot edit a store that is not yours"
+  successfully_destroy_store: "Store was successfully destroyed."
+  store_exists: "You have a Store"
+  product_was_created: "Product was successfully created."
+  product_was_updated: "Product was successfully updated."
+  successfully_destroy_product: "Product was successfully destroyed."
