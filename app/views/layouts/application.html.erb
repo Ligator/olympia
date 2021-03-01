@@ -28,14 +28,20 @@
               <%= render "layouts/cart_icon" %>
             </span>
           </form>
+
           <% if user_signed_in? %>
-            <div class="text-light ">Conectado como <strong class="ml-2 mr-2"> <%= current_user.email %> </strong> </div>
-            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link btn btn-outline-primary btn-sm m-1' %>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link btn btn-outline-danger btn-sm m-1' %>
+            <div class="text-light"> User: <strong class="ml-2 mr-2">
+              <%= current_user.email %> </strong>
+            </div>
+
+            <%= link_to 'Edit profile', edit_user_registration_path, class: "btn btn-outline-secondary"%>
+
+            <%= link_to "Log out", destroy_user_session_path,class: "btn btn-outline-secondary", method: :delete %>
           <% else %>
-            <%= link_to "Registrarme", new_user_registration_path, :class => 'navbar-link btn btn-outline-light m-1'  %>
-            <%= link_to "Acceder", new_user_session_path, :class => 'navbar-link btn btn-outline-primary m-1'  %>
+            <%= link_to "Sing in", new_user_registration_path, class: "btn btn-outline-secondary"  %>
+            <%= link_to "Log in", new_user_session_path,class: "btn btn-outline-secondary" %>
           <% end %>
+
         </nav>
       </div>
 
@@ -80,24 +86,28 @@
       </div>
     <% end %>
 
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
 
     <footer>
-      <div class="container me-auto mb-2 mb-lg-0">
-        <div class="row">
-          <div class="col">
-            <a href="#"> Preguntas frecuentes</a>
-          </div>
-          <div class="col">
-            <a href="#"> Contáctanos</a>
-          </div>
-          <div class="col">
-            <a href="#"> Prensa</a>
-          </div>
-          <div class="col">
-            <a href="#"> Términos y condiciones</a>
-          </div>
-        </div>
+      <div class="container-f mx-auto ">
+        <nav class="navbar navbar-expand sticky-top ">
+          <ul class="navbar-nav mx-auto">
+            <li class="col-lg-6 nav-item">
+              <a href="#"> Preguntas frecuentes</a>
+            </li>
+            <li class="col-lg-6 nav-item">
+              <a href="#"> Contáctanos</a>
+            </li>
+            <li class="col-lg-6 nav-item">
+              <a href="#"> Prensa</a>
+            </li>
+            <li class="col-6 nav-item">
+              <a href="#"> Términos y condiciones</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </footer>
   </body>
