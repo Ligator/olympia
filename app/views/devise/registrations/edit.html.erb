@@ -5,12 +5,10 @@
   </div>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="form-group">
-    <div class="field justify-content">
-      <%= f.label :email %>
-    </div>
+    <%= f.label :email %>
     <%= f.email_field :email, class: "justify-content form-control", autofocus: true, autocomplete: "email" %>
   </div>
 
@@ -19,9 +17,7 @@
   <% end %>
 
   <div class="form-group">
-    <div class="field justify-content">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
-    </div>
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
     <%= f.password_field :password,class: "justify-content form-control", autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -29,17 +25,13 @@
   </div>
 
   <div class="form-group">
-    <div class="field justify-content">
-      <%= f.label :password_confirmation %>
-    </div>
-      <%= f.password_field :password_confirmation,class: "justify-content form-control", autocomplete: "new-password" %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation,class: "justify-content form-control", autocomplete: "new-password" %>
   </div>
 
   <div class="form-group">
-    <div class="field justify-content">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    </div>
-      <%= f.password_field :current_password,class: "justify-content form-control", autocomplete: "new-password" %>
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+    <%= f.password_field :current_password,class: "justify-content form-control", autocomplete: "new-password" %>
   </div>
 
   <div class=" field justify-content">
