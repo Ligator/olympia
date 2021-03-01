@@ -14,6 +14,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/101b932633.js" crossorigin="anonymous"></script>
 
     <title>Olympia</title>
   </head>
@@ -25,15 +26,21 @@
           <form class="d-flex col-md">
             <input class="form col-3 col-sm-4 col-md-6 col-lg-8 col-xl-8 f " type="text-white" placeholder="Buscas algo en especial?" aria-label="Search">
             <button class="btn btn-outline-success " type="submit">Search</button>
-            <button class="btn" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-              <path d="M0 0h24v24H0z" fill="none"/>
-              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></button>
+            <%= link_to "<i class='fas fa-shopping-cart'></i>".html_safe, "#", style: "font-size: 20px; color: white;" %>
           </form>
 
-          <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-secondary" %>
+          <% if user_signed_in? %>
+            <div class="text-light"> User: <strong class="ml-2 mr-2">
+              <%= current_user.email %> </strong>
+            </div>
 
-          <%= link_to "Log out", destroy_user_session_path, class: "btn btn-outline-secondary", method: :delete %>
+            <%= link_to 'Edit profile', edit_user_registration_path, class: "btn btn-outline-secondary"%>
+
+            <%= link_to "Log out", destroy_user_session_path,class: "btn btn-outline-secondary", method: :delete %>
+          <% else %>
+            <%= link_to "Sing in", new_user_registration_path, class: "btn btn-outline-secondary"  %>
+            <%= link_to "Log in", new_user_session_path,class: "btn btn-outline-secondary" %>
+          <% end %>
 
         </nav>
       </div>
@@ -42,9 +49,10 @@
         <nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-light bg-light sticky-top ">
           <ul class="navbar-nav ">
             <li class="col nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-              Productos
-              </a>
+              <%= link_to 'Productos', products_path, class: "nav-link active" %>
+            </li>
+            <li class="col nav-item">
+              <%= link_to 'Stores', stores_path, class: "nav-link active" %>
             </li>
             <li class=" col nav-item">
               <a class="nav-link active" aria-current="page" href="#">

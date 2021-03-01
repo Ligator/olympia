@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Stores</h1>
+<h1>Stores VIEW</h1>
 
 <table>
   <thead>
@@ -19,13 +19,16 @@
         <td><%= store.description %></td>
         <td><%= store.user_id %></td>
         <td><%= link_to 'Show', store %></td>
-        <td><%= link_to 'Edit', edit_store_path(store) %></td>
-        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.store.eql?(store) %>
+          <td><%= link_to 'Edit', edit_store_path(store) %></td>
+          <td><%= link_to 'Destroy', store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Store', new_store_path %>
+<% if current_user.store.nil? %>
+  <%= link_to 'New Store', new_store_path %>
+<% end %>

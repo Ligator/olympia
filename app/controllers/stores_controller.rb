@@ -8,6 +8,7 @@ class StoresController < ApplicationController
 
   # GET /stores/1 or /stores/1.json
   def show
+    @store = Store.find(params[:id])
   end
 
   # GET /stores/new
@@ -21,29 +22,38 @@ class StoresController < ApplicationController
 
   # POST /stores or /stores.json
   def create
-    @store = Store.new(store_params)
-
-    respond_to do |format|
-      if @store.save
-        format.html { redirect_to @store, notice: "Store was successfully created." }
-        format.json { render :show, status: :created, location: @store }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+    if current_user.store.nil?
+      @store = current_user.build_store(store_params)
+      respond_to do |format|
+        if @store.save
+          format.html { redirect_to @store, notice: "Store was successfully created." }
+          format.json { render :show, status: :created, location: @store }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = "You have a Store"
+      redirect_to stores_path
     end
   end
 
   # PATCH/PUT /stores/1 or /stores/1.json
   def update
-    respond_to do |format|
-      if @store.update(store_params)
-        format.html { redirect_to @store, notice: "Store was successfully updated." }
-        format.json { render :show, status: :ok, location: @store }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+    if current_user.store.eql?(@store)
+      respond_to do |format|
+        if @store.update(store_params)
+          format.html { redirect_to @store, notice: "Store was successfully updated." }
+          format.json { render :show, status: :ok, location: @store }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = "You cannot edit a store that is not yours"
+      render :index
     end
   end
 
@@ -59,11 +69,11 @@ class StoresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_store
-      @store = Store.find(params[:id])
+      @store = current_user.store
     end
 
     # Only allow a list of trusted parameters through.
     def store_params
-      params.require(:store).permit(:name, :description, :user_id)
+      params.require(:store).permit(:name, :description)
     end
 end
