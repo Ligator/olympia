@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Products</h1>
 
@@ -38,9 +37,11 @@
         <td><%= product.quantity %></td>
         <td><%= product.store_id %></td>
         <td><%= link_to 'Show', store_product_path(product.store_id, product.id) %></td>
-        <% if current_user.store.eql?(product.store) %>
-          <td><%= link_to 'Edit', edit_store_product_path(product.store_id, product.id) %></td>
-          <td><%= link_to 'Destroy', store_product_path(product.store_id, product.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% unless current_user.nil? %>
+          <% if current_user.store.eql?(product.store) %>
+            <td><%= link_to 'Edit', edit_store_product_path(product.store_id, product.id) %></td>
+            <td><%= link_to 'Destroy', store_product_path(product.store_id, product.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>

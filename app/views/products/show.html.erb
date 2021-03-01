@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <% if Rails.env.production? %>
   <div >
     <%= cl_image_tag @product.image.key %>
@@ -33,7 +32,9 @@
   <%= @product.quantity %>
 </p>
 
-<%= link_to 'Edit', edit_store_product_path(@product.store, @product) %> |
-<%= link_to 'Store', store_path(@product.store) %>|
-<%= link_to 'Products', products_path %>|
-<%= link_to 'Destroy', store_product_path(@product.store, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Store', store_path(@product.store) %> |
+<%= link_to 'Products', products_path %> |
+<% if current_user.present? %>
+  <%= link_to 'Edit', edit_store_product_path(@product.store, @product) %> |
+  <%= link_to 'Destroy', store_product_path(@product.store, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
