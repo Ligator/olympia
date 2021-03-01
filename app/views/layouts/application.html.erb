@@ -24,7 +24,9 @@
           <form class="d-flex col-md">
             <input class="form col-3 col-sm-4 col-md-6 col-lg-8 col-xl-8 f " type="text-white" placeholder="Buscas algo en especial?" aria-label="Search">
             <button class="btn btn-outline-success " type="submit">Search</button>
-            <%= link_to "<i class='fas fa-shopping-cart'></i>".html_safe, "#", style: "font-size: 20px; color: white;" %>
+            <span class="cart_icon">
+              <%= render "layouts/cart_icon" %>
+            </span>
           </form>
           <% if user_signed_in? %>
             <div class="text-light ">Conectado como <strong class="ml-2 mr-2"> <%= current_user.email %> </strong> </div>

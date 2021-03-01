@@ -16,6 +16,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 gem 'devise'
+gem 'devise-guests'
 gem 'awesome_print'
 gem 'pg'
 gem 'cloudinary'
