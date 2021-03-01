@@ -1,0 +1,54 @@
+<% if cart_products_count.positive? %>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Size</th>
+        <th>Quantity</th>
+        <th>Made by</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @quantities_hash.each do |product, quantity| %>
+        <tr class="product_<%= product.id %>">
+          <% if Rails.env.production? %>
+            <td >
+              <div class="d-flex align-items-center mr-3">
+                <%= cl_image_tag product.image.key, class: "card-img-top" %>
+              </div>
+            </td>
+          <% else %>
+            <td >
+              <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
+                <%= image_tag product.images.first, class: "card-img-top" %>
+              </div>
+            </td>
+          <% end %>
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= product.price %></td>
+          <td><%= product.size %></td>
+          <td><%= quantity %></td>
+          <td><%= product.store.name %></td>
+          <td>
+            <%= form_tag orders_remove_from_cart_path(product_id: @product), remote: true do %>
+              <%= hidden_field_tag :product_id, product.id %>
+              <%= submit_tag 'Remove', class: "btn btn-primary" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= form_tag orders_create_path do %>
+    <%= submit_tag "Pay Order", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <h1><%= t(:empty_cart) %></h1>
+<% end %>

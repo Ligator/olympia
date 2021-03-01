@@ -1,11 +1,10 @@
 module ApplicationHelper
-  def cart_products
-    return [] unless cart?
-    ids = sessions["cart_#{current_user&.id}"].map { |product_details| product_details[:id] }
-    Product.where(id: ids)
+  def cart_products_count
+    return 0 unless cart?
+    session["cart_#{current_or_guest_user.id}"].count
   end
 
   def cart?
-    sessions["cart_#{current_user&.id}"].present?
+    session["cart_#{current_or_guest_user.id}"].present?
   end
 end
