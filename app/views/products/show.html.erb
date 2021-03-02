@@ -38,3 +38,40 @@
   <%= link_to 'Edit', edit_store_product_path(@product.store, @product) %> |
   <%= link_to 'Destroy', store_product_path(@product.store, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
+
+<h2>Comments</h2>
+<div class="comments_content">
+  <%= render @product.comments %>
+</div>
+<div class="comments_alert">
+</div>
+
+<% if user_signed_in? %>
+  <h2>Add a comment:</h2>
+  <%= render 'comments/form' %>
+<% end %>
+
+<div id="edit-comment" style="display:none;"></div>
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#create_comment').mouseleave(function() {
+      $('.comment_body').val('');
+      var mensaje1 = $('#message_error_comment').text();
+
+      if(mensaje1.match(/^\s+$/) === null) {
+        setTimeout(function() {
+             $('#message_error_comment').hide();
+        },4000);
+      } else {
+        $('#message_error_comment').hide();
+      }
+
+    });
+
+
+  });
+</script>

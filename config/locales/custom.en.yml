@@ -9,3 +9,5 @@ en:
   product_was_created: "Product was successfully created."
   product_was_updated: "Product was successfully updated."
   successfully_destroy_product: "Product was successfully destroyed."
+  comment_was_created: "Comment was successfully created."
+  comment_was_not_created: "Comment wasn't be created."

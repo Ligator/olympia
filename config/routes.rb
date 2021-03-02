@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'orders/thank_you'
   resources :products
   resources :stores do
-    resources :products
+    resources :products do
+      resources :comments
+    end
   end
   devise_for :users
   get "statics/home"
