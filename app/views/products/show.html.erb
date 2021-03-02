@@ -58,24 +58,15 @@
 <div id="edit-comment" style="display:none;"></div>
 
 
-
-
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#create_comment').mouseleave(function() {
-      $('.comment_body').val('');
-      var mensaje1 = $('#message_error_comment').text();
-
-      if(mensaje1.match(/^\s+$/) === null) {
+    var message_error_comment = $('#message_error_comment').text();
+      if(message_error_comment.match(/^\s+$/) === null) {
         setTimeout(function() {
-             $('#message_error_comment').hide();
+          $('#message_error_comment').hide();
         },4000);
       } else {
         $('#message_error_comment').hide();
       }
-
-    });
-
-
   });
 </script>

@@ -4,18 +4,17 @@ class CommentsController < ApplicationController
     @product = Product.find(params[:product_id])
     @comment = @product.comments.build(comment_params.merge(user: current_user))
     @store = @product.store
-    if @comment.save
-      flash[:notice] = I18n.t(:comment_was_created)
-    else
-      flash[:alert] = I18n.t(:comment_was_not_created)
-    end
+    @comment.save
+    @flag_message = true
   end
 
   def destroy
     @product = Product.find(params[:product_id])
     @comment = @product.comments.find(params[:id])
+    @store = @product.store
     @comment.destroy
-    redirect_to store_product_path(@product.store, @product)
+    @message = "your comment has been deleted"
+    @flag_message = true
   end
 
   def edit
