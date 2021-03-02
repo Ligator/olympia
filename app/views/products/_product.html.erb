@@ -1,7 +1,7 @@
   <tr>
     <% if Rails.env.production? %>
       <td >
-        <div class="d-flex align-items-center mr-3">
+        <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
           <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
         </div>
       </td>
