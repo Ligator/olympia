@@ -12,3 +12,4 @@ es:
   comment_was_created: "El comentario se creó correctamente."
   comment_was_not_created: "El comentario no se pudo crear."
   pay_order: "Pagar"
+  invalid_order: "Orden Inválida"

@@ -33,7 +33,6 @@ class OrdersController < ApplicationController
         size: product.size
       })
 
-      @currency = "mxn"
       line_items << {
         price_data: {
           currency: @currency,
@@ -56,23 +55,28 @@ class OrdersController < ApplicationController
       locale: current_or_guest_user.locale,
       success_url: orders_thank_you_url(session_id: "") + "{CHECKOUT_SESSION_ID}",
       cancel_url: orders_cart_url,
+      metadata: {
+        order_id: @order.id
+      }
     })
 
     respond_to do |format|
       format.json { render json: { id: session.id } }
       format.html { head(:ok) }
     end
-  rescue Stripe::InvalidRequestError => error
-    respond_to do |format|
-      format.json { render json: { msg: error.message }}
-      format.html { head(:ok) }
-    end
   end
 
   def thank_you
     session.delete("cart_#{current_or_guest_user.id}")
+
+    redirect_on_invalid_order && return if params[:session_id].blank?
     stripe_session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @customer = Stripe::Customer.retrieve(stripe_session.customer)
+
+    order = Order.find_by_id(stripe_session.metadata[:order_id])
+    redirect_on_invalid_order && return if order.blank?
+    order.update(state: stripe_session.payment_status, stripe_session: stripe_session.id, payment_method: stripe_session.payment_method_types.last)
+    current_user&.update(stripe_customer_id: stripe_session.customer)
   end
 
   private
@@ -82,11 +86,7 @@ class OrdersController < ApplicationController
   end
 
   def redirect_on_invalid_order
-    if @order.paid?
-      flash[:error] = I18n.t(:order_already_paid)
-    else
-      flash[:error] = I18n.t(:invalid_order)
-    end
+    flash[:error] = I18n.t(:invalid_order)
     redirect_to orders_cart_path
   end
 

@@ -28,7 +28,7 @@
             <button class="btn btn-outline-success " type="submit">Search</button>
             <%= link_to languages_set_language_path, style: "color: white;", method: :post, class: "m-1" do %>
               <span class="fas fa-globe" style="font-size: 20px;"></span>
-              <%= current_or_guest_user.locale.upcase %>
+              <%= current_or_guest_user.locale.upcase %> <%= @currency.upcase %>
             <% end %>
             <span class="cart_icon">
               <%= render "layouts/cart_icon" %>
@@ -89,6 +89,12 @@
     <% if alert %>
       <div class="alert alert-danger" role="alert">
         <%= alert %>
+      </div>
+    <% end %>
+
+    <% if flash[:error] %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:error] %>
       </div>
     <% end %>
 
