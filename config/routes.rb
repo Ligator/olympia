@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   post 'languages/set_language'
   resources :products
   resources :stores do
-    resources :products
+    resources :products do
+      resources :comments
+    end
   end
   devise_for :users
   get "statics/home"
