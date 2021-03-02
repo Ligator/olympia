@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
   def create_checkout_session
     redirect_on_invalid_cart && return unless cart?
     line_items = []
+
     @order = Order.create(user: current_or_guest_user)
     Product.where(id: session["cart_#{current_or_guest_user.id}"].keys).each do |product|
       quantity = session["cart_#{current_or_guest_user.id}"][product.id.to_s]
@@ -61,7 +62,6 @@ class OrdersController < ApplicationController
       format.json { render json: { id: session.id } }
       format.html { head(:ok) }
     end
-
   rescue Stripe::InvalidRequestError => error
     respond_to do |format|
       format.json { render json: { msg: error.message }}
