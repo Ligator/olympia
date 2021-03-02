@@ -32,6 +32,10 @@
   <%= @product.quantity %>
 </p>
 
+<%= form_tag orders_add_to_cart_path(product_id: @product), remote: true do %>
+  <%= submit_tag 'Add to cart', class: "btn btn-primary" %>
+<% end %>
+
 <%= link_to 'Store', store_path(@product.store) %> |
 <%= link_to 'Products', products_path %> |
 <% if current_user.present? %>

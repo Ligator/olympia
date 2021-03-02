@@ -1,0 +1,10 @@
+<%= link_to orders_cart_path do %>
+  <span class="fa-stack">
+    <span class="fas fa-shopping-cart" style="font-size: 20px; color: white;"></span>
+    <% if cart_products_count.positive? %>
+      <span class="notify-badge badge badge-pill badge-primary">
+        <%= cart_products_count %>
+      </span>
+    <% end %>
+  </span>
+<% end %>
