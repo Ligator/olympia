@@ -2,7 +2,7 @@
     <% if Rails.env.production? %>
       <td >
         <div class="d-flex align-items-center mr-3">
-          <%= cl_image_tag product.image.key, class: "card-img-top" %>
+          <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
         </div>
       </td>
     <% else %>
