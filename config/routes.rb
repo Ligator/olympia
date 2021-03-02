@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'orders/thank_you'
   post 'orders/add_to_cart'
   post 'orders/remove_from_cart'
+  post 'languages/set_language'
   resources :products
   resources :stores do
     resources :products do

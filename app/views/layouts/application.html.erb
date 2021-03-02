@@ -21,10 +21,14 @@
     <header >
       <div class="container-f">
         <nav class="navbar navbar-dark bg-dark navbar-expand-sm-2 navbar-light bg-light  ">
-          <a class="navbar-brand" href="#">Expendio Artesano</a>
+          <a class="navbar-brand" href="#">¡Pásele wera!</a>
           <form class="d-flex col-md">
             <input class="form col-3 col-sm-4 col-md-6 col-lg-8 col-xl-8 f " type="text-white" placeholder="Buscas algo en especial?" aria-label="Search">
             <button class="btn btn-outline-success " type="submit">Search</button>
+            <%= link_to languages_set_language_path, style: "color: white;", method: :post, class: "m-1" do %>
+              <span class="fas fa-globe" style="font-size: 20px;"></span>
+              <%= current_or_guest_user.locale.upcase %>
+            <% end %>
             <span class="cart_icon">
               <%= render "layouts/cart_icon" %>
             </span>
