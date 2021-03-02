@@ -1,0 +1,15 @@
+<% if comment.valid? %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.user.email %>
+  </p>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+  <% if current_user.eql?(comment.user) %>
+    <%= link_to 'Edit', edit_store_product_comment_path(@store, @product, comment), :remote=>true %>
+    <%= link_to 'Destroy', store_product_comment_path(@store, @product, comment), method: :delete, :remote=>true, class: "destroy_comment" %>
+  <% end %>
+<% end %>
+

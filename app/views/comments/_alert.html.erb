@@ -1,0 +1,9 @@
+<div class="alert alert-danger" role="alert" id="message_error_comment">
+  <% if @comment.errors.blank? %>
+      <%= @message %>
+  <% else %>
+    <% @comment.errors.each do |message| %>
+        <%= message.message %>
+    <% end %>
+  <% end %>
+</div>

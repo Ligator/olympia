@@ -1,9 +1,6 @@
 class OrdersController < ApplicationController
   def cart
-    @products = Product.where(id: session["cart_#{current_or_guest_user.id}"].keys).to_a
-    @quantities_hash = session["cart_#{current_or_guest_user.id}"].dup.transform_keys do |product_id|
-      @products.find { |product| product.id.to_s == product_id }
-    end
+    set_quantities_hash
   end
 
   def add_to_cart
@@ -15,12 +12,13 @@ class OrdersController < ApplicationController
 
   def remove_from_cart
     session["cart_#{current_or_guest_user.id}"].delete(params[:product_id])
+    set_quantities_hash
   end
 
   def create
     redirect_on_invalid_cart && return unless cart?
 
-    @order = Order.create
+    @order = Order.create(user: current_or_guest_user)
     Product.where(id: session["cart_#{current_or_guest_user.id}"].keys).each do |product|
       @order.order_items.create({
         product: product,
@@ -28,8 +26,7 @@ class OrdersController < ApplicationController
         description: product.description,
         price_in_cents: product.price_in_cents,
         quantity: session["cart_#{current_or_guest_user.id}"][product.id],
-        size: product.size,
-        user: current_user
+        size: product.size
       })
     end
 
@@ -37,7 +34,7 @@ class OrdersController < ApplicationController
   end
 
   def checkout
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:order_id])
     redirect_on_invalid_order && return unless @order.pending?
   end
 
@@ -65,5 +62,14 @@ class OrdersController < ApplicationController
 
   def cart?
     session["cart_#{current_or_guest_user.id}"].present?
+  end
+
+  def set_quantities_hash
+    if session["cart_#{current_or_guest_user.id}"].present?
+      @products = Product.where(id: session["cart_#{current_or_guest_user.id}"].keys).to_a
+      @quantities_hash = session["cart_#{current_or_guest_user.id}"].dup.transform_keys do |product_id|
+        @products.find { |product| product.id.to_s == product_id }
+      end
+    end
   end
 end
