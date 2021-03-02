@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'orders/thank_you'
   post 'orders/add_to_cart'
   post 'orders/remove_from_cart'
+  get '/search', action: 'index', controller: 'searches'
   resources :products
   resources :stores do
     resources :products
