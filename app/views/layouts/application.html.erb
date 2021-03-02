@@ -21,14 +21,15 @@
       <div class="container-f">
         <nav class="navbar navbar-dark bg-dark navbar-expand-sm-2 navbar-light bg-light  ">
           <a class="navbar-brand" href="#">Expendio Artesano</a>
-          <form class="d-flex col-md">
-            <input class="form col-3 col-sm-4 col-md-6 col-lg-8 col-xl-8 f " type="text-white" placeholder="Buscas algo en especial?" aria-label="Search">
-            <button class="btn btn-outline-success " type="submit">Search</button>
-            <%= link_to 'Search', search_path, class: "btn btn-outline-success"%>
+          <div class="d-flex col-md">
+            <%= form_tag(controller: "searches", action: "index", method: "get") do %>
+              <%= text_field_tag :filter, params[:filter], class: "form col-3 col-sm-4 col-md-6 col-lg-8 col-xl-8 f ", placeholder: "Buscas algo en especial?", id: "input_search" %>
+              <%= submit_tag 'Search', class: "btn btn-outline-success"%>
+            <% end %>
             <span class="cart_icon">
               <%= render "layouts/cart_icon" %>
             </span>
-          </form>
+          </div>
 
           <% if user_signed_in? %>
             <div class="text-light"> User: <strong class="ml-2 mr-2">
@@ -113,3 +114,4 @@
     </footer>
   </body>
 </html>
+
