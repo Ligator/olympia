@@ -18,11 +18,9 @@
         <td><%= store.description %></td>
         <td><%= store.user_id %></td>
         <td><%= link_to 'Show', store_path(store) %></td>
-        <% unless current_user.nil? %>
-          <% if current_user.store.eql?(store) %>
-            <td><%= link_to 'Edit', edit_store_path(store) %></td>
-            <td><%= link_to 'Destroy', store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
+        <% if user_signed_in? && current_user.store.eql?(store) %>
+          <td><%= link_to 'Edit', edit_store_path(store) %></td>
+          <td><%= link_to 'Destroy', store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
@@ -30,8 +28,6 @@
 </table>
 
 <br>
-<% unless current_user.nil? %>
-  <% if current_user.store.nil? %>
-    <%= link_to 'New Store', new_store_path %>
-  <% end %>
+<% if user_signed_in? && current_user.store.nil? %>
+  <%= link_to 'New Store', new_store_path %>
 <% end %>

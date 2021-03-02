@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   post 'orders/remove_from_cart'
   resources :products
   resources :stores do
-    resources :products
+    resources :products do
+      resources :comments
+    end
   end
   devise_for :users
   get "statics/home"
