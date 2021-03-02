@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
 
   scope :pending, -> { where(state: "pending") }
   scope :paid, -> { where(state: "paid") }

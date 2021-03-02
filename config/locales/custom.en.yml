@@ -11,3 +11,5 @@ en:
   successfully_destroy_product: "Product was successfully destroyed."
   comment_was_created: "Comment was successfully created."
   comment_was_not_created: "Comment wasn't be created."
+  pay_order: "Checkout"
+  invalid_order: "Invalid Order"
