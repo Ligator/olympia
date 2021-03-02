@@ -1,9 +1,6 @@
 class OrdersController < ApplicationController
   def cart
-    @products = Product.where(id: session["cart_#{current_or_guest_user.id}"].keys).to_a
-    @quantities_hash = session["cart_#{current_or_guest_user.id}"].dup.transform_keys do |product_id|
-      @products.find { |product| product.id.to_s == product_id }
-    end
+    set_quantities_hash
   end
 
   def add_to_cart
@@ -15,6 +12,7 @@ class OrdersController < ApplicationController
 
   def remove_from_cart
     session["cart_#{current_or_guest_user.id}"].delete(params[:product_id])
+    set_quantities_hash
   end
 
   def create
@@ -65,5 +63,14 @@ class OrdersController < ApplicationController
 
   def cart?
     session["cart_#{current_or_guest_user.id}"].present?
+  end
+
+  def set_quantities_hash
+    if session["cart_#{current_or_guest_user.id}"].present?
+      @products = Product.where(id: session["cart_#{current_or_guest_user.id}"].keys).to_a
+      @quantities_hash = session["cart_#{current_or_guest_user.id}"].dup.transform_keys do |product_id|
+        @products.find { |product| product.id.to_s == product_id }
+      end
+    end
   end
 end
