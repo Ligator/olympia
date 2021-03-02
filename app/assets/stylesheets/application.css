@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+.notify-badge {
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  font-size: 12.025px;
+  font-weight: bold;
+  white-space: nowrap;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  vertical-align: top;
+}

@@ -97,6 +97,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-guests (0.7.0)
+      devise
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -283,6 +285,7 @@ DEPENDENCIES
   cloudinary
   database_cleaner
   devise
+  devise-guests
   factory_bot_rails
   jbuilder (~> 2.7)
   letter_opener
