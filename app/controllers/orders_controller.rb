@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   def create
     redirect_on_invalid_cart && return unless cart?
 
-    @order = Order.create
+    @order = Order.create(user: current_or_guest_user)
     Product.where(id: session["cart_#{current_or_guest_user.id}"].keys).each do |product|
       @order.order_items.create({
         product: product,
@@ -26,8 +26,7 @@ class OrdersController < ApplicationController
         description: product.description,
         price_in_cents: product.price_in_cents,
         quantity: session["cart_#{current_or_guest_user.id}"][product.id],
-        size: product.size,
-        user: current_user
+        size: product.size
       })
     end
 
@@ -35,7 +34,7 @@ class OrdersController < ApplicationController
   end
 
   def checkout
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:order_id])
     redirect_on_invalid_order && return unless @order.pending?
   end
 
