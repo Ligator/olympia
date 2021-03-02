@@ -9,3 +9,7 @@ es:
   product_was_created: "El producto se creó correctamente."
   product_was_updated: "El producto se actualizó correctamente."
   successfully_destroy_product: "El producto se destruyó con éxito."
+  comment_was_created: "El comentario se creó correctamente."
+  comment_was_not_created: "El comentario no se pudo crear."
+  pay_order: "Pagar"
+  invalid_order: "Orden Inválida"

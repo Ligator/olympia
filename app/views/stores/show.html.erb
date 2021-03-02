@@ -32,7 +32,7 @@
 <br>
 
 <%= link_to 'Back', stores_path %> |
-<% if current_user.present? && current_user.store.eql?(@store) %>
+<% if user_signed_in? && current_user.store.eql?(@store) %>
   <%= link_to 'Edit', edit_store_path(@store) %> |
   <%= link_to 'New Product', new_store_product_path(@store) %>
 <% end %>

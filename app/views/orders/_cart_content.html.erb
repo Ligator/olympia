@@ -18,8 +18,8 @@
         <tr class="product_<%= product.id %>">
           <% if Rails.env.production? %>
             <td >
-              <div class="d-flex align-items-center mr-3">
-                <%= cl_image_tag product.image.key, class: "card-img-top" %>
+              <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
+                <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
               </div>
             </td>
           <% else %>
@@ -46,9 +46,8 @@
     </tbody>
   </table>
 
-  <%= form_tag orders_create_path do %>
-    <%= submit_tag "Pay Order", class: "btn btn-primary" %>
-  <% end %>
+  <button id="checkout-button" class="btn btn-primary"><%= t(:pay_order) %></button>
+
 <% else %>
   <h1><%= t(:empty_cart) %></h1>
 <% end %>

@@ -9,7 +9,8 @@ class ProductsController < ApplicationController
   # GET /products/1 or /products/1.json
   def show
     @store = Store.find(params[:store_id])
-    product = @store.products.find(params[:id])
+    @product = @store.products.find(params[:id])
+    @comment = @product.comments.build
   end
 
   # GET /products/new
