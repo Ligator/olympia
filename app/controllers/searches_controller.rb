@@ -1,9 +1,20 @@
 class SearchesController < ApplicationController
 
   def index
-    @users = User.where("email ILIKE ?", "%#{params[:filter]}%")
-    @stores = Store.where("name ILIKE ?", "%#{params[:filter]}%")
-    @products = Product.where("name ILIKE ?", "%#{params[:filter]}%")
+    if params[:filter].blank?
+      @users = ''
+      @stores = ''
+      @products = ''
+    else
+      @users = User.where(["first_name ILIKE ? OR last_name ILIKE ?", "%#{params[:filter]}%", "%#{params[:filter]}%"])
+      @stores = Store.where("name ILIKE ? OR description ILIKE ?", "%#{params[:filter]}%", "%#{params[:filter]}%")
+      @products = Product.where("name ILIKE ? OR description ILIKE ?", "%#{params[:filter]}%", "%#{params[:filter]}%")
+    end
+  end
+
+  def order_product_by_name
+    @store = Store.find(params[:store_id])
+
   end
 
 end

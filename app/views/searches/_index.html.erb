@@ -1,0 +1,106 @@
+
+<div id="search--index_modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Search</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%if @stores.present? %>
+          <h2>Tiendas</h2>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Vendor</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <% @stores.each do |store| %>
+              <tbody>
+                <tr>
+                  <td><%= store.name %></td>
+                  <td><%= store.description %></td>
+                  <td><%= store.user.first_name%></td>
+                  <td><%= link_to 'Show', store_path(store) %></td>
+                </tr>
+              </tbody>
+            <% end %>
+          </table>
+        <% end %>
+        <%if @users.present? %>
+          <h2>Usuarios</h2>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Store</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+              <% @users.each do |user| %>
+                <tbody>
+                  <tr>
+                    <td><%= user.full_name %></td>
+                    <td><%= user.store.name %></td>
+                    <% if user.store.present? %>
+                      <td><%= link_to 'Show', store_path(user.store, user.store.id) %></td>
+                    <% end %>
+                  </tr>
+                </tbody>
+              <% end %>
+            </table>
+        <% end %>
+        <%if @products.present? %>
+          <h2>Productos</h2>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Store</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <% @products.each do |product| %>
+              <tbody>
+                <tr>
+                  <% if Rails.env.production? %>
+                    <td >
+                      <div class="d-flex align-items-center mr-3">
+                        <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
+                      </div>
+                    </td>
+                  <% else %>
+                    <td >
+                      <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
+                        <%= image_tag product.images.first, class: "card-img-top" %>
+                      </div>
+                    </td>
+                  <% end %>
+                  <td><%= product.name %></td>
+                  <td><%= product.price %></td>
+                  <td><%= product.store.name %></td>
+                  <td><%= link_to 'More Information', store_product_path(product.store_id, product.id) %></td>
+                </tr>
+              </tbody>
+            <% end %>
+          </table>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

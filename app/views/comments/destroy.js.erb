@@ -1,2 +1,11 @@
 $('.comments_content').html("<%= j (render @product.comments) %>");
 $('.comments_alert').html("<%= j (render 'comments/alert') %>");
+$( document ).ready(function() {
+    var message_error_comment = $('#message_error_comment').text();
+    window.setTimeout(
+        function() {
+          $('#message_error_comment').hide();
+        },4000);
+
+
+  });
