@@ -46,9 +46,8 @@
     </tbody>
   </table>
 
-  <%= form_tag orders_create_path do %>
-    <%= submit_tag "Pay Order", class: "btn btn-primary" %>
-  <% end %>
+  <button id="checkout-button" class="btn btn-primary"><%= t(:pay_order) %></button>
+
 <% else %>
   <h1><%= t(:empty_cart) %></h1>
 <% end %>

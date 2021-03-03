@@ -14,7 +14,7 @@
     <div class="form-group">
       <%= f.label :password %>
       <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %><%= t(:characters_minimum) %> )</em>
+        <em>(<%= t("devise.shared.minimum_password_length.other", count: @minimum_password_length) %>)</em>
       <% end %>
       <%= f.password_field :password,class: "justify-content form-control", autocomplete: "new-password" %>
     </div>
