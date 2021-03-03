@@ -7,4 +7,9 @@ class User < ApplicationRecord
   has_one :store, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
+
+  def full_name
+    [first_name, last_name].compact.join(" ").squeeze
+  end
+
 end

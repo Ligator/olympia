@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     @product = Product.find(params[:product_id])
     @comment = @product.comments.build(comment_params.merge(user: current_user))
     @store = @product.store
+
     @comment.save
     @flag_message = true
   end
@@ -11,6 +12,7 @@ class CommentsController < ApplicationController
   def destroy
     @product = Product.find(params[:product_id])
     @comment = @product.comments.find(params[:id])
+
     @store = @product.store
     @comment.destroy
     @message = "your comment has been deleted"

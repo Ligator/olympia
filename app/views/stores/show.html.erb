@@ -14,7 +14,8 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Image</th>
+      <th>Name <%= link_to '',order_product_by_name_path(store_id: @store.id, flag_order: @flag_order_product), type: "button", class: "btn btn-secondary", method: :post, :remote=>true %> </th>
       <th>Description</th>
       <th>Price in cents</th>
       <th>Size</th>
@@ -25,7 +26,9 @@
   </thead>
 
   <tbody>
-    <%= render @store.products %>
+    <div class="products_content">
+      <%= render @store.products %>
+    </div>
   </tbody>
 </table>
 
