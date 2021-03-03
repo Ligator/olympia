@@ -16,11 +16,25 @@
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
+    <div class="d-flex" id="wrapper">
 
-    <%= render "layouts/main_navbar" %>
+      <!-- Sidebar -->
+      <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading"> <%= current_user.full_name %> </div>
+        <div class="list-group list-group-flush">
+          <%= link_to 'Perfil', profile_show_path, class: "list-group-item list-group-item-action bg-light" %>
+          <%= link_to 'Envíos', profile_shipments_path, class: "list-group-item list-group-item-action bg-light" %>
+          <%= link_to 'Ordenes', profile_orders_path, class: "list-group-item list-group-item-action bg-light" %>
+          <%= link_to 'Productos', profile_products_path, class: "list-group-item list-group-item-action bg-light" %>
+          <%= link_to 'Tarjeta', profile_cards_path, class: "list-group-item list-group-item-action bg-light" %>
+          <a href="#" class="list-group-item list-group-item-action bg-light">Perfil</a>
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
 
-    <div class="row">
-      <div class="offset-md-1 col-md-10 col-sm-12">
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+
         <% if notice %>
           <div class="alert alert-success my-2" role="alert">
             <%= notice %>
@@ -35,34 +49,25 @@
           </div>
         <% else %>
           <div class="artesanos text-center my-2">
-            <%= link_to "Si eres artesano, haz click en aquí.", "#" %>
           </div>
         <% end %>
 
-        <%= yield %>
+        <div class="container-fluid">
+          <button class="btn btn-primary" id="menu-toggle">Menu</button>
+          <%= link_to 'Regresar', root_path, class: "btn btn-primary" %>
+          <%= yield %>
+        </div>
       </div>
-    </div>
+      <!-- /#page-content-wrapper -->
 
-    <footer>
-      <div class="container-f mx-auto ">
-        <nav class="navbar navbar-expand sticky-top ">
-          <ul class="navbar-nav mx-auto">
-            <li class="col-lg-6 nav-item">
-              <a href="#"> Preguntas frecuentes</a>
-            </li>
-            <li class="col-lg-6 nav-item">
-              <a href="#"> Contáctanos</a>
-            </li>
-            <li class="col-lg-6 nav-item">
-              <a href="#"> Prensa</a>
-            </li>
-            <li class="col-6 nav-item">
-              <a href="#"> Términos y condiciones</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </footer>
+    </div>
+    <!-- /#wrapper -->
+    <script>
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
   </body>
 </html>
 

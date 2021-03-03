@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'profile/index', action: 'index', controller: 'profiles'
+  get 'profile/show', action: 'show', controller: 'profiles'
+  get 'profile/shipments', action: 'shipments', controller: 'profiles'
+  get 'profile/orders', action: 'orders', controller: 'profiles'
+  get 'profile/products', action: 'products', controller: 'profiles'
+  get 'profile/cards', action: 'cards', controller: 'profiles'
   get 'orders/cart'
   get 'orders/thank_you'
   post 'orders/add_to_cart'
@@ -17,7 +23,7 @@ Rails.application.routes.draw do
   end
   devise_for :users
   devise_scope :user do
-    get 'resource/edit', to: 'users/registrations#edit'
+    get 'user/edit', to: 'users/registrations#edit'
   end
   get "statics/home"
   get "statics/test_email"
