@@ -70,7 +70,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <% if user_signed_in? %>
-                  <%= link_to current_user.email, edit_user_registration_path, class: "dropdown-item" %>
+                  <%= link_to current_user.email, profile_show_path, class: "dropdown-item" %>
                   <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
                 <% else %>
                   <%= link_to t("devise.sessions.new.sign_in"), new_user_session_path,class: "dropdown-item" %>
