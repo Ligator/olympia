@@ -1,71 +1,42 @@
-<div class="card container mt-2">
-  <div class="row m-5">
-    <div class="card col-sm">
-      Imágen
-    </div>
-  </div>
-  <div class="row">
-    <div class="card col-sm">
-      <p class="card-text-bold">Nombre: </p>
-      <p class="card-text"><%= current_user.full_name %></p>
-    </div>
-  </div>
-</div>
+
 <div class="d-flex justify-content-center p-3">
   <div class="card mb-3 col-xs col-md-10 col-lg-12" style="max-width: 800px;">
     <h3 class="card-title d-flex justify-content-center mt-3"><%=%></h3>
     <div class="row no-gutters d-flex justify-content-center">
-      <% if Rails.env.production? %>
-        <div class="col-xs col-sm-8 col-md-6 col-lg-4 d-flex align-items-center mr-3">
-          <%=# cl_image_tag , class: "card-img-top" %>
-        </div>
-      <% else %>
-        <%# if @member.image.present? %>
-          <div class="col-xs col-sm-8 col-md-6 col-lg-4 d-flex align-items-center mr-3">
-            <%=# image_tag , class: "card-img-top" %>
-          </div>
-        <%# end %>
-      <% end %>
-
+      <div class="d-flex align-items-center mr-3" style="max-width: 200px;">
+        <% if current_user.avatar.present? %>
+          <% if Rails.env.production? %>
+            <%= cl_image_tag current_user.avatar.key, class: "card-img-top rounded-circle" %>
+          <% else %>
+            <%= image_tag current_user.avatar, class: "card-img-top rounded-circle" %>
+          <% end %>
+        <% end %>
+      </div>
       <div class="col-xs col-sm-10 col-md-9 col-lg-6 ml-3">
         <div class="card-body">
 
           <table class="table table-striped table-responsive-md table-responsive-lg">
             <tbody>
               <tr>
-                <th scope="row">Tipo de Usuario: </th>
-                <td><%=%></td>
+                <th scope="row">Nombre(s):</th>
+                <td><%= current_user.first_name %></td>
               </tr>
               <tr>
-                <th scope="row">Ocupación: </th>
-                <td><%=%></td>
+                <th scope="row">Apellidos:</th>
+                <td><%= current_user.last_name %></td>
               </tr>
               <tr>
-                <th scope="row">Teléfono</th>
-                <td><%=%></td>
+                <th scope="row">Teléfono:</th>
+                <td><%= current_user.phone %></td>
               </tr>
               <tr>
-                <th scope="row">Correo</th>
-                <td><%=%></td>
+                <th scope="row">Correo:</th>
+                <td><%= current_user.email %></td>
               </tr>
-              <%# if @member.type.eql?("Beneficiary") %>
                 <tr>
-                  <th scope="row">Cuenta</th>
-                  <td><%=%></td>
+                  <th scope="row">Tienda</th>
+                  <td><%= current_user.store.name %></td>
                 </tr>
-              <%# end %>
-              <tr>
-                <th scope="row">Fecha de Nacimiento</th>
-                <td><%=%></td>
-              </tr>
-              <tr>
-                <th scope="row">INE/IFE</th>
-                <td><%=%></td>
-              </tr>
-              <tr>
-                <th scope="row">Estado Civil</th>
-                <td><%=%></td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -76,9 +47,9 @@
           <table class="table table-striped table-responsive-md">
             <tbody class="text-center">
               <tr>
-                <td><%=%></td>
-                <td><%=%></td>
-                <td><%=%></td>
+                <td><%#=%></td>
+                <td><%#=%></td>
+                <td><%#=%></td>
               </tr>
               <tr>
                 <th scope="row">Calle</th>
@@ -87,9 +58,9 @@
 
               </tr>
               <tr>
-                <td><%=%></td>
-                <td><%=%></td>
-                <td><%=%></td>
+                <td><%#=%></td>
+                <td><%#=%></td>
+                <td><%#=%></td>
               </tr>
               <tr>
                 <th scope="row">C.P.</th>
@@ -101,6 +72,8 @@
         </div>
       <%# end %>
     </div>
-
+    <div class="d-flex justify-content-center mb-3">
+      <%= link_to "Editar", user_edit_path,  type: "button", class: "btn btn-success col-6" %>
+    </div>
   </div>
 </div>
