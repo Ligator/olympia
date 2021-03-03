@@ -43,13 +43,16 @@
           <% end %>
         </li>
 
-        <li class="nav-item dropdown active">
+        <li class="nav-item dropdown <%= "active" if user_signed_in? %>">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="fas fa-user" style="font-size: 20px;"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <% if user_signed_in? %>
-              <%= link_to current_user.email, user_edit_path, class: "dropdown-item" %>
+              <%= label_tag "Welcome", nil, class: "px-4 pt-2 text-muted" %>
+              <%= label_tag current_user.email, nil, class: "px-4 pt-2 text-muted" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "My Profile", user_edit_path, class: "dropdown-item" %>
               <%= link_to current_user.store.name, store_path(current_user.store), class: "dropdown-item" if current_user.store.present? %>
               <div class="dropdown-divider"></div>
               <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
