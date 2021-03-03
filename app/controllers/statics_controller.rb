@@ -6,4 +6,8 @@ class StaticsController < ApplicationController
     TestEmailsMailer.test.deliver_now
     redirect_to :statics_home
   end
+
+  def answers_and_cuestions
+  end
 end
+
