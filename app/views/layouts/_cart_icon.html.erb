@@ -1,6 +1,6 @@
-<%= link_to orders_cart_path do %>
+<%= link_to orders_cart_path, class: "nav-link" do %>
   <span class="fa-stack">
-    <span class="fas fa-shopping-cart" style="font-size: 20px; color: white;"></span>
+    <span class="fas fa-shopping-cart" style="font-size: 20px; color: black;"></span>
     <% if cart_products_count.positive? %>
       <span class="notify-badge badge badge-pill badge-primary">
         <%= cart_products_count %>
