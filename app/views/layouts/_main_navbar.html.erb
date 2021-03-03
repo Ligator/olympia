@@ -49,7 +49,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <% if user_signed_in? %>
-              <%= link_to current_user.email, edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to current_user.email, user_edit_path, class: "dropdown-item" %>
               <%= link_to current_user.store.name, store_path(current_user.store), class: "dropdown-item" if current_user.store.present? %>
               <div class="dropdown-divider"></div>
               <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
