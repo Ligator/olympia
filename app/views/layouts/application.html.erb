@@ -17,77 +17,7 @@
   </head>
   <body>
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <%= link_to "¡Pásele wera!", statics_home_path, class: "navbar-brand"%>
-        <ul class="navbar-nav d-lg-none ml-auto navbar-icons d-flex flex-row">
-          <li class="nav-item">
-          </li>
-          <li class="nav-item mx-1">
-            <span class="cart_icon">
-              <%= render "layouts/cart_icon" %>
-            </span>
-          </li>
-        </ul>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <%= link_to 'Shop', products_path, class: "nav-link active" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Producers', stores_path, class: "nav-link" %>
-            </li>
-          </ul>
-
-          <div class="input-group mr-auto col-lg-6 col-12">
-        <!--<input type="text" class="form-control" placeholder="Buscar" aria-label="Search a product or a history" aria-describedby="addon-wrapping">
-            <div class="input-group-append">
-              <span class="input-group-text" id="addon-wrapping">
-                <span class="fas fa-search"></span>
-              </span>
-            </div> -->
-            <%= form_with url: "/search", local: false, :remote=>true do %>
-              <%= text_field_tag :filter, params[:filter], class: "form-control", placeholder: "Buscar", id: "input_search" %>
-              <%= submit_tag 'Search', class: "btn btn-outline-success"%>
-            <% end %>
-          </div>
-
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <%= link_to languages_set_language_path, style: "color: black;", method: :post, class: "nav-link" do %>
-                <span class="fas fa-globe" style="font-size: 20px;"></span>
-                <%= current_or_guest_user.locale.upcase %> <%= @currency.upcase %>
-              <% end %>
-            </li>
-
-            <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="fas fa-user" style="font-size: 20px;"></span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <% if user_signed_in? %>
-                  <%= link_to current_user.email, profile_show_path, class: "dropdown-item" %>
-                  <%= link_to current_user.store.name, store_path(current_user.store), class: "dropdown-item" if current_user.store.present? %>
-                  <div class="dropdown-divider"></div>
-                  <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
-                <% else %>
-                  <%= link_to t("devise.sessions.new.sign_in"), new_user_session_path,class: "dropdown-item" %>
-                  <%= link_to t("devise.registrations.new.sign_up"), new_user_registration_path, class: "dropdown-item"  %>
-                <% end %>
-              </div>
-            </li>
-
-            <li class="nav-item cart_icon">
-              <%= render "layouts/cart_icon" %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <%= render "layouts/main_navbar" %>
 
     <div class="row">
       <div class="offset-md-1 col-md-10 col-sm-12">

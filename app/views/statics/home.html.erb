@@ -1,7 +1,7 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
   <% @products.each do |product| %>
     <div class="col p-2">
-      <div class="card border-light mb-3 overflow-hidden">
+      <div class="card border-light mb-3 overflow-hidden"  style="height: 100%">
         <div class="text-center" style="height: 300px" >
           <%= link_to [product.store, product] do %>
             <% if product.images.present? %>
@@ -9,11 +9,8 @@
             <% end %>
           <% end %>
         </div>
-        <div class="card-body bg-white">
+        <div class="card-body bg-white" style="height: 100%">
           <h5><%= product.name %></h5>
-          <p class="card-text">
-            <%= product.description %>
-          </p>
           <p class="card-text">
             <%= number_to_currency product.price, currency: @currency %>
           </p>
