@@ -40,12 +40,12 @@
               <%= current_user.email %> </strong>
             </div>
 
-            <%= link_to 'Edit profile', edit_user_registration_path, class: "btn btn-outline-secondary"%>
+            <%= link_to t("devise.registrations.edit.title",resource: resource_name.to_s.humanize), edit_user_registration_path, class: "btn btn-outline-secondary"%>
 
-            <%= link_to "Log out", destroy_user_session_path,class: "btn btn-outline-secondary", method: :delete %>
+            <%= link_to t(:log_out), destroy_user_session_path,class: "btn btn-outline-secondary", method: :delete %>
           <% else %>
-            <%= link_to "Sing in", new_user_registration_path, class: "btn btn-outline-secondary"  %>
-            <%= link_to "Log in", new_user_session_path,class: "btn btn-outline-secondary" %>
+            <%= link_to t("devise.registrations.new.sign_up"), new_user_registration_path, class: "btn btn-outline-secondary"  %>
+            <%= link_to t("devise.sessions.new.sign_in"), new_user_session_path,class: "btn btn-outline-secondary" %>
           <% end %>
 
         </nav>

@@ -11,5 +11,8 @@ es:
   successfully_destroy_product: "El producto se destruyó con éxito."
   comment_was_created: "El comentario se creó correctamente."
   comment_was_not_created: "El comentario no se pudo crear."
+
+  log_out: "Cerrar sesión"
+
   pay_order: "Pagar"
   invalid_order: "Orden Inválida"
