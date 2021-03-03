@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
+  has_one :address, dependent: :destroy
+
   def full_name
     [first_name, last_name].compact.join(" ").squeeze
   end
