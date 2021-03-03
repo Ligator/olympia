@@ -1,3 +1,12 @@
 $('#edit-comment').html("<%= j (render 'edit') %>");
 $('#edit-comment--modal').modal('show')
 $('#edit-comment').slideDown(350)
+$( document ).ready(function() {
+    var message_error_comment = $('#message_error_comment').text();
+    window.setTimeout(
+        function() {
+          $('#message_error_comment').hide();
+        },4000);
+
+
+  });

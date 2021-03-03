@@ -18,19 +18,17 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <% if Rails.env.production? %>
-          <td >
-            <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
-              <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
-            </div>
-          </td>
-        <% else %>
-          <td >
-            <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
-              <%= image_tag product.images.first, class: "card-img-top" %>
-            </div>
-          </td>
-        <% end %>
+        <td >
+          <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
+            <% if product.images.present? %>
+              <% if Rails.env.production? %>
+                <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
+              <% else %>
+                <%= image_tag product.images.first, class: "card-img-top" %>
+              <% end %>
+            <% end %>
+          </div>
+        </td>
         <td><%= product.name %></td>
         <td><%= product.description %></td>
         <td><%= product.price %></td>

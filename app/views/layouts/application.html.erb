@@ -45,12 +45,16 @@
           </ul>
 
           <div class="input-group mr-auto col-lg-6 col-12">
-            <input type="text" class="form-control" placeholder="Buscar" aria-label="Search a product or a history" aria-describedby="addon-wrapping">
+        <!--<input type="text" class="form-control" placeholder="Buscar" aria-label="Search a product or a history" aria-describedby="addon-wrapping">
             <div class="input-group-append">
               <span class="input-group-text" id="addon-wrapping">
                 <span class="fas fa-search"></span>
               </span>
-            </div>
+            </div> -->
+            <%= form_with url: "/search", local: false, :remote=>true do %>
+              <%= text_field_tag :filter, params[:filter], class: "form-control", placeholder: "Buscar", id: "input_search" %>
+              <%= submit_tag 'Search', class: "btn btn-outline-success"%>
+            <% end %>
           </div>
 
           <ul class="navbar-nav mr-auto">
@@ -128,3 +132,4 @@
     </footer>
   </body>
 </html>
+
