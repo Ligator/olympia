@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     end
   end
   devise_for :users
+  devise_scope :user do
+    get 'resource/edit', to: 'users/registrations#edit'
+  end
   get "statics/home"
   get "statics/test_email"
 
