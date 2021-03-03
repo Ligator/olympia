@@ -10,9 +10,6 @@
         <div class="card-body bg-white" style="height: 100%">
           <h5><%= product.name %></h5>
           <p class="card-text">
-            <%= product.description %>
-          </p>
-          <p class="card-text">
             <%= number_to_currency product.price, currency: @currency %>
           </p>
         </div>
