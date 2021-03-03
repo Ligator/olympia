@@ -26,3 +26,29 @@
   border-radius: 9px;
   vertical-align: top;
 }
+
+.hov-cl0:hover {color: #fff;}
+.hov-bg0:hover {background-color: #fff;}
+.hov-cl1:hover {color: #717fe0;}
+.hov-bg1:hover {background-color: #717fe0;}
+
+.hov-img0 {
+  display: block;
+  overflow: hidden;
+}
+
+.hov-img0 img{
+  width: 100%;
+  -webkit-transition: transform 0.9s ease;
+  -o-transition: transform 0.9s ease;
+  -moz-transition: transform 0.9s ease;
+  transition: transform 0.9s ease;
+}
+
+.hov-img0:hover img {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
