@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Olympia</title>
+    <title>¡Pásele wera!</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
@@ -9,98 +9,103 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/101b932633.js" crossorigin="anonymous"></script>
     <script src="https://js.stripe.com/v3/"></script>
-
   </head>
   <body>
-    <header >
-      <div class="container-f">
-        <nav class="navbar navbar-dark bg-dark navbar-expand-sm-2 navbar-light bg-light  ">
-          <a class="navbar-brand" href="#">¡Pásele wera!</a>
-          <div class="d-flex col-md">
-            <%= form_with url: "/search", local: false, :remote=>true do %>
-              <%= text_field_tag :filter, params[:filter], class: "form col-3 col-sm-4 col-md-6 col-lg-8 col-xl-8 f ", placeholder: "Buscas algo en especial?", id: "input_search" %>
-              <%= submit_tag 'Search', class: "btn btn-outline-success"%>
-            <% end %>
-            <%= link_to languages_set_language_path, style: "color: white;", method: :post, class: "m-1" do %>
-              <span class="fas fa-globe" style="font-size: 20px;"></span>
-              <%= current_or_guest_user.locale.upcase %> <%= @currency.upcase %>
-            <% end %>
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <%= link_to "¡Pásele wera!", statics_home_path, class: "navbar-brand"%>
+        <ul class="navbar-nav d-lg-none ml-auto navbar-icons d-flex flex-row">
+          <li class="nav-item">
+          </li>
+          <li class="nav-item mx-1">
             <span class="cart_icon">
               <%= render "layouts/cart_icon" %>
             </span>
-          </div>
-          <div id="search--index" style="display:none;"></div>
-          <% if user_signed_in? %>
-            <div class="text-light"> User: <strong class="ml-2 mr-2">
-              <%= current_user.full_name %> </strong>
-            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <%= link_to 'Edit profile', edit_user_registration_path, class: "btn btn-outline-secondary"%>
-
-            <%= link_to "Log out", destroy_user_session_path,class: "btn btn-outline-secondary", method: :delete %>
-          <% else %>
-            <%= link_to "Sing in", new_user_registration_path, class: "btn btn-outline-secondary"  %>
-            <%= link_to "Log in", new_user_session_path,class: "btn btn-outline-secondary" %>
-          <% end %>
-
-        </nav>
-      </div>
-
-      <div class="container-f">
-        <nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-light bg-light sticky-top ">
-          <ul class="navbar-nav ">
-            <li class="col nav-item">
-              <%= link_to 'Productos', products_path, class: "nav-link active" %>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to 'Shop', products_path, class: "nav-link active" %>
             </li>
-            <li class="col nav-item">
-              <%= link_to 'Stores', stores_path, class: "nav-link active" %>
-            </li>
-            <li class=" col nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-              Artesanos
-              </a>
-            </li>
-            <li class=" col nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-              Cursos
-              </a>
-            </li>
-            <li class=" col nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-              Promociones
-              </a>
+            <li class="nav-item">
+              <%= link_to 'Producers', stores_path, class: "nav-link" %>
             </li>
           </ul>
-        </nav>
-      </div>
-    </header>
 
-    <% if notice %>
-      <div class="alert alert-success" role="alert">
-        <%= notice %>
-      </div>
-    <% end %>
+          <div class="input-group mr-auto col-lg-6 col-12">
+        <!--<input type="text" class="form-control" placeholder="Buscar" aria-label="Search a product or a history" aria-describedby="addon-wrapping">
+            <div class="input-group-append">
+              <span class="input-group-text" id="addon-wrapping">
+                <span class="fas fa-search"></span>
+              </span>
+            </div> -->
+            <%= form_with url: "/search", local: false, :remote=>true do %>
+              <%= text_field_tag :filter, params[:filter], class: "form-control", placeholder: "Buscar", id: "input_search" %>
+              <%= submit_tag 'Search', class: "btn btn-outline-success"%>
+            <% end %>
+          </div>
 
-    <% if alert %>
-      <div class="alert alert-danger" role="alert">
-        <%= alert %>
-      </div>
-    <% end %>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <%= link_to languages_set_language_path, style: "color: black;", method: :post, class: "nav-link" do %>
+                <span class="fas fa-globe" style="font-size: 20px;"></span>
+                <%= current_or_guest_user.locale.upcase %> <%= @currency.upcase %>
+              <% end %>
+            </li>
 
-    <% if flash[:error] %>
-      <div class="alert alert-danger" role="alert">
-        <%= flash[:error] %>
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fas fa-user" style="font-size: 20px;"></span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% if user_signed_in? %>
+                  <%= link_to current_user.email, edit_user_registration_path, class: "dropdown-item" %>
+                  <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
+                <% else %>
+                  <%= link_to t("devise.sessions.new.sign_in"), new_user_session_path,class: "dropdown-item" %>
+                  <%= link_to t("devise.registrations.new.sign_up"), new_user_registration_path, class: "dropdown-item"  %>
+                <% end %>
+              </div>
+            </li>
+
+            <li class="nav-item cart_icon">
+              <%= render "layouts/cart_icon" %>
+            </li>
+          </ul>
+        </div>
       </div>
-    <% end %>
+    </nav>
 
     <div class="container">
+      <% if notice %>
+        <div class="alert alert-success my-2" role="alert">
+          <%= notice %>
+        </div>
+      <% elsif alert %>
+        <div class="alert alert-danger my-2" role="alert">
+          <%= alert %>
+        </div>
+      <% elsif flash[:error] %>
+        <div class="alert alert-danger my-2" role="alert">
+          <%= flash[:error] %>
+        </div>
+      <% else %>
+        <div class="artesanos text-center my-2">
+          <%= link_to "Si eres artesano, haz click en aquí.", "#" %>
+        </div>
+      <% end %>
+
       <%= yield %>
     </div>
 
