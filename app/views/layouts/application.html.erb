@@ -83,29 +83,21 @@
     </nav>
 
     <div class="container">
-      <div class="artesanos text-center m-2">
-        <%= link_to "Si eres artesano, haz click en aquí.", "#" %>
-      </div>
-
-      <!-- <div class="alert alert-success" role="alert">
-        sdfasdfasdfasdgsf sadfsd fasdf s
-      </div> -->
-
       <% if notice %>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success my-2" role="alert">
           <%= notice %>
         </div>
-      <% end %>
-
-      <% if alert %>
-        <div class="alert alert-danger" role="alert">
+      <% elsif alert %>
+        <div class="alert alert-danger my-2" role="alert">
           <%= alert %>
         </div>
-      <% end %>
-
-      <% if flash[:error] %>
-        <div class="alert alert-danger" role="alert">
+      <% elsif flash[:error] %>
+        <div class="alert alert-danger my-2" role="alert">
           <%= flash[:error] %>
+        </div>
+      <% else %>
+        <div class="artesanos text-center my-2">
+          <%= link_to "Si eres artesano, haz click en aquí.", "#" %>
         </div>
       <% end %>
 
