@@ -66,6 +66,8 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <% if user_signed_in? %>
                   <%= link_to current_user.email, edit_user_registration_path, class: "dropdown-item" %>
+                  <%= link_to current_user.store.name, store_path(current_user.store), class: "dropdown-item" if current_user.store.present? %>
+                  <div class="dropdown-divider"></div>
                   <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
                 <% else %>
                   <%= link_to t("devise.sessions.new.sign_in"), new_user_session_path,class: "dropdown-item" %>
@@ -82,26 +84,28 @@
       </div>
     </nav>
 
-    <div class="container">
-      <% if notice %>
-        <div class="alert alert-success my-2" role="alert">
-          <%= notice %>
-        </div>
-      <% elsif alert %>
-        <div class="alert alert-danger my-2" role="alert">
-          <%= alert %>
-        </div>
-      <% elsif flash[:error] %>
-        <div class="alert alert-danger my-2" role="alert">
-          <%= flash[:error] %>
-        </div>
-      <% else %>
-        <div class="artesanos text-center my-2">
-          <%= link_to "Si eres artesano, haz click en aquí.", "#" %>
-        </div>
-      <% end %>
+    <div class="row">
+      <div class="offset-md-1 col-md-10 col-sm-12">
+        <% if notice %>
+          <div class="alert alert-success my-2" role="alert">
+            <%= notice %>
+          </div>
+        <% elsif alert %>
+          <div class="alert alert-danger my-2" role="alert">
+            <%= alert %>
+          </div>
+        <% elsif flash[:error] %>
+          <div class="alert alert-danger my-2" role="alert">
+            <%= flash[:error] %>
+          </div>
+        <% else %>
+          <div class="artesanos text-center my-2">
+            <%= link_to "Si eres artesano, haz click en aquí.", "#" %>
+          </div>
+        <% end %>
 
-      <%= yield %>
+        <%= yield %>
+      </div>
     </div>
 
     <footer>
