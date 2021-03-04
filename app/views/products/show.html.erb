@@ -1,12 +1,42 @@
-<% if Rails.env.production? %>
-  <div >
-    <%= cl_image_tag @product.images.first.key %>
-  </div>
-<% else %>
-  <div >
-    <%= image_tag @product.images.first %>
-  </div>
-<% end %>
+<div class="d-flex align-items-center mr-3 ">
+  <% if @product.images.present? %>
+    <% if Rails.env.production? %>
+      <%= cl_image_tag @product.images.first.key, class: "card-img-top" %>
+    <% else %>
+
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        </ol>
+        <div class="carousel-inner" style="height: 20rem; width: 20rem;">
+          <div class="carousel-item active" data-interval="10000">
+            <%= image_tag @product.images.first, style: "height: 20rem"%>
+          </div>
+          <% @product.images.each do |image| %>
+            <% unless image.eql?(@product.images.first) %>
+              <div class="carousel-item" data-interval="10000">
+                <%= image_tag image, style: "height: 20rem" %>
+              </div>
+            <% end %>
+          <% end %>
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+          <button class="btn btn-secondary sm" style="">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+          </button>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+          <button class="btn btn-secondary sm" style="">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </button>
+        </a>
+      </div>
+
+    <% end %>
+  <% end %>
+</div>
+
 <p>
   <strong>Name:</strong>
   <%= @product.name %>
@@ -38,7 +68,7 @@
 
 <%= link_to 'Store', store_path(@product.store) %> |
 <%= link_to 'Products', products_path %> |
-<% if current_user.present? %>
+<% if current_user.present? && current_user.store.eql?(@product.store)%>
   <%= link_to 'Edit', edit_store_product_path(@product.store, @product) %> |
   <%= link_to 'Destroy', store_product_path(@product.store, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
