@@ -1,12 +1,11 @@
 <%= form_with model: [ @store, @product, @comment ], local: false do |form| %>
-  <div class="modal-body">
+  <div class="row">
       <p>
         <%= form.label :body %><br>
         <%= form.text_area :body, class: "comment_body" %>
       </p>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <div class="row d-flex justify-content-center">
     <%= form.submit class: "btn btn-primary", id: "create_comment" %>
   </div>
 <% end %>
