@@ -20,13 +20,13 @@
             <tr class="product_<%= product.id %>">
               <% if Rails.env.production? %>
                 <td class="col">
-                  <div class="d-flex align-items-center mr-3" style="max-width: 150px;">
+                  <div class="d-flex align-items-center col-6 mr-3" style="max-width: 50px;">
                     <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
                   </div>
                 </td>
               <% else %>
                 <td class="col">
-                  <div class="align-items-center" style="max-width: 150px;">
+                  <div class="align-items-center" style="max-width: 50px;">
                     <%= image_tag product.images.first, class: "card-img-top" %>
                   </div>
                 </td>
@@ -35,10 +35,8 @@
               <td class="col"><%= product.description %></td>
               <td class="col"><%= product.size  %></td>
               <td class="col"><%= product.price %></td>
-              <td class="col">
-                <div class="form-sm-3">
-                  <input class="mtext-104 cl3 num-product" type="number" name="num-product1" value="1">
-                </div>
+              <td>
+                <input class="col" type="number" value="1">
               </td>
 
               <td class="col">
