@@ -29,13 +29,18 @@
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
     <div class="row">
+      <div class="col">
+        TODO: Remove dummy data to actual filters
+      </div>
+    </div>
+    <div class="row">
       <div class="col-3">
         <h5>Sort by</h5>
         <div class="list-group">
           <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
             All <span class="badge badge-primary badge-pill">14</span>
           <% end %>
-          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light active" do %>
             Popularity <span class="badge badge-primary badge-pill">10</span>
           <% end %>
           <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
@@ -49,7 +54,7 @@
       <div class="col-3 m-auto">
         <h5>Price</h5>
         <div class="list-group">
-          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light active" do %>
             All <span class="badge badge-primary badge-pill">14</span>
           <% end %>
           <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
@@ -78,7 +83,7 @@
           <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
             Negro <span class="badge badge-primary badge-pill">5</span>
           <% end %>
-          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light active" do %>
             Rojo <span class="badge badge-primary badge-pill">8</span>
           <% end %>
           <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
@@ -100,7 +105,7 @@
               <div id="carouselProduct_<%= product.id %>" class="carousel slide mb-4" data-ride="carousel">
                 <div class="carousel-inner">
                   <% product.images.each_with_index do |image, i| %>
-                    <div class="carousel-item <%= 'active' if i === 0 %>">
+                    <div class="carousel-item <%= 'active' if i === 0 %>" style="height: 300px">
                       <%= image_tag image, class: "img-fluid", alt: product.name, style: "max-height: 150%, min-height: 100%" %>
                     </div>
                   <% end %>
@@ -121,7 +126,6 @@
         </div>
         <div class="card-body bg-white" style="height: 100%">
           <h5><%= product.name %></h5>
-          <h5><%= product.images.count %></h5>
           <p class="card-text">
             <%= number_to_currency product.price, currency: @currency %>
           </p>
@@ -130,3 +134,11 @@
     </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(".list-group-item-action").on("click", function(){
+    $(this).closest(".list-group").find("a").removeClass("active");
+    $(this).addClass("active");
+    return false;
+  })
+</script>
