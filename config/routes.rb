@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       resources :comments
     end
   end
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'users/registrations' }
   devise_scope :user do
     get 'user/edit', to: 'users/registrations#edit'
   end

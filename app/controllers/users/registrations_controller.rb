@@ -23,6 +23,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
+    if resource.address.nil?
+      address = Address.new(address_params.merge(user_id: resource.id))
+      address.save
+    else
+      resource.address.update(address_params)
+    end
   end
 
   # DELETE /resource
@@ -40,24 +46,38 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
+    def address_params
+      params.require(:address).permit(:street,:number, :colony, :postal_code,
+                                                    :city, :state
+                                          )
+    end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+    # If you have extra params to permit, append them to the sanitizer.
+    # def configure_sign_up_params
+    #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+    # end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+    # If you have extra params to permit, append them to the sanitizer.
+    # def configure_account_update_params
+    #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+    # end
 
-  # The path used after sign up.
-  def after_sign_up_path_for(resource)
-    super(resource)
-  end
+    # The path used after sign up.
+    def after_sign_up_path_for(resource)
+      super(resource)
+    end
 
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+    # The path used after sign up for inactive accounts.
+    def after_inactive_sign_up_path_for(resource)
+      super(resource)
+    end
+
+    def after_update_path_for(resource)
+      case resource
+      when :user, User
+        resource.store.present? ? profile_show_path : root_path
+      else
+        super
+      end
+    end
 end

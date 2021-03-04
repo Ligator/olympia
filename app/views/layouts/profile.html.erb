@@ -19,17 +19,32 @@
     <div class="d-flex" id="wrapper">
 
       <!-- Sidebar -->
-      <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading"> <%= current_user.full_name %> </div>
+      <div class="bg-light border" id="sidebar-wrapper">
+        <div class="row d-flex">
+          <td class="col">
+            <div class="sidebar-heading"> <%= current_user.full_name %> </div>
+          </td>
+        </div>
         <div class="list-group list-group-flush">
+          <%= link_to root_path, style: "color: black;", class: "nav-link" do %>
+            <span class="far fa-arrow-alt-circle-left" style="font-size: 20px;"> Regresar</span>
+          <% end %>
           <%= link_to 'Perfil', profile_show_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Envíos', profile_shipments_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Ordenes', profile_orders_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Productos', profile_products_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Tarjeta', profile_cards_path, class: "list-group-item list-group-item-action bg-light" %>
-          <a href="#" class="list-group-item list-group-item-action bg-light">Perfil</a>
         </div>
       </div>
+      <div id="change-state-toggle">
+        <button id="menu-toggle-right" class="btn btn-outline-secondary">
+          <i class="fas fa-angle-double-right" id="menu-toggle-right_icon"></i>
+        </button>
+        <button id="menu-toggle-left" class="btn btn-outline-secondary">
+          <i class="fas fa-angle-double-left" id="menu-toggle-left_icon"></i>
+        </button>
+      </div>
+
       <!-- /#sidebar-wrapper -->
 
       <!-- Page Content -->
@@ -53,20 +68,33 @@
         <% end %>
 
         <div class="container-fluid">
-          <button class="btn btn-primary" id="menu-toggle">Menu</button>
-          <%= link_to 'Regresar', root_path, class: "btn btn-primary" %>
           <%= yield %>
         </div>
       </div>
       <!-- /#page-content-wrapper -->
-
     </div>
     <!-- /#wrapper -->
     <script>
-      $("#menu-toggle").click(function(e) {
+      if($("#wrapper").hasClass( "toggled" )){
+        $("#menu-toggle-right").hide();
+      }else{
+        $("#menu-toggle-left").hide();
+      }
+
+      $("#menu-toggle-right").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
+        $("#menu-toggle-right").hide();
+        $("#menu-toggle-left").show();
       });
+      $("#menu-toggle-left").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        $("#menu-toggle-right").show();
+        $("#menu-toggle-left").hide();
+      });
+
+
     </script>
   </body>
 </html>

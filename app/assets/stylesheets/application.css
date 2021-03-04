@@ -52,3 +52,30 @@
   -o-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+@media screen and (max-width: 320px) {
+     table {
+       display: block;
+       overflow-x: auto;
+     }
+}
+
+#edit_profile--modal-dialog{
+  max-width: 600px;
+}
+
+#menu-toggle-right{
+  width: 30px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#menu-toggle-left{
+  width: 30px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
