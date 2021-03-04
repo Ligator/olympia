@@ -1,49 +1,7 @@
-
 <h1>Products</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Size</th>
-      <th>Quantity</th>
-      <th>Store</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td >
-          <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
-            <% if product.images.present? %>
-              <% if Rails.env.production? %>
-                <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
-              <% else %>
-                <%= image_tag product.images.first, class: "card-img-top" %>
-              <% end %>
-            <% end %>
-          </div>
-        </td>
-        <td><%= product.name %></td>
-        <td><%= product.description %></td>
-        <td><%= product.price %></td>
-        <td><%= product.size %></td>
-        <td><%= product.quantity %></td>
-        <td><%= product.store_id %></td>
-        <td><%= link_to 'Show', store_product_path(product.store_id, product.id) %></td>
-        <% if user_signed_in? && current_user.store.eql?(product.store) %>
-          <td><%= link_to 'Edit', edit_store_product_path(product.store_id, product.id) %></td>
-          <td><%= link_to 'Destroy', store_product_path(product.store_id, product.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+  <% @products.each do |product| %>
+      <%= render "/products/product", product: product %>
+  <% end %>
+</div>
 
