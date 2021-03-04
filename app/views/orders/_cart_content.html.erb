@@ -1,53 +1,72 @@
-<% if cart_products_count.positive? %>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Size</th>
-        <th>Quantity</th>
-        <th>Made by</th>
-        <th></th>
-      </tr>
-    </thead>
+<div class="container">
+  <% if cart_products_count.positive? %>
+    <table class="table table-hover">
+      <div class="row align-items-center offset-md-1 col-md-10 col-sm-12">
+        <thead>
+          <tr class="table_head align-content-center ">
+            <th></th>
+            <th class="column-1 col">Name</th>
+            <th class="column-2 col">Description</th>
+            <th class="column-3 col">Size</th>
+            <th class="column-4 col">Price</th>
+            <th class="column-5 col">Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+      </div>
+      <div class="row align-items-center offset-md-1 col-md-10 col-sm-12">
+        <tbody>
+          <% @quantities_hash.each do |product, quantity| %>
+            <tr class="product_<%= product.id %>">
+              <% if Rails.env.production? %>
+                <td class="col">
+                  <div class="d-flex align-items-center mr-3" style="max-width: 150px;">
+                    <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
+                  </div>
+                </td>
+              <% else %>
+                <td class="col">
+                  <div class="align-items-center" style="max-width: 150px;">
+                    <%= image_tag product.images.first, class: "card-img-top" %>
+                  </div>
+                </td>
+              <% end %>
+              <td class="col"><%= product.name %></td>
+              <td class="col"><%= product.description %></td>
+              <td class="col"><%= product.size  %></td>
+              <td class="col"><%= product.price %></td>
+              <td class="col">
+                <div class="form-sm-3">
+                  <input class="mtext-104 cl3 num-product" type="number" name="num-product1" value="1">
+                </div>
+              </td>
 
-    <tbody>
-      <% @quantities_hash.each do |product, quantity| %>
-        <tr class="product_<%= product.id %>">
-          <% if Rails.env.production? %>
-            <td >
-              <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
-                <%= cl_image_tag product.images.first.key, class: "card-img-top" %>
-              </div>
-            </td>
-          <% else %>
-            <td >
-              <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
-                <%= image_tag product.images.first, class: "card-img-top" %>
-              </div>
-            </td>
+              <td class="col">
+                <%= form_tag orders_remove_from_cart_path(product_id: @product), remote: true do %>
+                  <%= hidden_field_tag :product_id, product.id %>
+                  <%= submit_tag 'Remove', class: "btn btn-primary" %>
+                <% end %>
+
+              </td>
+            </tr>
           <% end %>
-          <td><%= product.name %></td>
-          <td><%= product.description %></td>
-          <td><%= product.price %></td>
-          <td><%= product.size %></td>
-          <td><%= quantity %></td>
-          <td><%= product.store.name %></td>
-          <td>
-            <%= form_tag orders_remove_from_cart_path(product_id: @product), remote: true do %>
-              <%= hidden_field_tag :product_id, product.id %>
-              <%= submit_tag 'Remove', class: "btn btn-primary" %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </tbody>
+      </div>
+    </table>
 
-  <button id="checkout-button" class="btn btn-primary"><%= t(:pay_order) %></button>
+    <div class="row">
+      <div>
+        <h3>Total $ </h3>
+      </div>
+    </div>
 
-<% else %>
-  <h1><%= t(:empty_cart) %></h1>
-<% end %>
+    <button id="checkout-button" class="btn btn-primary"><%= t(:pay_order) %></button>
+
+  <% else %>
+    <h1><%= t(:empty_cart) %></h1>
+  <% end %>
+</div>
+
+
+
+
