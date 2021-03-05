@@ -1,49 +1,38 @@
- <!-- <tr>
-    <td >
-      <div class="d-flex align-items-center mr-3" style="max-width: 50px;">
-        <%# if product.images.present? %>
-          <%# if Rails.env.production? %>
-            <%#= cl_image_tag product.images.first.key, class: "card-img-top" %>
-          <%# else %>
-            <%#= image_tag product.images.first, class: "card-img-top" %>
-          <%# end %>
-        <%# end %>
-      </div>
-    </td>
-    <td><%#= product.name %></td>
-    <td><%#= product.description %></td>
-    <td><%#= product.price_in_cents %></td>
-    <td><%#= product.size %></td>
-    <td><%#= product.quantity %></td>
-    <td><%#= product.store_id %></td>
-    <td><%#= link_to 'Show', store_product_path(product.store_id, product.id) %></td>
-    <%# if user_signed_in? && current_user.store.eql?(@store) %>
-      <td><%#= link_to 'Edit', edit_store_product_path(product.store_id, product.id) %></td>
-      <td><%#= link_to 'Destroy', store_product_path(product.store_id, product.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <%# end %>
-  </tr> -->
-
-
-    <div class="col p-2">
-      <div class="card border-light mb-3 overflow-hidden"  style="height: 100%">
-        <div class="text-center" style="height: 300px" >
-          <%= link_to [product.store, product], class: "hov-img0" do %>
-            <% if product.images.present? %>
-              <% if Rails.env.production? %>
-                <%= cl_image_tag product.images.first.key, class: "img-fluid", alt: product.name, style: "max-height: 150%, min-height: 100%" %>
-              <% else %>
-                <%= image_tag product.images.first, class: "img-fluid", alt: product.name, style: "max-height: 150%, min-height: 100%" %>
+<div class="col">
+  <div class="card border-light my-3 overflow-hidden" style="height: 100%">
+    <div class="text-center" style="height: 300px" >
+      <%= link_to [product.store, product], class: "hov-img0" do %>
+        <% if product.images.count > 1 %>
+          <div id="carouselProduct_<%= product.id %>" class="carousel slide mb-4" data-ride="carousel">
+            <div class="carousel-inner" >
+              <% product.images.each_with_index do |image, i| %>
+                <div class="carousel-item <%= 'active' if i === 0 %> " style="height: 300px">
+                  <%= image_tag image, alt: product.name, style: "max-height: 150%, min-height: 100%" %>
+                </div>
               <% end %>
-            <% else %>
-              <%= link_to product.name, store_product_path(product.store, product) %>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="card-body bg-white" style="height: 100%">
-          <h5><%= product.name %></h5>
-          <p class="card-text">
-            <%= number_to_currency product.price, currency: @currency %>
-          </p>
-        </div>
-      </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselProduct_<%= product.id %>" role="button" data-slide="prev">
+              <button class="btn btn-secondary sm" style="">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+              </button>
+            </a>
+            <a class="carousel-control-next" href="#carouselProduct_<%= product.id %>" role="button" data-slide="next">
+              <button class="btn btn-secondary sm" style="">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </button>
+            </a>
+          </div>
+        <% elsif product.images.present? %>
+          <%= image_tag product.images.first, class: "img-fluid", alt: product.name, style: "max-height: 150%, min-height: 100%" %>
+        <% end %>
+      <% end %>
     </div>
+    <div class="card-body bg-white" id="card-body-name_and_price" style="height: 100%">
+      <h5><%= product.name %></h5>
+      <p class="card-text">
+        <%= number_to_currency product.price, currency: @currency %>
+      </p>
+    </div>
+  </div>
+</div>
+

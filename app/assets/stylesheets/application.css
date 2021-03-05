@@ -82,3 +82,9 @@
 .main_toolbar .dropdown:hover > .dropdown-menu {
   display: block;
 }
+
+#product_image {
+  max-height: 300px;
+  min-height: 30px;
+  width: auto;
+}
