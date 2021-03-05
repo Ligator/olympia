@@ -3,4 +3,8 @@
   <% current_user.store.products.each do |product| %>
       <%= render "/products/product", product: product %>
   <% end %>
+
+</div>
+<div class="row mt-5 d-flex justify-content-center">
+  <%= link_to 'Nuevo Producto', new_store_product_path(current_user.store), :remote=>true , class: "btn btn-primary btn-lg"%>
 </div>
