@@ -31,6 +31,5 @@ class Product < ApplicationRecord
 
   def full_price_usd
     full_price_mxn / ENV["ONE_USD_TO_MXN"].to_d
-
   end
 end
