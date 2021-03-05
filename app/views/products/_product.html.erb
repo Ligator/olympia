@@ -33,6 +33,12 @@
         <%= number_to_currency product.full_price(@currency), locale: @currency %>
       </p>
     </div>
+    <%= link_to 'Ver', store_product_path(product.store, product), :remote=>true, class: "btn btn-info button_edit_product" %>
+    <%= link_to 'Editar', edit_store_product_path(product.store, product), :remote=>true, class: "btn btn-primary button_edit_product" %>
+    <%= link_to 'Eliminar', store_product_path(product.store, product), method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true, class: "btn btn-danger button_edit_product" %>
   </div>
 </div>
 
+<script async type="text/javascript">
+  $(".button_edit_product").hide();
+</script>

@@ -12,6 +12,7 @@ class Product < ApplicationRecord
 
   scope :with_inventory, -> { where("quantity > ?", 0) }
 
+
   def full_price(currency)
     raise "Currency is missing" if currency.blank?
     case currency
@@ -30,5 +31,6 @@ class Product < ApplicationRecord
 
   def full_price_usd
     full_price_mxn / ENV["ONE_USD_TO_MXN"].to_d
+
   end
 end

@@ -1,10 +1,16 @@
 <h1>Products</h1>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-  <% current_user.store.products.each do |product| %>
-      <%= render "/products/product", product: product %>
-  <% end %>
 
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5" id="render_products_in_profile">
+  <%= render current_user.store.products %>
 </div>
 <div class="row mt-5 d-flex justify-content-center">
   <%= link_to 'Nuevo Producto', new_store_product_path(current_user.store), :remote=>true , class: "btn btn-primary btn-lg"%>
 </div>
+
+<div id="new-product" style="display:none;"></div>
+<div id="show-product" style="display:none;"></div>
+<div id="edit-product" style="display:none;"></div>
+
+<script async type="text/javascript">
+  $(".button_edit_product").show();
+</script>
