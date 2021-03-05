@@ -81,7 +81,7 @@
 
 
 #product_image {
-  max-height: 150%;
-  min-height: 100%;
+  max-height: 300px;
+  min-height: 30px;
   width: auto;
 }
