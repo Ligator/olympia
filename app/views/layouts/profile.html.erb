@@ -70,9 +70,9 @@
                 </button>
               </div>
             </div>
-            <button class="btn btn-outline-secondary d-flex align-item-center">
-              Ir a Tienda <i class="far fa-arrow-alt-circle-right" style="font-size: 25px;"></i>
-            </button>
+            <%= link_to root_path, class: "btn btn-outline-secondary d-flex align-item-center" do %>
+              Ir a Tienda<span class="far fa-arrow-alt-circle-right" style="font-size: 25px;"></span>
+            <% end %>
           </div>
 
           <%= yield %>
