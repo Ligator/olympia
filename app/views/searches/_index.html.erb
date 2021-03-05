@@ -84,7 +84,7 @@
                     </td>
                   <% end %>
                   <td><%= product.name %></td>
-                  <td><%= product.price %></td>
+                  <td><%= number_to_currency product.full_price(@currency), locale: @currency %></td>
                   <td><%= product.store.name %></td>
                   <td><%= link_to 'More Information', store_product_path(product.store_id, product.id) %></td>
                 </tr>

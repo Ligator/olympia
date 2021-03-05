@@ -34,7 +34,7 @@
               <td class="col"><%= product.name %></td>
               <td class="col"><%= product.description %></td>
               <td class="col"><%= product.size  %></td>
-              <td class="col"><%= product.price %></td>
+              <td class="col"><%= number_to_currency product.full_price(@currency), locale: @currency %></td>
               <td>
                 <input class="col" type="number" value="1">
               </td>

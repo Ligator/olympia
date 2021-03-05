@@ -30,7 +30,7 @@
     <div class="card-body bg-white" id="card-body-name_and_price" style="height: 100%">
       <h5><%= product.name %></h5>
       <p class="card-text">
-        <%= number_to_currency product.price, currency: @currency %>
+        <%= number_to_currency product.full_price(@currency), locale: @currency %>
       </p>
     </div>
   </div>

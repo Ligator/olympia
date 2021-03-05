@@ -42,6 +42,7 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
+    @store = current_user.store
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product.store, notice: I18n.t(:product_was_updated) }
