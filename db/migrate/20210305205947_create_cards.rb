@@ -6,6 +6,7 @@ class CreateCards < ActiveRecord::Migration[6.1]
       t.string :titular_name
       t.date :expiration_date
       t.string :type
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

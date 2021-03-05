@@ -7,13 +7,15 @@ RSpec.describe "cards/index", type: :view do
         number_card: 2,
         name_bank: "Name Bank",
         titular_name: "Titular Name",
-        type: "Type"
+        type: "Type",
+        user: nil
       ),
       Card.create!(
         number_card: 2,
         name_bank: "Name Bank",
         titular_name: "Titular Name",
-        type: "Type"
+        type: "Type",
+        user: nil
       )
     ])
   end
@@ -24,5 +26,6 @@ RSpec.describe "cards/index", type: :view do
     assert_select "tr>td", text: "Name Bank".to_s, count: 2
     assert_select "tr>td", text: "Titular Name".to_s, count: 2
     assert_select "tr>td", text: "Type".to_s, count: 2
+    assert_select "tr>td", text: nil.to_s, count: 2
   end
 end

@@ -5,5 +5,6 @@ FactoryBot.define do
     titular_name { "MyString" }
     expiration_date { "2021-03-05" }
     type { "" }
+    user { nil }
   end
 end

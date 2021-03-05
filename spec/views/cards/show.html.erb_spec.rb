@@ -6,7 +6,8 @@ RSpec.describe "cards/show", type: :view do
       number_card: 2,
       name_bank: "Name Bank",
       titular_name: "Titular Name",
-      type: "Type"
+      type: "Type",
+      user: nil
     ))
   end
 
@@ -16,5 +17,6 @@ RSpec.describe "cards/show", type: :view do
     expect(rendered).to match(/Name Bank/)
     expect(rendered).to match(/Titular Name/)
     expect(rendered).to match(/Type/)
+    expect(rendered).to match(//)
   end
 end
