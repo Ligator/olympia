@@ -86,6 +86,7 @@
               </div>
             <% end %>
           </div>
+          <a href="#" id="change_password--profile" class="stretched-link">Cambiar contraseña</a>
           <div class="form-group" id="form-edit--password">
             <div class="row">
               <div class="col-sm col-md p-2 d-flex align-items-center">
@@ -110,14 +111,14 @@
               (<%= t("devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes") %>)</i>
             <%= f.password_field :current_password,class: "justify-content form-control", autocomplete: "new-password", required: :value %>
           </div>
-          <div class=" field justify-content">
-            <div class="actions">
-              <%= f.submit t("devise.registrations.edit.update"), class: "btn btn-primary" %>
-              <button type="button" class="btn btn-danger" id="change_password--profile">Cambiar Contraseña</button>
-            </div>
-          </div>
-        <% end %>
+
+
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= f.submit t("devise.registrations.edit.update"), class: "btn btn-primary" %>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>
@@ -125,6 +126,7 @@
   $("#change_password--profile").click(function(e) {
     e.preventDefault();
     $("#form-edit--password").show();
+    $("#change_password--profile").hide()
   });
   $("#form-edit--password").hide();
 </script>

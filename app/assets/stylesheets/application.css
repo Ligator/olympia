@@ -83,6 +83,10 @@
   display: block;
 }
 
+.link-return_store{
+  position: relative;
+  left: 200px;
+}
 #product_image {
   max-height: 300px;
   min-height: 30px;
