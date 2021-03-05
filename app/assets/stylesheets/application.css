@@ -82,3 +82,8 @@
 .main_toolbar .dropdown:hover > .dropdown-menu {
   display: block;
 }
+
+.link-return_store{
+  position: relative;
+  left: 200px;
+}

@@ -16,9 +16,7 @@
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
-    <%= link_to root_path, style: "color: black;", class: "nav-link" do %>
-      <span class="far fa-arrow-alt-circle-left" style="font-size: 20px;"> Regresar</span>
-    <% end %>
+
     <div class="d-flex" id="wrapper">
 
       <!-- Sidebar -->
@@ -36,14 +34,7 @@
           <%= link_to 'Tarjeta', profile_cards_path, class: "list-group-item list-group-item-action bg-light" %>
         </div>
       </div>
-      <div id="change-state-toggle">
-        <button id="menu-toggle-right" class="btn btn-outline-secondary">
-          <i class="fas fa-angle-double-right" id="menu-toggle-right_icon"></i>
-        </button>
-        <button id="menu-toggle-left" class="btn btn-outline-secondary">
-          <i class="fas fa-angle-double-left" id="menu-toggle-left_icon"></i>
-        </button>
-      </div>
+
 
       <!-- /#sidebar-wrapper -->
 
@@ -68,6 +59,22 @@
         <% end %>
 
         <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col">
+              <div id="change-state-toggle">
+                <button id="menu-toggle-right" class="btn btn-outline-secondary">
+                  <i class="fas fa-angle-double-right" id="menu-toggle-right_icon" style="font-size: 20px;"></i>
+                </button>
+                <button id="menu-toggle-left" class="btn btn-outline-secondary">
+                  <i class="fas fa-angle-double-left" id="menu-toggle-left_icon" style="font-size: 20px;"></i>
+                </button>
+              </div>
+            </div>
+            <button class="btn btn-outline-secondary d-flex align-item-center">
+              Ir a Tienda <i class="far fa-arrow-alt-circle-right" style="font-size: 25px;"></i>
+            </button>
+          </div>
+
           <%= yield %>
         </div>
       </div>
