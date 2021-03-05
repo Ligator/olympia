@@ -1,0 +1,12 @@
+/* custom.scss */
+
+$theme-colors: (
+  "primary": #878C5E,
+  "secundary": #DBC7AC,
+  "info": #F29D52,
+  "light": #D9D2D3,
+  "dark": #A19381
+);
+
+/* import the necessary Bootstrap files */
+@import "/bootstrap/scss/bootstrap";
