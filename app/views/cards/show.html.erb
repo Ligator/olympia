@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number card:</strong>
+  <%= @card.number_card %>
+</p>
+
+<p>
+  <strong>Name bank:</strong>
+  <%= @card.name_bank %>
+</p>
+
+<p>
+  <strong>Titular name:</strong>
+  <%= @card.titular_name %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @card.expiration_date %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @card.type %>
+</p>
+
+<%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Back', cards_path %>

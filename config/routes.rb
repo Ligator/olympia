@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cards
   get 'profile/index', action: 'index', controller: 'profiles'
   get 'profile/show', action: 'show', controller: 'profiles'
   get 'profile/shipments', action: 'shipments', controller: 'profiles'
