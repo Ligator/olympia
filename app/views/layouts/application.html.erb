@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>¡Pásele wera!</title>
+    <title>Color de mi pueblo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
@@ -30,11 +30,8 @@
           <div class="alert alert-danger my-2" role="alert">
             <%= flash[:error] %>
           </div>
-        <% else %>
-          <div class="artesanos text-center my-2">
-            <%= link_to "Si eres artesano, haz click en aquí.", "#" %>
-          </div>
         <% end %>
+        <br>
 
         <%= yield %>
       </div>
