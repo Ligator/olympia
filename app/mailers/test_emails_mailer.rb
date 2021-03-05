@@ -10,4 +10,10 @@ class TestEmailsMailer < ApplicationMailer
 
     mail to: "to@example.org"
   end
+  deliver
+
+  def suscription_producer
+    TestEmailsMailer.test.deliver_now
+    render :statics_suscription
+  end
 end
