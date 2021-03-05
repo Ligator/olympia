@@ -79,3 +79,9 @@
   justify-content: center;
 }
 
+
+#product_image {
+  max-height: 150%;
+  min-height: 100%;
+  width: auto;
+}
