@@ -13,7 +13,12 @@ es:
   comment_was_not_created: "El comentario no se pudo crear."
 
   log_out: "Cerrar sesión"
-
   pay_order: "Pagar"
   invalid_order: "Orden Inválida"
   edit_profile: "Editar perfil"
+  search: "Buscar"
+  shop: "Tienda"
+  about_us: "Quiénes somos"
+  artesanos: "¿Haces artesanias?, haz click aqui"
+  welcome: "Bienvenidos"
+  my_profile: "Mi perfil"

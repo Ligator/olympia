@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   end
   get "statics/home"
   get "statics/test_email"
+  get "statics/information"
+
 
   root to: "statics#home"
 end

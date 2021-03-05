@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     I18n.with_locale(locale, &action)
   end
 
+
   protected
 
   def configure_permitted_parameters
