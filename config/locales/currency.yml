@@ -1,0 +1,14 @@
+mxn:
+  number:
+    currency:
+      format:
+        format: "%u%n"
+        unit: "MXN$"
+        precision: 2
+usd:
+  number:
+    currency:
+      format:
+        format: "%u%n"
+        unit: "USD$"
+        precision: 2
