@@ -47,7 +47,7 @@
               <div class="container">
                 <div class="col">
                   <h3>
-                    Price: <%= number_to_currency @product.price, currency: @currency %>
+                    Price: <%= number_to_currency @product.full_price(@currency), locale: @currency %>
                   </h3>
                 </div>
                 <div class="col">

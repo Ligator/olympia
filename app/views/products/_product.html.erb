@@ -6,7 +6,7 @@
           <div id="carouselProduct_<%= product.id %>" class="carousel slide mb-4" data-ride="carousel">
             <div class="carousel-inner" >
               <% product.images.each_with_index do |image, i| %>
-                <div class="carousel-item <%= 'active' if i === 0 %> " style="height: 300px">
+                <div class="carousel-item <%= 'active' if i === 0 %>" style="height: 300px">
                   <%= image_tag image, alt: product.name, style: "max-height: 150%, min-height: 100%" %>
                 </div>
               <% end %>
