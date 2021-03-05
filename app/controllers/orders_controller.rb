@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
         product: product,
         name: product.name,
         description: product.description,
-        price_in_cents: product.price_in_cents,
+        price_in_cents: product.full_price(@currency),
         quantity: quantity,
         size: product.size
       })
@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
             description: product.description,
             images: []
           },
-          unit_amount: product.price_in_cents,
+          unit_amount: product.full_price(@currency),
         },
         quantity: quantity
       }
