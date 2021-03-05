@@ -12,6 +12,6 @@ class StaticsController < ApplicationController
   end
 
   def suscription
-    # TestEmailsMailer.test.deliver_now
+    TestEmailsMailer.test.deliver_now
   end
 end
