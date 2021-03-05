@@ -44,7 +44,7 @@
               <span class="fas fa-user" style="font-size: 20px;"></span>
             <% end %>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu m-0" aria-labelledby="navbarDropdown">
             <% if user_signed_in? %>
               <%= label_tag "Welcome", nil, class: "px-4 pt-2 text-muted" %>
               <%= label_tag current_user.email, nil, class: "px-4 pt-2 text-muted" %>
