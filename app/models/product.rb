@@ -6,6 +6,6 @@ class Product < ApplicationRecord
   scope :with_inventory, -> { where("quantity > ?", 0) }
 
   def price
-    (price_in_cents / 100.0).to_d
+    (price_in_cents.to_d / 100.0).to_d
   end
 end
