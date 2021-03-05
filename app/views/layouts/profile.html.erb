@@ -16,6 +16,9 @@
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
+    <%= link_to root_path, style: "color: black;", class: "nav-link" do %>
+      <span class="far fa-arrow-alt-circle-left" style="font-size: 20px;"> Regresar</span>
+    <% end %>
     <div class="d-flex" id="wrapper">
 
       <!-- Sidebar -->
@@ -26,9 +29,6 @@
           </td>
         </div>
         <div class="list-group list-group-flush">
-          <%= link_to root_path, style: "color: black;", class: "nav-link" do %>
-            <span class="far fa-arrow-alt-circle-left" style="font-size: 20px;"> Regresar</span>
-          <% end %>
           <%= link_to 'Perfil', profile_show_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Envíos', profile_shipments_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Ordenes', profile_orders_path, class: "list-group-item list-group-item-action bg-light" %>

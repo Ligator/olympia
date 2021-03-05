@@ -1,36 +1,36 @@
-<div class="card p-5">
+<div class="card p-4">
   <div class="row">
-    <div class="col">
-      <div class="d-flex align-items-center mr-3 justify-content-center">
-        <% if @product.images.present? %>
-            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <% indicators_count = @product.images.count %>
-                <%# indicators_count.each do |index| %>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="#{index}" class="active"></li>
-                <%# end %>
-              </ol>
-              <div class="carousel-inner" style="height: 20rem; width: 20rem;">
-                <div class="carousel-item active">
-                  <% if Rails.env.production? %>
-                    <%= cl_image_tag @product.images.first.key, style: "height: 20rem" %>
-                  <% else %>
-                    <%= image_tag @product.images.first, style: "height: 20rem" %>
-                  <% end %>
-                </div>
-                <% @product.images.each do |image| %>
-                  <% unless image.eql?(@product.images.first) %>
-                    <div class="carousel-item">
-                      <% if Rails.env.production? %>
-                        <%= cl_image_tag images.first.key, style: "height: 20rem" %>
-                      <% else %>
-                        <%= image_tag image, style: "height: 20rem" %>
-                      <% end %>
-                    </div>
-                  <% end %>
+    <div class="col d-flex align-items-center justify-content-center">
+      <% if @product.images.present? %>
+          <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <% indicators_count = @product.images.count %>
+              <%# indicators_count.each do |index| %>
+                <li data-target="#carouselExampleIndicators" data-slide-to="#{index}" class="active"></li>
+              <%# end %>
+            </ol>
+            <div class="carousel-inner" style="height: 20rem; width: 20rem;">
+              <div class="carousel-item active">
+                <% if Rails.env.production? %>
+                  <%= cl_image_tag @product.images.first.key, style: "height: 20rem" %>
+                <% else %>
+                  <%= image_tag @product.images.first, style: "height: 20rem" %>
                 <% end %>
-
               </div>
+              <% @product.images.each do |image| %>
+                <% unless image.eql?(@product.images.first) %>
+                  <div class="carousel-item">
+                    <% if Rails.env.production? %>
+                      <%= cl_image_tag image.first.key, style: "height: 20rem" %>
+                    <% else %>
+                      <%= image_tag image, style: "height: 20rem" %>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+
+            </div>
+            <% if indicators_count > 1 %>
               <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
                 <button class="btn btn-secondary sm" style="">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -41,9 +41,9 @@
                   <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </button>
               </a>
-            </div>
-        <% end %>
-      </div>
+            <% end %>
+          </div>
+      <% end %>
     </div>
     <div class="col">
       <h4><%= @product.name.capitalize %></h4>
@@ -77,27 +77,34 @@
 
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <%= link_to 'Store', store_path(@product.store) %> |
+      <%= link_to 'Products', products_path %> |
+      <% if current_user.present? && current_user.store.eql?(@product.store)%>
+        <%= link_to 'Edit', edit_store_product_path(@product.store, @product) %> |
+        <%= link_to 'Destroy', store_product_path(@product.store, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 
-<%= link_to 'Store', store_path(@product.store) %> |
-<%= link_to 'Products', products_path %> |
-<% if current_user.present? && current_user.store.eql?(@product.store)%>
-  <%= link_to 'Edit', edit_store_product_path(@product.store, @product) %> |
-  <%= link_to 'Destroy', store_product_path(@product.store, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+<div class="container">
+  <h2>Comments</h2>
+  <div class="comments_content">
+    <%= render @product.comments %>
+  </div>
+  <div class="comments_alert">
+  </div>
 
-<h2>Comments</h2>
-<div class="comments_content">
-  <%= render @product.comments %>
-</div>
-<div class="comments_alert">
+  <% if user_signed_in? %>
+    <h2>Add a comment:</h2>
+    <%= render 'comments/form' %>
+  <% end %>
 </div>
 
-<% if user_signed_in? %>
-  <h2>Add a comment:</h2>
-  <%= render 'comments/form' %>
-<% end %>
+
 
 <div id="edit-comment" style="display:none;"></div>
 
