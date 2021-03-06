@@ -2,11 +2,14 @@
   <div class="container">
     <div class="flex-column w-100 my-30" id="navbarCollapse">
       <ul class="navbar-nav flex-row w-100 justify-content-between">
-        <li class="nav-item active">
-          <%= link_to "Color de mi pueblo", statics_home_path, class: "navbar-brand my-auto" %>
+        <li class="nav-item active my-auto">
+          <%= link_to statics_home_path, class: "navbar-brand my-auto" do %>
+            <%= image_tag "LOGO1.png", style: "height: 70px; width: 100px" %>
+          <% end %>
+          <%#= link_to "Color de mi pueblo", statics_home_path, class: "navbar-brand my-auto" %>
         </li>
-        <li class="nav-item w-50">
-          <%= form_with url: "/search", local: false, remote: true, class: "mr-auto" do %>
+        <li class="nav-item w-50 my-auto">
+          <%= form_tag products_path, method: :get, class: "mr-auto" do %>
             <div class="input-group ">
               <%= text_field_tag :filter, params[:filter], class: "form-control", placeholder: t(:search), id: "input_search" %>
               <div class="input-group-append">
@@ -17,7 +20,7 @@
             </div>
           <% end %>
         </li>
-        <li class="nav-item cart_icon">
+        <li class="nav-item cart_icon my-auto">
           <%= render "layouts/cart_icon" %>
         </li>
       </ul>

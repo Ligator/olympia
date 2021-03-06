@@ -1,0 +1,3 @@
+$('#render_cards_in_profile').html("<%= j (render current_user.card) %>");
+$('#new-card--modal').modal('hide');
+$('#new-card').slideDown(350)
