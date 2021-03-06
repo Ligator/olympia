@@ -11,8 +11,8 @@ class TestEmailsMailer < ApplicationMailer
     mail to: "to@example.org"
   end
 
-  def send_email
-     mail to: "to@example.org"
+  def send_email(email)
+     mail(to: email, subject: "¡Bienvenid@ a la cooperativa!", from: "support@colordemipueblo.com")
   end
 
 end
