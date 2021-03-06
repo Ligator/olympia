@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_03_05_205947) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.integer "number_card"
+    t.bigint "number_card"
     t.string "name_bank"
     t.string "titular_name"
     t.date "expiration_date"

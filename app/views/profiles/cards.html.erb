@@ -1,2 +1,16 @@
-<h1>Profile#cards</h1>
-<p>Find me in app/views/profile/cards.html.erb</p>
+<div class="card p-5" style="max-width: 750px;">
+  <h1>Tarjeta</h1>
+
+  <div id="render_cards_in_profile">
+    <% if current_user.card.present? %>
+      <%= render current_user.card %>
+    <% end %>
+  </div>
+</table>
+  <% if current_user.card.nil? %>
+    <%= link_to "Nueva Tarjeta", new_card_path, :remote=>true %>
+  <% end %>
+  <div id="new-card" style="display:none;"></div>
+  <div id="edit-card" style="display:none;"></div>
+</div>
+
