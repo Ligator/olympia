@@ -1,6 +1,6 @@
 class StaticsController < ApplicationController
   def home
-      @products = Product.with_inventory.all
+      @products = Product.with_inventory.all.with_attached_images
   end
 
   def test_email

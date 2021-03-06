@@ -7,7 +7,7 @@
 </div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5" id="render_products_in_profile">
-  <%= render current_user.store.products %>
+  <%= render current_user.store.products.with_attached_images %>
 </div>
 
 <div id="new-product" style="display:none;"></div>

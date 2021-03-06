@@ -25,20 +25,24 @@
               <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                 <tr>
                   <td style="color: #153643; font-family: Arial, sans-serif;">
-                    <h1 style="font-size: 24px; margin: 0;">¡Felicidades!</h1>
+                    <h1 style="font-size: 24px; margin: 0;">¡Disfruta de tu compra!</h1>
                   </td>
                 </tr>
                 <tr>
                   <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
                     <p style="margin: 0;">
-                     Tu solicitud ha sido aceptada, haz click en el boton para continuar con el registro y empezar a vender
+                      A continuación te dejamos un enlace donde siempre vas a poder ver tu orden:
                     </p>
                   </td>
                 </tr>
                 <tr>
                   <td style="color: #153643; font-family: Arial, sans-serif;">
-                    <% url = Rails.env.production? ? "https://colordemipueblo.com/profile/show" : profile_show_url %>
-                    <%= link_to "Registrarse", url,
+                    <% if Rails.env.production?
+                        url = "https://colordemipueblo.com/orders/show?order_id=#{@order.id}&v=#{@order.created_at.to_i}"
+                      else
+                        url = orders_show_url(order_id: @order.id, v: @order.created_at.to_i)
+                      end %>
+                    <%= link_to "Ver orden", url,
                       style: "background-color:#d9753b;
                               border-radius:5px;
                               border:1px solid #d9753b;
@@ -60,7 +64,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                 <tr>
                   <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
-                    <p style="margin: 0;">&reg; Colores de mi tierra 2021<br/>
+                    <p style="margin: 0;">&reg; Color De Mi Pueblo 2021<br/>
                    <a href="#" style="color: #ffffff;">Unsubscribe</a> to this newsletter instantly</p>
                   </td>
                   <td align="right">

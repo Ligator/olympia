@@ -92,6 +92,7 @@
     $("body").find(".order_total").load("<%= orders_update_quantity_in_cart_path %>?product_id=" + product_id + "&quantity=" + quantity)
   }
 </script>
+
 <script type="text/javascript">
   var stripe = Stripe('<%= ENV["STRIPE_PUBLIC_KEY"] %>');
   var checkoutButton = document.getElementById('checkout-button');

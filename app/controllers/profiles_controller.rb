@@ -4,9 +4,16 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    if current_user.blank? || current_user.store.blank?
+    if current_user.blank?
       redirect_to new_user_session_path
       return
+    elsif current_user.customer?
+      redirect_to root_path
+      return
+    end
+    if current_user.applicant? && current_user.store.nil?
+      current_user.create_store
+      current_user.update(role: "seller")
     end
     render layout: 'profile'
   end
