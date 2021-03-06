@@ -3,6 +3,19 @@
   <%= render "cart_content" %>
 </div>
 
+<div class="container col-md-8 cart_totals <%= 'd-none' unless cart_products_count.positive? %>">
+  <div class="d-flex bd-highlight mb-3">
+    <div class="p-2 bd-highlight">
+      <div class="order_total">
+        <h3 >Total <%= number_to_currency(@total, locale: @currency) %></h3>
+      </div>
+    </div>
+    <div class="p-2 bd-highlight">
+      <button id="checkout-button" class="btn btn-primary"><%= t(:pay_order) %></button>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
   $("body").on("change", ".update_quantity_in_cart", set_quantity);
 
@@ -40,17 +53,4 @@
     });
   });
 </script>
-
-<div class="container col-md-8 cart_totals <%= 'd-none' unless cart_products_count.positive? %>">
-  <div class="d-flex bd-highlight mb-3">
-    <div class="p-2 bd-highlight">
-      <div class="order_total">
-        <h3 >Total <%= number_to_currency(@total, locale: @currency) %></h3>
-      </div>
-    </div>
-    <div class="p-2 bd-highlight">
-      <button id="checkout-button" class="btn btn-primary"><%= t(:pay_order) %></button>
-    </div>
-  </div>
-</div>
 
