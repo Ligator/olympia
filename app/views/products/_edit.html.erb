@@ -26,27 +26,27 @@
 
           <div class="field">
             <%= form.label :name %>
-            <%= form.text_field :name %>
+            <%= form.text_field :name, required: :value %>
           </div>
 
           <div class="field">
             <%= form.label :description %>
-            <%= form.text_field :description %>
+            <%= form.text_field :description, required: :value %>
           </div>
 
           <div class="field">
             <%= form.label :price_in_cents %>
-            <%= form.number_field :price_in_cents %>
+            <%= form.number_field :price_in_cents, required: :value %>
           </div>
 
           <div class="field">
             <%= form.label :size %>
-            <%= form.text_field :size %>
+            <%= form.text_field :size, required: :value %>
           </div>
 
           <div class="field">
             <%= form.label :quantity %>
-            <%= form.number_field :quantity %>
+            <%= form.number_field :quantity, required: :value %>
           </div>
 
         </div>
