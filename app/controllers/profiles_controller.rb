@@ -13,7 +13,6 @@ class ProfilesController < ApplicationController
 
   def shipments
     render layout: 'profile'
-    @orders = current_user.orders
   end
 
   def sales

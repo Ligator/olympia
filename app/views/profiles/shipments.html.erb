@@ -1,36 +1,33 @@
-<div class="card container col-xs col-sm col-md col-lg-10 mt-3 mb-3 border border-primary">
-  <h3 class="d-flex justify-content-center mt-2">
-    Resumen de Prestamos
-  </h3>
-  <table class="table table-hover table-responsive-lg">
-    <thead class="text-white">
-        <tr >
-          <th scope="col">Clave</th>
-          <th scope="col">Usuario</th>
-          <th scope="col">Capital Prestado</th>
-          <th scope="col">Capital Pagado</th>
-          <th scope="col">Interes Pagado</th>
-          <th scope="col">Interes Generado</th>
-          <th scope="col">Saldo Total</th>
-          <th scope="col"></th>
-
-        </tr>
-    </thead>
-    <tbody>
-      <% if @orders.present? %>
-        <% @orders.paid.each do |order| %>
-          <thead class="text-white"> Ordenes </thead>
-          <%= order.order_items.each do |order_item| %>
+<% @orders = current_user.orders %>
+<% if @orders.present? %>
+  <% @orders.paid.each do |order| %>
+    <div class="card container col-xs col-sm col-md col-lg-10 mt-3 mb-3 p-4">
+      <h3 class="d-flex justify-content-center mt-2">
+        Ordenes de Compra Pagadas
+      </h3>
+      <table class="table table-hover table-responsive-lg">
+        <thead class="text-black">
             <tr >
+              <th scope="col">Fecha</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Talla</th>
+            </tr>
+        </thead>
+        <tbody>
+          <thead class="text-black"> Orden: <%= order.id %> </thead>
+          <% order.order_items.each do |order_item| %>
+            <tr >
+              <td><%= order_item.created_at.to_date %></td>
               <td><%= order_item.name %></td>
               <td><%= order_item.description %></td>
-              <td><%= number_to_currency product.full_price(@currency), locale: @currency %></td>
-              <td><%= number_to_currency(account.total_pago_capital, :unit => "$", :separator => ".", :delimiter => ",") %></td>
-              <td><%= number_to_currency(account.total_pago_intereses, :unit => "$", :separator => ".", :delimiter => ",") %></td>
+              <td><%= number_to_currency order_item.product.full_price(@currency), locale: @currency %></td>
+              <td><%= order_item.size %></td>
             </tr>
           <% end %>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% end %>
