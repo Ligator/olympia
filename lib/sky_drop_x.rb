@@ -21,6 +21,7 @@ class SkyDropX
       zip_to: zip_to,
       parcel: parcel
     })
+    puts response.body
     JSON.parse(response.body)
   rescue JSON::ParserError => error
     { error: error }
@@ -152,7 +153,7 @@ class SkyDropX
   end
 
   def endpoint_call(verb, path, package_details = nil)
-    uri = URI("#{base_url}/v1/#{path}")
+    uri = URI("#{base_url}/v1/#{path}.json")
     https = Net::HTTP.new(uri.host, uri.port)
     https.use_ssl = true
     if verb == "get"
@@ -163,7 +164,7 @@ class SkyDropX
     request["Authorization"] = "Bearer #{ENV['SKYDROPX_API_KEY']}"
     if package_details.present?
       # request.body = package_details
-      request.body = package_details.to_json
+      request.body = package_details.to_query
       # puts package_details
       puts request.body
     end
@@ -172,86 +173,86 @@ class SkyDropX
 end
 
 
-skydropx = SkyDropX.new
-r = skydropx.create_shipment(
-  address_from: {
-    "province": "Ciudad de México",
-    "city": "Azcapotzalco",
-    "name": "Jose Fernando",
-    "zip": "02900",
-    "country": "MX",
-    "address1": "Av. Principal #234",
-    "company": "skydropx",
-    "address2": "Centro",
-    "phone": "5555555555",
-    "email": "skydropx@email.com"
-  },
-  parcels: [{
-    "weight": 3,
-    "distance_unit": "CM",
-    "mass_unit": "KG",
-    "height": 10,
-    "width": 10,
-    "length": 10
-  }],
-  address_to: {
-    "province": "Jalisco",
-    "city": "Guadalajara",
-    "name": "Jorge Fernández",
-    "zip": "44100",
-    "country": "MX",
-    "address1": " Av. Lázaro Cárdenas #234",
-    "company": "-",
-    "address2": "Americana",
-    "phone": "5555555555",
-    "email": "ejemplo@skydropx.com",
-    "reference": "Frente a tienda de abarro",
-    "contents": "ropa"
-  }
-)
+# skydropx = SkyDropX.new
+# r = skydropx.create_shipment(
+#   address_from: {
+#     "province": "Ciudad de México",
+#     "city": "Azcapotzalco",
+#     "name": "Jose Fernando",
+#     "zip": "02900",
+#     "country": "MX",
+#     "address1": "Av. Principal #234",
+#     "company": "skydropx",
+#     "address2": "Centro",
+#     "phone": "5555555555",
+#     "email": "skydropx@email.com"
+#   },
+#   parcels: [{
+#     "weight": 3,
+#     "distance_unit": "CM",
+#     "mass_unit": "KG",
+#     "height": 10,
+#     "width": 10,
+#     "length": 10
+#   }],
+#   address_to: {
+#     "province": "Jalisco",
+#     "city": "Guadalajara",
+#     "name": "Jorge Fernández",
+#     "zip": "44100",
+#     "country": "MX",
+#     "address1": " Av. Lázaro Cárdenas #234",
+#     "company": "-",
+#     "address2": "Americana",
+#     "phone": "5555555555",
+#     "email": "ejemplo@skydropx.com",
+#     "reference": "Frente a tienda de abarro",
+#     "contents": "ropa"
+#   }
+# )
 
-# "parcel": { "weight": 10, "height": 10, "width": 10, "length": 10 }
+# # "parcel": { "weight": 10, "height": 10, "width": 10, "length": 10 }
 
 
 
-curl "https://api-demo.skydropx.com/v1/shipments" \
-  -H "Authorization: Token token=El7j0lNpWycdqPcTwMNUvHu0iRZkIZb5I7AdmBSrREAt" \
-  -H "Content-Type: application/json" \
-  -d '{
-      "address_from": {
-      "province": "Ciudad de México",
-      "city": "Azcapotzalco",
-      "name": "Jose Fernando",
-      "zip": "02900",
-      "country": "MX",
-      "address1": "Av. Principal #234",
-      "company": "skydropx",
-      "address2": "Centro",
-      "phone": "5555555555",
-      "email": "skydropx@email.com"},
-      "parcels": [{
-        "weight": 3,
-        "distance_unit": "CM",
-        "mass_unit": "KG",
-        "height": 10,
-        "width": 10,
-        "length": 10
-      }],
-      "address_to": {
-        "province": "Jalisco",
-        "city": "Guadalajara",
-        "name": "Jorge Fernández",
-        "zip": "44100",
-        "country": "MX",
-        "address1": " Av. Lázaro Cárdenas #234",
-        "company": "-",
-        "address2": "Americana",
-        "phone": "5555555555",
-        "email": "ejemplo@skydropx.com",
-        "reference": "Frente a tienda de abarro",
-        "contents": "ropa_curl"
-      }
-    }'
+# curl "https://api-demo.skydropx.com/v1/shipments" \
+#   -H "Authorization: Token token=El7j0lNpWycdqPcTwMNUvHu0iRZkIZb5I7AdmBSrREAt" \
+#   -H "Content-Type: application/json" \
+#   -d '{
+#       "address_from": {
+#       "province": "Ciudad de México",
+#       "city": "Azcapotzalco",
+#       "name": "Jose Fernando",
+#       "zip": "02900",
+#       "country": "MX",
+#       "address1": "Av. Principal #234",
+#       "company": "skydropx",
+#       "address2": "Centro",
+#       "phone": "5555555555",
+#       "email": "skydropx@email.com"},
+#       "parcels": [{
+#         "weight": 3,
+#         "distance_unit": "CM",
+#         "mass_unit": "KG",
+#         "height": 10,
+#         "width": 10,
+#         "length": 10
+#       }],
+#       "address_to": {
+#         "province": "Jalisco",
+#         "city": "Guadalajara",
+#         "name": "Jorge Fernández",
+#         "zip": "44100",
+#         "country": "MX",
+#         "address1": " Av. Lázaro Cárdenas #234",
+#         "company": "-",
+#         "address2": "Americana",
+#         "phone": "5555555555",
+#         "email": "ejemplo@skydropx.com",
+#         "reference": "Frente a tienda de abarro",
+#         "contents": "ropa_curl"
+#       }
+#     }'
 
 
 
