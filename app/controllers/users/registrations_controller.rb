@@ -53,7 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def demo_images_params
-      params.require(:user).permit(demo_images: [])
+      params.require(:user).permit(:new_partner, demo_images: [])
     end
 
     # If you have extra params to permit, append them to the sanitizer.
