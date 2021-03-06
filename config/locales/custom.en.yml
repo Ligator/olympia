@@ -49,3 +49,7 @@ en:
   wayb: "We appreciate your business!"
   continue_buying: "Continue buying"
   resend_unlock_instructions: "Resend unlock instructions"
+  address: "Address"
+  item: "Item"
+  quantity: "Quantity"
+  remove: "Remove"
