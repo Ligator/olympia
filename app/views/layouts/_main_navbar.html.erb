@@ -6,7 +6,6 @@
           <%= link_to statics_home_path, class: "navbar-brand my-auto" do %>
             <%= image_tag "LOGO1.png", style: "height: 70px; width: 100px" %>
           <% end %>
-          <%#= link_to "Color de mi pueblo", statics_home_path, class: "navbar-brand my-auto" %>
         </li>
         <li class="nav-item w-50 my-auto">
           <%= form_tag products_path, method: :get, class: "mr-auto" do %>
@@ -56,7 +55,9 @@
               <%= label_tag current_user.email, nil, class: "px-4 pt-2 text-muted" %>
               <div class="dropdown-divider"></div>
               <%= link_to t(:my_profile), profile_show_path, class: "dropdown-item" %>
-              <%= link_to current_user.store.name, store_path(current_user.store), class: "dropdown-item" if current_user.store.present? %>
+              <%= link_to "Mis Ventas", "profile/orders", class: "dropdown-item" if current_user.store.present? %>
+              <%= link_to "Mis Productos", "profile/products", class: "dropdown-item" if current_user.store.present? %>
+              <%= link_to "Mi Tarjeta", "profile/cards", class: "dropdown-item" if current_user.store.present? %>
               <div class="dropdown-divider"></div>
               <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
             <% else %>
