@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  skip_before_action :verify_authenticity_token, only: [:update_current_or_guest_user]
 
   # GET /resource/sign_up
   # def new
@@ -32,8 +33,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_current_or_guest_user
-    current_or_guest_user
-    binding.pry
+    current_or_guest_user.update(user_params)
+    current_or_guest_user.address.update(address_params)
+    head :ok
   end
 
   # DELETE /resource
@@ -61,6 +63,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params.require(:user).permit(:new_partner, demo_images: [])
     end
 
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :phone, :email, :password, :password_confirmation, :current_password, :avatar)
+    end
     # If you have extra params to permit, append them to the sanitizer.
     # def configure_sign_up_params
     #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
