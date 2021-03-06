@@ -54,6 +54,7 @@
               <%= label_tag t(:welcome), nil, class: "px-4 pt-2 text-muted" %>
               <%= label_tag current_user.email, nil, class: "px-4 pt-2 text-muted" %>
               <div class="dropdown-divider"></div>
+              <%= link_to "Users", profile_users_path, class: "dropdown-item" if current_user.admin? %>
               <%= link_to t(:my_profile), profile_show_path, class: "dropdown-item" %>
               <%= link_to "Mis Ventas", profile_shipments_path, class: "dropdown-item" if current_user.store.present? %>
               <%= link_to "Mis Productos", profile_products_path, class: "dropdown-item" if current_user.store.present? %>
