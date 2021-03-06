@@ -1,22 +1,19 @@
-<div class="container">
-  <div class="form-group">
-    <h1><%= @store.name %> </h1>
-  </div>
+<div class="form-group">
+  <h1><%= @store.name %> </h1>
+</div>
+
+<div class="form-group">
+  <h4>
+    <%= @store.description %>
+  </h4>
+</div>
 
 
-      <%= @store.description %>
-    </h2>
-  </div>
+<% if user_signed_in? && current_user.store.eql?(@store) %>
+  <%= link_to 'Editar nombre y descripción', edit_store_path(@store) %> |
+  <%= link_to 'Agregar Producto', profile_products_path %>
+<% end %>
 
-
-  <% if user_signed_in? && current_user.store.eql?(@store) %>
-    <%= link_to 'Edit', edit_store_path(@store) %> |
-    <%= link_to 'New Product', new_store_product_path(@store) %>
-  <% end %>
-
-  <h1>Products</h1>
-
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-    <%= render @store.products %>
-  </div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+  <%= render @store.products %>
 </div>
