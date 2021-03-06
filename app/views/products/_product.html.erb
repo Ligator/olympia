@@ -33,6 +33,9 @@
         <%= number_to_currency product.full_price(@currency), locale: @currency %>
         <% if controller_name == "profiles" %>
           <div class="text-muted">
+            Inventario <%= product.quantity %>
+          </div>
+          <div class="text-muted">
             <%= number_to_currency product.full_price_mxn - product.delivery_cost, locale: "mxn" %> - Costo real
           </div>
           <div class="text-muted">
