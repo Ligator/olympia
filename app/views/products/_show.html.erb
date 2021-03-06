@@ -74,10 +74,6 @@
             <div class="col">
               <%= link_to 'Store', store_path(@product.store) %> |
               <%= link_to 'Products', products_path %> |
-              <% if current_user.present? && current_user.store.eql?(@product.store)%>
-                <%= link_to 'Edit', edit_store_product_path(@product.store, @product) %> |
-                <%= link_to 'Destroy', store_product_path(@product.store, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
-              <% end %>
             </div>
           </div>
         </div>

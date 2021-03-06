@@ -23,22 +23,17 @@
 
           <div class="field">
             <%= form.label :number_card %>
-            <%= form.number_field :number_card %>
+            <%= form.number_field :number_card, required: :value %>
           </div>
 
           <div class="field">
             <%= form.label :name_bank %>
-            <%= form.text_field :name_bank %>
+            <%= form.text_field :name_bank, required: :value %>
           </div>
 
           <div class="field">
             <%= form.label :titular_name %>
-            <%= form.text_field :titular_name %>
-          </div>
-
-          <div class="field">
-            <%= form.label :expiration_date %>
-            <%= form.date_select :expiration_date %>
+            <%= form.text_field :titular_name, required: :value %>
           </div>
         </div>
         <div class="modal-footer">
