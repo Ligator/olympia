@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'profile/index', action: 'index', controller: 'profiles'
   get 'profile/show', action: 'show', controller: 'profiles'
   get 'profile/shipments', action: 'shipments', controller: 'profiles'
-  get 'profile/orders', action: 'orders', controller: 'profiles'
+  get 'profile/sales', action: 'sales', controller: 'profiles'
   get 'profile/products', action: 'products', controller: 'profiles'
   get 'profile/cards', action: 'cards', controller: 'profiles'
   get 'orders/cart'
