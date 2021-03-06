@@ -1,6 +1,6 @@
-<h1>Editing Card</h1>
+<h1><%= t(:editing_card) %></h1>
 
 <%= render 'form', card: @card %>
 
-<%= link_to 'Show', @card %> |
-<%= link_to 'Back', cards_path %>
+<%= link_to t(:show), @card %> |
+<%= link_to t("devise.shared.links.back"), cards_path %>
