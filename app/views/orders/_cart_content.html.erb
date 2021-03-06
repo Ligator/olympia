@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container col-md-8">
   <% if cart_products_count.positive? %>
     <table class="table table-hover table-responsive">
       <thead>
         <tr class="table_head align-content-center">
           <th></th>
-          <th class="column-1" scope="col">Item</th>
-          <th class="column-2" scope="col">Quantity</th>
+          <th class="column-1" scope="col"><%= t(:item )%></th>
+          <th class="column-2" scope="col"><%= t(:quantity )%></th>
           <th></th>
         </tr>
       </thead>
@@ -37,7 +37,7 @@
             <td>
               <%= form_tag orders_remove_from_cart_path(product_id: @product), remote: true do %>
                 <%= hidden_field_tag :product_id, product.id %>
-                <%= submit_tag 'Remove', class: "btn btn-primary" %>
+                <%= submit_tag t(:remove), class: "btn btn-primary" %>
               <% end %>
             </td>
           </tr>
@@ -48,3 +48,4 @@
     <h1><%= t(:empty_cart) %></h1>
   <% end %>
 </div>
+

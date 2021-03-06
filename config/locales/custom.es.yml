@@ -49,4 +49,7 @@ es:
   wayb: "¡Apreciamos su compra!"
   continue_buying: "Seguir comprando"
   resend_unlock_instructions: "Reenviar instrucciones de desbloqueo"
-
+  address: "Dirección:"
+  item: "Artículo"
+  quantity: "Cantidad"
+  remove: "Quitar"
