@@ -62,8 +62,8 @@
   </div>
   <div class="row">
     <div class="col">
-      <%= link_to 'Store', store_path(@product.store) %> |
-      <%= link_to 'Products', products_path %> |
+      <%= link_to "Ver mas de #{@store.name}", store_path(@product.store) %>
+
     </div>
   </div>
 </div>
