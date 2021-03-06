@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
 
   def show
     if current_user.blank? || current_user.store.blank?
-      redirect_to statics_home_path
+      redirect_to user_session
       return
     end
     render layout: 'profile'
