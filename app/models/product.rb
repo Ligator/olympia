@@ -5,10 +5,10 @@ class Product < ApplicationRecord
 
   validates_presence_of :name, :description, :price_in_cents, :quantity,
                         :weight, :height, :width, :length
-  validates :weight, numericality: { greater_than: 0, only_integer: true }
-  validates :height, numericality: { greater_than: 0, only_integer: true }
-  validates :width,  numericality: { greater_than: 0, only_integer: true }
-  validates :length, numericality: { greater_than: 0, only_integer: true }
+  # validates :weight, numericality: { greater_than: 0, only_integer: true }
+  # validates :height, numericality: { greater_than: 0, only_integer: true }
+  # validates :width,  numericality: { greater_than: 0, only_integer: true }
+  # validates :length, numericality: { greater_than: 0, only_integer: true }
 
   scope :with_inventory, -> { where("quantity > ?", 0) }
 
