@@ -31,6 +31,14 @@
       <h5><%= product.name %></h5>
       <p class="card-text">
         <%= number_to_currency product.full_price(@currency), locale: @currency %>
+        <% if controller_name == "profiles" %>
+          <div class="text-muted">
+            <%= number_to_currency product.full_price_mxn - product.delivery_cost, locale: "mxn" %> - Costo real
+          </div>
+          <div class="text-muted">
+            <%= number_to_currency product.delivery_cost, locale: "mxn" %> - Envío
+          </div>
+        <% end %>
       </p>
     </div>
     <%= link_to 'Ver', store_product_path(product.store, product), :remote=>true, class: "btn btn-info button_edit_product text-white m-2" %>
