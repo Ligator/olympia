@@ -10,4 +10,9 @@ class TestEmailsMailer < ApplicationMailer
 
     mail to: "to@example.org"
   end
+
+  def send_email
+     mail to: "to@example.org"
+  end
+
 end
