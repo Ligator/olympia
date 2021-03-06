@@ -113,6 +113,7 @@ class OrdersController < ApplicationController
   end
 
   def cart_order_total
+    return 0 if session["cart_#{current_or_guest_user.id}"].blank?
     total = 0
     session["cart_#{current_or_guest_user.id}"].each do |product_id, quantity|
       total += (Product.find(product_id).full_price(@currency) * quantity.to_i).to_d.round(2)
