@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cards
   get 'profile/index', action: 'index', controller: 'profiles'
   get 'profile/show', action: 'show', controller: 'profiles'
   get 'profile/shipments', action: 'shipments', controller: 'profiles'
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   post '/search', action: 'index', controller: 'searches'
   post '/order_product_by_name', action: 'order_product_by_name', controller: 'searches'
   post 'orders/create_checkout_session'
+  get 'orders/update_quantity_in_cart'
   post 'languages/set_language'
 
   resources :products

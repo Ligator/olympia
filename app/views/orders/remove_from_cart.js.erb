@@ -1,2 +1,6 @@
 $(".cart_icon").html("<%= j render('layouts/cart_icon') %>");
 $(".cart_content").html("<%= j render('cart_content') %>");
+$("body").find(".update_quantity_in_cart:first").trigger("change");
+<% unless cart_products_count.positive? %>
+  $(".cart_totals").addClass("d-none");
+<% end %>
