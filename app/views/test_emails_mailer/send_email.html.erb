@@ -37,7 +37,8 @@
                 </tr>
                 <tr>
                   <td style="color: #153643; font-family: Arial, sans-serif;">
-                    <%= link_to "Registrarse", profile_show_url,
+                    <% url = Rails.env.production? ? "https://colordemipueblo.com/profile/show" : profile_show_url %>
+                    <%= link_to "Registrarse", url,
                       style: "background-color:#d9753b;
                               border-radius:5px;
                               border:1px solid #d9753b;
