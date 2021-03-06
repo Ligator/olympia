@@ -1,34 +1,34 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Number card:</strong>
+  <strong><%=t(:number_card)%></strong>
   <%= @card.number_card %>
 </p>
 
 <p>
-  <strong>Name bank:</strong>
+  <strong><%=t(:name_bank)%></strong>
   <%= @card.name_bank %>
 </p>
 
 <p>
-  <strong>Titular name:</strong>
+  <strong><%=t(:titular_name)%></strong>
   <%= @card.titular_name %>
 </p>
 
 <p>
-  <strong>Expiration date:</strong>
+  <strong><%=t(:expiration_date)%></strong>
   <%= @card.expiration_date %>
 </p>
 
 <p>
-  <strong>Type:</strong>
+  <strong><%=t(:type)%></strong>
   <%= @card.type %>
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong><%=t("activerecord.models.user.one")%></strong>
   <%= @card.user_id %>
 </p>
 
-<%= link_to 'Edit', edit_card_path(@card) %> |
-<%= link_to 'Back', cards_path %>
+<%= link_to t(:edit), edit_card_path(@card) %> |
+<%= link_to t("devise.shared.links.back"), cards_path %>

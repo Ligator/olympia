@@ -1,33 +1,14 @@
 
-<h1>Stores VIEW</h1>
+<div class="container"></div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Vendor</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @stores.each do |store| %>
-      <tr>
-        <td><%= store.name %></td>
-        <td><%= store.description %></td>
-        <td><%= store.user.full_name %></td>
-        <td><%= link_to 'Show', store_path(store) %></td>
-        <% if user_signed_in? && current_user.store.eql?(store) %>
-          <td><%= link_to 'Edit', edit_store_path(store) %></td>
-          <td><%= link_to 'Destroy', store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-<% if user_signed_in? && current_user.store.nil? %>
-  <%= link_to 'New Store', new_store_path %>
-<% end %>
+
+
+
+¿Quiénes somos?
+Somos una plataforma cooperativa de venta de artesanías mexicanas, hecha de sueños por crear un lugar común de comercio justo y consciente para todas las personas que producen y consumen. Compartimos nuestra identidad, nuestra vida, y el color de nuestros pueblos.
+Misión:
+Ser un espacio abierto de comercialización virtual de artesanías textiles mexicanas, buscamos dignificar nuestro trabajo y el de nuestros pueblos, para lograr el rescate y la preservación de esta actividad.
+Visión
+Ser una cooperativa conformada por personas artesanas comprometidas por promover las condiciones de vida de las familias de nuestra cooperativa,  y ser el espacio común de todas las personas artesanas en México.

@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" id="edit_profile--modal-dialog">
     <div class="modal-content pl-5 pr-5 pb-5">
       <div class="modal-header">
-        <h5 class="modal-title">Editar Perfil</h5>
+        <h5 class="modal-title"><%= t(:edit_profile)%></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -77,21 +77,21 @@
               </div>
               <div class="row">
                 <div class="col-sm col-md p-2">
-                  <%= address.text_field :city,class: "form-control", placeholder: "Ciudad", id: "validationTooltip11", required: :value %>
+                  <%= address.text_field :city,class: "form-control", placeholder: t(:city), id: "validationTooltip11", required: :value %>
                 </div>
                 <div class="col-sm col-md p-2">
-                  <%= address.text_field :state,class: "form-control", placeholder: "Estado", id: "validationTooltip12", required: :value %>
+                  <%= address.text_field :state,class: "form-control", placeholder: t(:state), id: "validationTooltip12", required: :value %>
                 </div>
 
               </div>
             <% end %>
           </div>
-          <a href="#" id="change_password--profile" class="link">Cambiar contraseña</a>
+          <a href="#" id="change_password--profile" class="link"><%= t("devise.passwords.edit.change_my_password")%></a>
           <div class="form-group" id="form-edit--password">
             <div class="row">
               <div class="col-sm col-md p-2 d-flex align-items-center">
                 <div>
-                  <%= f.label :password %><i> (<%= t("devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it")%>)</i>
+                  <%= f.label :password, t("activerecords.attributes.user.password") %><i> <%= t("devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it")%></i>
                   <%= f.password_field :password,class: "justify-content form-control", autocomplete: "new-password" %>
                   <% if @minimum_password_length %>
                     <em><%= t("devise.shared.minimum_password_length.other", count: @minimum_password_length) %></em>
@@ -100,14 +100,14 @@
               </div>
               <div class="col-sm col-md p-2 d-flex align-items-center">
                 <div>
-                  <%= f.label :password_confirmation %>
+                  <%= f.label :password_confirmation, t("activerecords.attributes.user.password_confirmation") %>
                   <%= f.password_field :password_confirmation,class: "justify-content form-control", autocomplete: "new-password" %>
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <%= f.label :current_password %> <i>
+            <%= f.label :current_password , t("activerecords.attributes.user.current_password")%> <i>
               (<%= t("devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes") %>)</i>
             <%= f.password_field :current_password,class: "justify-content form-control", autocomplete: "new-password", required: :value %>
           </div>
@@ -115,7 +115,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t(:close) %></button>
         <%= f.submit t("devise.registrations.edit.update"), class: "btn btn-primary" %>
       </div>
       <% end %>
