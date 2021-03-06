@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   belongs_to :store
   has_many :comments
 
+  before_save :set_delivery_cost
+
   validates_presence_of :name, :description, :price_in_cents, :quantity
   # validates :weight, numericality: { greater_than: 0, only_integer: true }
   # validates :height, numericality: { greater_than: 0, only_integer: true }
@@ -50,5 +52,9 @@ class Product < ApplicationRecord
 
   def full_price_in_cents_usd
     (full_price_in_cents_mxn / ENV["ONE_USD_TO_MXN"].to_i).to_i
+  end
+
+  def set_delivery_cost
+    self.delivery_cost = ENV["PACKAGE_COST"].to_i
   end
 end
