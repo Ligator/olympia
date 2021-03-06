@@ -20,4 +20,19 @@ class User < ApplicationRecord
     [first_name, last_name].compact.join(" ").squeeze
   end
 
+  def customer?
+    role == "customer"
+  end
+
+  def applicant?
+    role == "applicant"
+  end
+
+  def seller?
+    role == "seller"
+  end
+
+  def admin?
+    role == "admin"
+  end
 end
