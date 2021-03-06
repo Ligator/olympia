@@ -3,7 +3,11 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.with_inventory.all
+    if params[:filter].present?
+      @products = Product.with_inventory.where("name ILIKE ? OR description ILIKE ?", "%#{params[:filter]}%", "%#{params[:filter]}%")
+    else
+      @products = Product.with_inventory.all
+    end
   end
 
   # GET /products/1 or /products/1.json
