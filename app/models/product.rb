@@ -55,6 +55,39 @@ class Product < ApplicationRecord
   end
 
   def set_delivery_cost
+    self.delivery_cost ||= ENV["PACKAGE_COST"].to_i
+
+    return if weight_was == weight &&
+              height_was == height &&
+              width_was == width &&
+              length_was == length
+
+    if [weight, height, width, length].map(&:to_i).any?(&:zero?)
+      self.delivery_cost = ENV["PACKAGE_COST"].to_i
+      return
+    end
+    if store.user.address.postal_code.blank?
+      self.delivery_cost = ENV["PACKAGE_COST"].to_i
+      return
+    end
+
+    response = SkyDropX.new.quotations({
+      zip_from: store.user.address.postal_code,
+      zip_to: "64000",
+      parcel: {
+        weight: weight.to_i,
+        height: height.to_i,
+        width: width.to_i,
+        length: length.to_i
+      }
+    })
+
+    if response.is_a?(Array)
+      self.delivery_cost = response.map{ |packing_service| packing_service["total_pricing"].to_d }.min
+    else
+      self.delivery_cost = ENV["PACKAGE_COST"].to_i
+    end
+  rescue
     self.delivery_cost = ENV["PACKAGE_COST"].to_i
   end
 end
