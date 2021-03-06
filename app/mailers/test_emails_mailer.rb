@@ -12,7 +12,11 @@ class TestEmailsMailer < ApplicationMailer
   end
 
   def send_email(email)
-     mail(to: email, subject: "¡Bienvenid@ a la cooperativa!", from: "support@colordemipueblo.com")
+    mail(to: email, subject: "¡Bienvenid@ a la cooperativa!", from: "support@colordemipueblo.com")
   end
 
+  def order_confirmation(email, order_id)
+    @order = Order.find(order_id)
+    mail(to: email, subject: "Gracias por su compra", from: "support@colordemipueblo.com")
+  end
 end

@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:order_id])
+    redirect_to root_path and return if @order.created_at.to_i != params[:v].to_i
   end
 
   def cart
@@ -90,6 +91,7 @@ class OrdersController < ApplicationController
     redirect_on_invalid_order && return if order.blank?
     order.update(state: stripe_session.payment_status, stripe_session: stripe_session.id, payment_method: stripe_session.payment_method_types.last)
     current_user&.update(stripe_customer_id: stripe_session.customer)
+    TestEmailsMailer.order_confirmation(current_or_guest_user.email, order.id).deliver_now
   end
 
   private
