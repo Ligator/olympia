@@ -12,10 +12,13 @@ class ProfilesController < ApplicationController
   end
 
   def shipments
+    store = current_user.store
+    product_ids = store.products.ids
+    @order_items = OrderItem.joins(:order).where(orders: { state: "paid" }, product_id: product_ids)
     render layout: 'profile'
   end
 
-  def orders
+  def sales
     render layout: 'profile'
   end
 

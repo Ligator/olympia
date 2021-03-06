@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create_checkout_session
 
+  def show
+    @order = Order.find(params[:order_id])
+  end
+
   def cart
     set_quantities_hash
     @total = cart_order_total
