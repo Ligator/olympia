@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Demystifying Email Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <style type="text/css">
+    a[x-apple-data-detectors] {color: inherit !important;}
+  </style>
+
+</head>
+<body style="margin: 0; padding: 0;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td style="padding: 20px 0 30px 0;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc;">
+          <tr>
+            <td align="center" bgcolor="white" style="padding: 40px 0 30px 0;">
+              <%= image_tag "header_email.jpg" %>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                <tr>
+                  <td style="color: #153643; font-family: Arial, sans-serif;">
+                    <h1 style="font-size: 24px; margin: 0;">¡Disfruta de tu compra!</h1>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
+                    <p style="margin: 0;">
+                      A continuación te dejamos un enlace donde siempre vas a poder ver tu orden:
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #153643; font-family: Arial, sans-serif;">
+                    <% if Rails.env.production?
+                        url = "https://colordemipueblo.com/orders/show?order_id=#{@order.id}&v=#{@order.created_at.to_i}"
+                      else
+                        url = orders_show_url(order_id: @order.id, v: @order.created_at.to_i)
+                      end %>
+                    <%= link_to "Ver orden", url,
+                      style: "background-color:#d9753b;
+                              border-radius:5px;
+                              border:1px solid #d9753b;
+                              display:inline-block;
+                              cursor:pointer;
+                              color:#ffffff;
+                              font-family:Arial;
+                              font-size:17px;
+                              padding:16px 31px;
+                              text-decoration:none;
+                              text-shadow:0px 1px 0px #d9753b;" %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+           <tr>
+            <td bgcolor="#8C2323" style="padding: 30px 30px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                <tr>
+                  <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
+                    <p style="margin: 0;">&reg; Color De Mi Pueblo 2021<br/>
+                   <a href="#" style="color: #ffffff;">Unsubscribe</a> to this newsletter instantly</p>
+                  </td>
+                  <td align="right">
+                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+                      <tr>
+                        <td>
+                        </td>
+                        <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
+                        <td>
+                          <a href="FACEBOOK_URL">
+                            <%= image_tag "icono-facebook.png",size: "38x38"%>
+                          </a>
+                        </td>
+                        <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
+                        <td>
+                          <a href="INSTAGRAM_URL">
+                            <%= image_tag "instagram-logo.png",size: "38x38"%>
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
