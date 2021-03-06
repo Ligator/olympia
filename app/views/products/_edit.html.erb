@@ -50,8 +50,9 @@
           <!-- Inventario -->
           <div class="form-group">
             <%= form.label :price_in_cents, "Precio", class: "col-form-label" %>
+            <label><%= number_to_currency @product.full_price(@currency), locale: @currency %></label>
             <div>
-              <%= form.text_field :price_in_cents, class: 'form-control', required: :value %>
+              <%= form.text_field :price_in_cents, value: nil, class: 'form-control', required: :value %>
             </div>
           </div>
 

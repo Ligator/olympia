@@ -36,7 +36,13 @@
                   </td>
                 </tr>
               </table>
-              <span class="myButton" id="myButton" style="box-shadow: rgb(187, 218, 247) 2px 2px 0px 0px inset; background: linear-gradient(rgb(121, 187, 255) 5%, rgb(55, 141, 229) 100%) rgb(121, 187, 255); border-radius: 9px; border: 1px solid rgb(132, 187, 243); display: inline-block; cursor: pointer; color: rgb(255, 255, 255); font-family: Arial; font-size: 15px; font-weight: bold; padding: 6px 76px; text-decoration: none; text-shadow: rgb(82, 142, 204) 0px 1px 0px;"><%= link_to "Registrarse", profile_show_url%></span>
+              <span class="myButton" id="myButton" style="box-shadow: rgb(187, 218, 247) 2px 2px 0px 0px inset; background: linear-gradient(rgb(121, 187, 255) 5%, rgb(55, 141, 229) 100%) rgb(121, 187, 255); border-radius: 9px; border: 1px solid rgb(132, 187, 243); display: inline-block; cursor: pointer; color: rgb(255, 255, 255); font-family: Arial; font-size: 15px; font-weight: bold; padding: 6px 76px; text-decoration: none; text-shadow: rgb(82, 142, 204) 0px 1px 0px;">
+                <%if Rails.env.development? %>
+                  <%= link_to "Registrarse", "https://colordemipueblo.com/profile/show" %>
+                <% else %>
+                  <%= link_to "Registrarse", profile_show_path %>
+                <% end %>
+                </span>
             </td>
           </tr>
            <tr>
