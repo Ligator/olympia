@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>¡Pásele wera!</title>
+    <title>Color de mi pueblo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= favicon_link_tag 'favicon-96x96.png' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -16,7 +17,6 @@
   <body>
 
     <%= render "layouts/main_navbar" %>
-
     <div class="row">
       <div class="offset-md-1 col-md-10 col-sm-12">
         <% if notice %>
@@ -31,11 +31,8 @@
           <div class="alert alert-danger my-2" role="alert">
             <%= flash[:error] %>
           </div>
-        <% else %>
-          <div class="artesanos text-center my-2">
-            <%= link_to "Si eres artesano, haz click en aquí.", "#" %>
-          </div>
         <% end %>
+        <br>
 
         <%= yield %>
       </div>

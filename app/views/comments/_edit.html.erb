@@ -12,12 +12,12 @@
         <div class="modal-body">
           <h1>Editing Comment</h1>
             <p>
-              <%= form.label :body %><br>
-              <%= form.text_area :body %>
+              <%= form.label :body, t(:body) %><br>
+              <%= form.text_area :body, class: "form-control"%>
             </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t(:close)%></button>
           <%= form.submit class: "btn btn-primary" %>
         </div>
       <% end %>

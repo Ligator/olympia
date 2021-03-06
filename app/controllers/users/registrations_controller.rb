@@ -52,6 +52,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                           )
     end
 
+    def demo_images_params
+      params.require(:user).permit(:new_partner, demo_images: [])
+    end
+
     # If you have extra params to permit, append them to the sanitizer.
     # def configure_sign_up_params
     #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
@@ -64,7 +68,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # The path used after sign up.
     def after_sign_up_path_for(resource)
-      super(resource)
+      if params[:new_partner]
+        resource.update(demo_images_params)
+        statics_suscription_path
+      else
+        super(resource)
+      end
     end
 
     # The path used after sign up for inactive accounts.

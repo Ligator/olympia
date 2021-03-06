@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_232823) do
+ActiveRecord::Schema.define(version: 2021_03_06_044408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 2021_03_03_232823) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "number_card"
+    t.string "name_bank"
+    t.string "titular_name"
+    t.date "expiration_date"
+    t.string "type"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -100,6 +112,11 @@ ActiveRecord::Schema.define(version: 2021_03_03_232823) do
     t.bigint "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "weight"
+    t.integer "height"
+    t.integer "width"
+    t.integer "length"
+    t.integer "delivery_cost"
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
@@ -126,6 +143,7 @@ ActiveRecord::Schema.define(version: 2021_03_03_232823) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone"
+    t.boolean "new_partner"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -133,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_03_03_232823) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "cards", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
   add_foreign_key "order_items", "orders"

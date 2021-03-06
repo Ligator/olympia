@@ -1,6 +1,28 @@
+<div class="container cart_totals <%= 'd-none' unless cart_products_count.positive? %>">
+  <div class="d-flex bd-highlight mb-3">
+    <div class="p-2 bd-highlight">
+      <div class="order_total">
+        <h3>Total <%= number_to_currency(@total, locale: @currency) %></h3>
+      </div>
+    </div>
+    <div class="ml-auto p-2 bd-highlight">
+      <button id="checkout-button" class="btn btn-primary"><%= t(:pay_order) %></button>
+    </div>
+  </div>
+</div>
 <div class="cart_content">
   <%= render "cart_content" %>
 </div>
+
+<script type="text/javascript">
+  $("body").on("change", ".update_quantity_in_cart", set_quantity);
+
+  function set_quantity(){
+    var quantity = $(this).val();
+    var product_id = $(this).closest("tr").data("product_id");
+    $("body").find(".order_total").load("<%= orders_update_quantity_in_cart_path %>?product_id=" + product_id + "&quantity=" + quantity)
+  }
+</script>
 
 <script type="text/javascript">
   var stripe = Stripe('<%= ENV["STRIPE_PUBLIC_KEY"] %>');

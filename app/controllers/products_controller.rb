@@ -3,7 +3,11 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    if params[:filter].present?
+      @products = Product.with_inventory.where("name ILIKE ? OR description ILIKE ?", "%#{params[:filter]}%", "%#{params[:filter]}%")
+    else
+      @products = Product.with_inventory.all
+    end
   end
 
   # GET /products/1 or /products/1.json
@@ -27,40 +31,29 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
+    price_in_cents = product_params[:price_in_cents].to_d * 100
     @store = current_user.store
-    @product = @store.products.new(product_params)
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to store_path(@product.store), notice: I18n.t(:product_was_created) }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
+    @product = @store.products.new(product_params.merge(price_in_cents: price_in_cents))
+    @product.save
   end
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to @product.store, notice: I18n.t(:product_was_updated) }
-        format.json { render :show, status: :ok, location: @product }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
+    price_in_cents = product_params[:price_in_cents].to_d * 100
+    @product.update(product_params.merge(price_in_cents: price_in_cents))
   end
 
   # DELETE /products/1 or /products/1.json
   def destroy
     @store = current_user.store
     @product = @store.products.find(params[:id])
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: I18n.t(:successfully_destroy_product) }
-      format.json { head :no_content }
+    if @product.comments.present?
+      flash[:alert] = "Un producto con comentarios no puede ser eliminado, si deseas que el producto desaparezca de la tienda coloque la cantidad de piezas en 0"
+      respond_to do |format|
+        format.html { redirect_to profile_products_path }
+      end
+    else
+      @product.destroy
     end
   end
 

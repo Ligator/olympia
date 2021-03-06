@@ -1,15 +1,37 @@
 <% if comment.valid? %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.user.email %>
-  </p>
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-  </p>
-  <% if current_user.eql?(comment.user) %>
-    <%= link_to 'Edit', edit_store_product_comment_path(@store, @product, comment), :remote=>true %>
-    <%= link_to 'Destroy', store_product_comment_path(@store, @product, comment), method: :delete, :remote=>true, class: "destroy_comment" %>
-  <% end %>
+  <div class="card mb-3" >
+  <div class="row no-gutters">
+    <div class="col-1 d-flex align-items-center justify-content-center">
+       <div class="d-flex align-items-center justify-content-center" style="max-height: 50%;">
+        <% if comment.user.avatar.present? %>
+          <% if Rails.env.production? %>
+            <%= cl_image_tag comment.user.avatar.key, class: "card-img-top rounded-circle", style: "min-width: 50px;" %>
+          <% else %>
+            <%= image_tag comment.user.avatar, class: "card-img-top rounded-circle", style: "min-width: 50px;" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="card-body">
+        <h5 class="card-title">
+
+          <% if comment.user.full_name.nil? %>
+            <%= comment.user.email %>
+          <% else %>
+            <%= comment.user.full_name %>
+          <% end %>
+        </h5>
+        <p class="card-text"><%= comment.body %></p>
+        <p class="card-text"><small class="text-muted"><%= comment.created_at %></small></p>
+        <% if current_user.eql?(comment.user) %>
+          <%= link_to t(:edit), edit_store_product_comment_path(@store, @product, comment), :remote=>true %>
+          <%= link_to t(:destroy), store_product_comment_path(@store, @product, comment), method: :delete, :remote=>true, class: "destroy_comment" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <% end %>
 

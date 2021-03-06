@@ -1,0 +1,108 @@
+<div id="show-product--modal" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-lg" id="show--modal-dialog">
+    <div class="modal-content pl-5 pr-5 pb-5" >
+      <div class="modal-header">
+        <h5 class="modal-title">Producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card p-4">
+          <div class="row">
+            <div class="col ">
+              <% if @product.images.present? %>
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" style="height: 100%">
+                  <% if @product.images.count > 1 %>
+                    <div id="carouselProduct_<%= @product.id %>" class="carousel slide mb-4" data-ride="carousel" >
+                      <div class="carousel-inner">
+                        <% @product.images.each_with_index do |image, i| %>
+                          <div class="carousel-item <%= 'active' if i === 0 %> d-flex justify-content-center" style="height: 300px;">
+                            <%= image_tag image, alt: @product.name, id: "product_image" %>
+                          </div>
+                        <% end %>
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselProduct_<%= @product.id %>" role="button" data-slide="prev">
+                        <button class="btn btn-secondary sm" style="">
+                          <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </button>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselProduct_<%= @product.id %>" role="button" data-slide="next">
+                        <button class="btn btn-secondary sm" style="">
+                          <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </button>
+                      </a>
+                    </div>
+                  <% elsif @product.images.present? %>
+                    <%= image_tag @product.images.first, class: "img-fluid", alt: @product.name, id: "product_image" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+           <!--  <div class="col">
+              <%= render "/products/product", product: @product, size: "" %>
+            </div> -->
+            <div class="col">
+              <h4 class="d-flex justify-content-center"><%= @product.name.capitalize %></h4>
+              <div class="container">
+                <div class="col">
+                  <h3>
+                    Price: <%= number_to_currency @product.full_price(@currency), locale: @currency %>
+                  </h3>
+                </div>
+                <div class="col">
+                    Size: <%= @product.size %>
+                </div>
+                <div class="col">
+                    Quantity: <%= @product.quantity %>
+                </div>
+              </div>
+              <div class="col mt-2">
+                  <%= @product.description %>
+              </div>
+              <div class="col d-flex justify-content-center mt-5">
+                <%= form_tag orders_add_to_cart_path(product_id: @product), remote: true do %>
+                  <%= submit_tag 'Add to cart', class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+          </div>
+          <div class="row">
+            <div class="col">
+              <%= link_to 'Store', store_path(@product.store) %> |
+              <%= link_to 'Products', products_path %> |
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container">
+          <h2>Comments</h2>
+          <div class="comments_content">
+            <%= render @product.comments %>
+          </div>
+          <div class="comments_alert">
+          </div>
+
+          <% if user_signed_in? %>
+            <h2>Add a comment:</h2>
+            <%= render 'comments/form' %>
+          <% end %>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.carousel').carousel({
+    interval: 2000
+  });
+  $('#card-body-name_and_price').hide();
+</script>

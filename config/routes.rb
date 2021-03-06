@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cards
   get 'profile/index', action: 'index', controller: 'profiles'
   get 'profile/show', action: 'show', controller: 'profiles'
   get 'profile/shipments', action: 'shipments', controller: 'profiles'
@@ -9,10 +10,10 @@ Rails.application.routes.draw do
   get 'orders/thank_you'
   post 'orders/add_to_cart'
   post 'orders/remove_from_cart'
-  get '/search', action: 'index', controller: 'searches'
-  post '/search', action: 'index', controller: 'searches'
+  post '/products/search', action: 'index', controller: 'products'
   post '/order_product_by_name', action: 'order_product_by_name', controller: 'searches'
   post 'orders/create_checkout_session'
+  get 'orders/update_quantity_in_cart'
   post 'languages/set_language'
 
   resources :products
@@ -27,6 +28,9 @@ Rails.application.routes.draw do
   end
   get "statics/home"
   get "statics/test_email"
+  get "statics/information"
+  get "statics/suscription"
+
 
   root to: "statics#home"
 end

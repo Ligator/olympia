@@ -1,5 +1,81 @@
-<h1>Products</h1>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+<!-- TODO: Remove dummy data to actual filters -->
+<p class="text-right p-0 m-0">
+  <%= link_to "<span class='fas fa-filter'></span> Filter".html_safe,
+    "#collapseExample",
+    class: "btn btn-outline-secondary",
+    data: { toggle: "collapse" },
+    aria: { expanded: "false", controls: "collapseExample" } %>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <div class="row">
+      <div class="col">
+        TODO: Remove dummy data to actual filters
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <h5>Sort by</h5>
+        <div class="list-group">
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            All <span class="badge badge-primary badge-pill">14</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light active" do %>
+            Popularity <span class="badge badge-primary badge-pill">10</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            Average rating <span class="badge badge-primary badge-pill">5</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            Newness <span class="badge badge-primary badge-pill">8</span>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-3 m-auto">
+        <h5>Price</h5>
+        <div class="list-group">
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light active" do %>
+            All <span class="badge badge-primary badge-pill">14</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            $0.00 - $500.00 <span class="badge badge-primary badge-pill">10</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            $500.00 - $1,000.00 <span class="badge badge-primary badge-pill">5</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            $1,000.00 - $2,000.00 <span class="badge badge-primary badge-pill">8</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            $2,000.00 and more <span class="badge badge-primary badge-pill">3</span>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-3">
+        <h5>Tipo</h5>
+        <div class="list-group">
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            All <span class="badge badge-primary badge-pill">14</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            Blanco <span class="badge badge-primary badge-pill">10</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            Negro <span class="badge badge-primary badge-pill">5</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light active" do %>
+            Rojo <span class="badge badge-primary badge-pill">8</span>
+          <% end %>
+          <%= link_to "#", class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center border-light" do %>
+            Azul <span class="badge badge-primary badge-pill">8</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5" id="products--index">
   <% @products.each do |product| %>
       <%= render "/products/product", product: product %>
   <% end %>

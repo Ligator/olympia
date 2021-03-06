@@ -3,18 +3,27 @@ class OrdersController < ApplicationController
 
   def cart
     set_quantities_hash
+    @total = cart_order_total
   end
 
   def add_to_cart
     @product = Product.find(params[:product_id])
     session["cart_#{current_or_guest_user.id}"] ||= {}
-    session["cart_#{current_or_guest_user.id}"][@product.id] ||= 0
-    session["cart_#{current_or_guest_user.id}"][@product.id] += 1
+    session["cart_#{current_or_guest_user.id}"][@product.id.to_s] ||= 0
+    session["cart_#{current_or_guest_user.id}"][@product.id.to_s] = session["cart_#{current_or_guest_user.id}"][@product.id.to_s] + 1
   end
 
   def remove_from_cart
+    @total = cart_order_total
     session["cart_#{current_or_guest_user.id}"].delete(params[:product_id])
     set_quantities_hash
+  end
+
+  def update_quantity_in_cart
+    @product = Product.find(params[:product_id])
+    session["cart_#{current_or_guest_user.id}"][@product.id.to_s] = params[:quantity].to_i
+    render html: "<h3>Total #{ActionController::Base.helpers.number_to_currency(cart_order_total, locale: @currency)}</h3>".html_safe,
+           layout: false
   end
 
   def create_checkout_session
@@ -28,7 +37,7 @@ class OrdersController < ApplicationController
         product: product,
         name: product.name,
         description: product.description,
-        price_in_cents: product.price_in_cents,
+        price_in_cents: product.full_price_in_cents(@currency),
         quantity: quantity,
         size: product.size
       })
@@ -41,7 +50,7 @@ class OrdersController < ApplicationController
             description: product.description,
             images: []
           },
-          unit_amount: product.price_in_cents,
+          unit_amount: product.full_price_in_cents(@currency),
         },
         quantity: quantity
       }
@@ -101,5 +110,14 @@ class OrdersController < ApplicationController
         @products.find { |product| product.id.to_s == product_id }
       end
     end
+  end
+
+  def cart_order_total
+    return 0 if session["cart_#{current_or_guest_user.id}"].blank?
+    total = 0
+    session["cart_#{current_or_guest_user.id}"].each do |product_id, quantity|
+      total += (Product.find(product_id).full_price(@currency) * quantity.to_i).to_d.round(2)
+    end
+    total.to_d.round(2)
   end
 end

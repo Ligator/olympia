@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>¡Pásele wera!</title>
+    <title>Color de mi pueblo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= favicon_link_tag 'favicon-96x96.png' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
     <script src="https://kit.fontawesome.com/101b932633.js" crossorigin="anonymous"></script>
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
-    <%= link_to root_path, style: "color: black;", class: "nav-link" do %>
-      <span class="far fa-arrow-alt-circle-left" style="font-size: 20px;"> Regresar</span>
-    <% end %>
+
     <div class="d-flex" id="wrapper">
 
       <!-- Sidebar -->
@@ -30,20 +28,12 @@
         </div>
         <div class="list-group list-group-flush">
           <%= link_to 'Perfil', profile_show_path, class: "list-group-item list-group-item-action bg-light" %>
-          <%= link_to 'Envíos', profile_shipments_path, class: "list-group-item list-group-item-action bg-light" %>
-          <%= link_to 'Ordenes', profile_orders_path, class: "list-group-item list-group-item-action bg-light" %>
+          <%= link_to 'Ventas', profile_orders_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Productos', profile_products_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Tarjeta', profile_cards_path, class: "list-group-item list-group-item-action bg-light" %>
         </div>
       </div>
-      <div id="change-state-toggle">
-        <button id="menu-toggle-right" class="btn btn-outline-secondary">
-          <i class="fas fa-angle-double-right" id="menu-toggle-right_icon"></i>
-        </button>
-        <button id="menu-toggle-left" class="btn btn-outline-secondary">
-          <i class="fas fa-angle-double-left" id="menu-toggle-left_icon"></i>
-        </button>
-      </div>
+
 
       <!-- /#sidebar-wrapper -->
 
@@ -68,6 +58,22 @@
         <% end %>
 
         <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col">
+              <div id="change-state-toggle">
+                <button id="menu-toggle-right" class="btn btn-outline-secondary">
+                  <i class="fas fa-angle-double-right" id="menu-toggle-right_icon" style="font-size: 20px;"></i>
+                </button>
+                <button id="menu-toggle-left" class="btn btn-outline-secondary">
+                  <i class="fas fa-angle-double-left" id="menu-toggle-left_icon" style="font-size: 20px;"></i>
+                </button>
+              </div>
+            </div>
+            <%= link_to root_path, class: "btn btn-outline-secondary d-flex align-item-center" do %>
+              Ir a Tienda<span class="far fa-arrow-alt-circle-right" style="font-size: 25px;"></span>
+            <% end %>
+          </div>
+
           <%= yield %>
         </div>
       </div>

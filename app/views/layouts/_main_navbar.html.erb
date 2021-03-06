@@ -2,13 +2,15 @@
   <div class="container">
     <div class="flex-column w-100 my-30" id="navbarCollapse">
       <ul class="navbar-nav flex-row w-100 justify-content-between">
-        <li class="nav-item active">
-          <%= link_to "¡Pásele wera!", statics_home_path, class: "navbar-brand my-auto" %>
+        <li class="nav-item active my-auto">
+          <%= link_to statics_home_path, class: "navbar-brand my-auto" do %>
+            <%= image_tag "LOGO1.png", style: "height: 70px; width: 100px" %>
+          <% end %>
         </li>
-        <li class="nav-item w-50">
-          <%= form_with url: "/search", local: false, remote: true, class: "mr-auto" do %>
+        <li class="nav-item w-50 my-auto">
+          <%= form_tag products_path, method: :get, class: "mr-auto" do %>
             <div class="input-group ">
-              <%= text_field_tag :filter, params[:filter], class: "form-control", placeholder: "Search", id: "input_search" %>
+              <%= text_field_tag :filter, params[:filter], class: "form-control", placeholder: t(:search), id: "input_search" %>
               <div class="input-group-append">
                 <%= button_tag class: "btn btn-outline-secondary" do %>
                   <span class="fas fa-search"></span>
@@ -17,16 +19,19 @@
             </div>
           <% end %>
         </li>
-        <li class="nav-item cart_icon">
+        <li class="nav-item cart_icon my-auto">
           <%= render "layouts/cart_icon" %>
         </li>
       </ul>
       <ul class="navbar-nav flex-row mb-2 d-flex align-content-around flex-wrap">
         <li class="nav-item flex-grow-2 <%= 'active' if controller_name == 'products' %>">
-          <%= link_to 'Shop', products_path, class: "nav-link mr-4" %>
+          <%= link_to t(:shop), products_path, class: "nav-link mr-4" %>
         </li>
         <li class="nav-item flex-grow-2 <%= 'active' if controller_name == 'stores' %>">
-          <%= link_to 'Producers', stores_path, class: "nav-link mr-4" %>
+          <%= link_to t(:about_us), stores_path, class: "nav-link mr-4" %>
+        </li>
+        <li class="nav-item flex-grow-2 <%= 'active' if controller_name == 'statics' %>">
+          <%= link_to t(:artesanos), statics_information_path, class: "nav-link mr-4" %>
         </li>
         <li class="nav-item flex-grow-1">
         </li>
@@ -46,11 +51,13 @@
           </a>
           <div class="dropdown-menu m-0" aria-labelledby="navbarDropdown">
             <% if user_signed_in? %>
-              <%= label_tag "Welcome", nil, class: "px-4 pt-2 text-muted" %>
+              <%= label_tag t(:welcome), nil, class: "px-4 pt-2 text-muted" %>
               <%= label_tag current_user.email, nil, class: "px-4 pt-2 text-muted" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "My Profile", profile_show_path, class: "dropdown-item" %>
-              <%= link_to current_user.store.name, store_path(current_user.store), class: "dropdown-item" if current_user.store.present? %>
+              <%= link_to t(:my_profile), profile_show_path, class: "dropdown-item" %>
+              <%= link_to "Mis Ventas", "profile/orders", class: "dropdown-item" if current_user.store.present? %>
+              <%= link_to "Mis Productos", "profile/products", class: "dropdown-item" if current_user.store.present? %>
+              <%= link_to "Mi Tarjeta", "profile/cards", class: "dropdown-item" if current_user.store.present? %>
               <div class="dropdown-divider"></div>
               <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
             <% else %>
