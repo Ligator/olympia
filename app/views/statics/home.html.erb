@@ -17,13 +17,11 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5" id="products--index" >
   <% @products.each do |product| %>
     <%= render "/products/product", product: product, size: "max-height: 150%, min-height: 100%" %>
   <% end %>
 </div>
-
 <script type="text/javascript">
   $(".list-group-item-action").on("click", function(){
     $(this).closest(".list-group").find("a").removeClass("active");

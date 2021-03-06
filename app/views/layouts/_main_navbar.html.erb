@@ -6,7 +6,7 @@
           <%= link_to "Color de mi pueblo", statics_home_path, class: "navbar-brand my-auto" %>
         </li>
         <li class="nav-item w-50">
-          <%= form_with url: "/search", local: false, remote: true, class: "mr-auto" do %>
+          <%= form_tag products_path, method: :get, class: "mr-auto" do %>
             <div class="input-group ">
               <%= text_field_tag :filter, params[:filter], class: "form-control", placeholder: t(:search), id: "input_search" %>
               <div class="input-group-append">
