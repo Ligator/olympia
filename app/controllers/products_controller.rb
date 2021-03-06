@@ -39,6 +39,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1 or /products/1.json
   def update
     @product.update(product_params)
+    binding.pry
   end
 
   # DELETE /products/1 or /products/1.json
