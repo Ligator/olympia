@@ -47,7 +47,14 @@ class ProductsController < ApplicationController
   def destroy
     @store = current_user.store
     @product = @store.products.find(params[:id])
-    @product.destroy
+    if @product.comments.present?
+      flash[:alert] = "Un producto con comentarios no puede ser eliminado, si deseas que el producto desaparezca de la tienda coloque la cantidad de piezas en 0"
+      respond_to do |format|
+        format.html { redirect_to profile_products_path }
+      end
+    else
+      @product.destroy
+    end
   end
 
   private
