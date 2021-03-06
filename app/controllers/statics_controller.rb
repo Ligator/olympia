@@ -10,4 +10,8 @@ class StaticsController < ApplicationController
 
   def information
   end
+
+  def suscription
+    TestEmailsMailer.send_email.deliver_now
+  end
 end
