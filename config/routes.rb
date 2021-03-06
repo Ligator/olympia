@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post 'orders/create_checkout_session'
   get 'orders/update_quantity_in_cart'
   post 'languages/set_language'
-
+  get "orders/show"
   resources :products
   resources :stores do
     resources :products do

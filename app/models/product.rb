@@ -13,7 +13,6 @@ class Product < ApplicationRecord
 
   scope :with_inventory, -> { where("quantity > ?", 0) }
 
-
   def full_price(currency)
     raise "Currency is missing" if currency.blank?
     case currency
