@@ -13,32 +13,17 @@
 
   <div class="field">
     <%= form.label :number_card, t(:number_card) %>
-    <%= form.number_field :number_card %>
+    <%= form.number_field :number_card, required: :value %>
   </div>
 
   <div class="field">
-    <%= form.label :name_bank, t(:name_bank) %>
+    <%= form.label :name_bank, t(:name_bank), required: :value %>
     <%= form.text_field :name_bank %>
   </div>
 
   <div class="field">
-    <%= form.label :titular_name, t(:titular_name)  %>
+    <%= form.label :titular_name, t(:titular_name), required: :value %>
     <%= form.text_field :titular_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :expiration_date, t(:expiration_date) %>
-    <%= form.date_select :expiration_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :type, t(:type) %>
-    <%= form.text_field :type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id, t(:user_id) %>
-    <%= form.text_field :user_id %>
   </div>
 
   <div class="actions">

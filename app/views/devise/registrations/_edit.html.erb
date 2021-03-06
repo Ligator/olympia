@@ -31,12 +31,12 @@
           <div class="form-group">
             <div class="row">
               <div class="col-sm col-md p-2">
-                <%= f.label :first_name, t(:first_name) %>
-                <%= f.text_field :first_name, class: "justify-content form-control", autofocus: true, autocomplete: "first_name" %>
+                <%= f.label :first_name %>
+                <%= f.text_field :first_name, class: "justify-content form-control", autofocus: true, autocomplete: "first_name", required: :value %>
               </div>
               <div class="col-sm col-md p-2">
-                <%= f.label :last_name,t(:last_name)%>
-                <%= f.text_field :last_name, class: "justify-content form-control", autofocus: true, autocomplete: "last_name" %>
+                <%= f.label :last_name %>
+                <%= f.text_field :last_name, class: "justify-content form-control", autofocus: true, autocomplete: "last_name", required: :value %>
               </div>
             </div>
           </div>
@@ -44,11 +44,11 @@
             <div class="row">
               <div class="col-sm col-md p-2">
                 <%= f.label :email, t("activerecord.attributes.user.email") %>
-                <%= f.email_field :email, class: "justify-content form-control", autofocus: true, autocomplete: "email" %>
+                <%= f.email_field :email, class: "justify-content form-control", autofocus: true, autocomplete: "email", required: :value %>
               </div>
               <div class="col-sm col-md p-2">
-                <%= f.label :phone, t(:phone_number)%>
-                <%= f.text_field :phone, class: "justify-content form-control", autofocus: true, autocomplete: "phone" %>
+                <%= f.label :phone %>
+                <%= f.text_field :phone, class: "justify-content form-control", autofocus: true, autocomplete: "phone", required: :value %>
               </div>
             </div>
           </div>
@@ -61,26 +61,26 @@
             <%= fields_for :address, resource.address do |address| %>
               <div class="row">
                 <div class="col-sm col-md p-2">
-                  <%= address.text_field :street,class: "form-control", placeholder: t(:street), id: "validationTooltip09"%>
+                  <%= address.text_field :street,class: "form-control", placeholder: "Calle", id: "validationTooltip09", required: :value %>
                 </div>
                 <div class="col-sm col-md p-2">
-                 <%= address.text_field :number,class: "form-control", placeholder: t(:number)%>
+                 <%= address.text_field :number,class: "form-control", placeholder: "Número", required: :value %>
                 </div>
                 <div class="col-sm col-md p-2">
-                 <%= address.text_field :postal_code,class: "form-control", placeholder: t(:zip)%>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm col-md p-2">
-                  <%= address.text_field :colony,class: "form-control", placeholder: t(:colonia), id: "validationTooltip10"%>
+                 <%= address.text_field :postal_code,class: "form-control", placeholder: "C.P.", required: :value %>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm col-md p-2">
-                  <%= address.text_field :city,class: "form-control", placeholder: t(:city), id: "validationTooltip11"%>
+                  <%= address.text_field :colony,class: "form-control", placeholder: "Colonia", id: "validationTooltip10", required: :value %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm col-md p-2">
+                  <%= address.text_field :city,class: "form-control", placeholder: t(:city), id: "validationTooltip11", required: :value %>
                 </div>
                 <div class="col-sm col-md p-2">
-                  <%= address.text_field :state,class: "form-control", placeholder: t(:state), id: "validationTooltip12"%>
+                  <%= address.text_field :state,class: "form-control", placeholder: t(:state), id: "validationTooltip12", required: :value %>
                 </div>
 
               </div>

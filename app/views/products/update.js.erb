@@ -1,4 +1,4 @@
 $('#render_products_in_profile').html("<%= j (render current_user.store.products) %>");
-$('#show-product--modal').modal('show')
-$('#show-product').slideDown(350)
+$('#edit-product--modal').modal('hide')
+$('#edit-product').slideDown(350)
 $(".button_edit_product").show();

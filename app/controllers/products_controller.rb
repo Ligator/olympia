@@ -31,14 +31,16 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
+    price_in_cents = product_params[:price_in_cents].to_d * 100
     @store = current_user.store
-    @product = @store.products.new(product_params)
+    @product = @store.products.new(product_params.merge(price_in_cents: price_in_cents))
     @product.save
   end
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
-    @product.update(product_params)
+    price_in_cents = product_params[:price_in_cents].to_d * 100
+    @product.update(product_params.merge(price_in_cents: price_in_cents))
   end
 
   # DELETE /products/1 or /products/1.json
