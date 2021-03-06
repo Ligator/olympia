@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'users/registrations' }
   devise_scope :user do
     get 'user/edit', to: 'users/registrations#edit'
+    put 'user/address', to: 'users/registrations#update_current_or_guest_user'
   end
   get "statics/home"
   get "statics/test_email"

@@ -31,6 +31,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def update_current_or_guest_user
+    current_or_guest_user
+    binding.pry
+  end
+
   # DELETE /resource
   # def destroy
   #   super

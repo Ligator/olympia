@@ -3,7 +3,7 @@
   <%= render "cart_content" %>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $("body").on("change", ".update_quantity_in_cart", set_quantity);
 
   function set_quantity(){
@@ -11,9 +11,9 @@
     var product_id = $(this).closest("tr").data("product_id");
     $("body").find(".order_total").load("<%= orders_update_quantity_in_cart_path %>?product_id=" + product_id + "&quantity=" + quantity)
   }
-</script>
+</script> -->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   var stripe = Stripe('<%= ENV["STRIPE_PUBLIC_KEY"] %>');
   var checkoutButton = document.getElementById('checkout-button');
 
@@ -39,6 +39,12 @@
       console.error('Error:', error);
     });
   });
+</script> -->
+
+<script>
+  $( "#checkout-button-form" ).on("click",function() {
+    $( "#edit_resource_name" ).submit();
+  });
 </script>
 
 <div id="edit-profile--modal"  tabindex="-1">
@@ -47,8 +53,8 @@
       <div class="modal-header">
         <h5 class="modal-title"><%= t(:address)%></h5>
       </div>
-      <% resource = User.new %>
-      <%= form_for(resource, as: "resource_name", url: "", html: { method: :put }, local: false) do |f| %>
+      <% resource = current_or_guest_user %>
+      <%= form_for(resource, as: "resource_name", url: user_address_path, html: { method: :put }, local: false ) do |f| %>
         <div class="modal-body">
           <%= render "devise/shared/error_messages", resource: resource %>
           <div class="row form-group">
@@ -124,6 +130,7 @@
       </div>
     </div>
     <div class="p-2 bd-highlight">
+      <%= link_to t(:pay_order), false, id: "checkout-button-form" %>
       <button id="checkout-button" class="btn btn-primary"><%= t(:pay_order) %></button>
     </div>
   </div>
