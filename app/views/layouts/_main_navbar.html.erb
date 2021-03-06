@@ -57,7 +57,7 @@
               <%= link_to t(:my_profile), profile_show_path, class: "dropdown-item" %>
               <%= link_to "Mis Ventas", profile_shipments_path, class: "dropdown-item" if current_user.store.present? %>
               <%= link_to "Mis Productos", profile_products_path, class: "dropdown-item" if current_user.store.present? %>
-              <%= link_to "Mi Tarjeta", "profile/cards", class: "dropdown-item" if current_user.store.present? %>
+              <%= link_to "Mi Tarjeta", profile_cards_path, class: "dropdown-item" if current_user.store.present? %>
               <div class="dropdown-divider"></div>
               <%= link_to t(:log_out), destroy_user_session_path, class: "dropdown-item", method: :delete %>
             <% else %>
