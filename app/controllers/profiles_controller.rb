@@ -13,6 +13,7 @@ class ProfilesController < ApplicationController
     end
     if current_user.applicant? && current_user.store.nil?
       current_user.create_store
+      current_user.update(role: "seller")
     end
     render layout: 'profile'
   end
