@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'profile/sales', action: 'sales', controller: 'profiles'
   get 'profile/products', action: 'products', controller: 'profiles'
   get 'profile/cards', action: 'cards', controller: 'profiles'
+  get 'profile/users', action: 'users', controller: 'profiles'
   get 'orders/cart'
   get 'orders/thank_you'
   post 'orders/add_to_cart'

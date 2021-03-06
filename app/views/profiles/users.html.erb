@@ -1,0 +1,40 @@
+<%= link_to "Applicants", profile_users_path(role: "applicant"), class: "btn btn-secondary" %>
+<%= link_to "Sellers", profile_users_path(role: "seller"), class: "btn btn-secondary" %>
+<%= link_to "Customers", profile_users_path(role: "customer"), class: "btn btn-secondary" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Contacto</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <th scope="row"><%= user.id %></th>
+        <td><%= user.full_name %></td>
+        <td>
+          <div><%= user.email %></div>
+          <div><%= user.phone %></div>
+        </td>
+        <td><%= user.role %></td>
+        <td><%= link_to "Aceptar", "#", class: "btn btn-primary" if user.applicant? %></td>
+        <td><%= link_to "Rechazar", "#", class: "btn btn-secondary" if user.applicant? %></td>
+      </tr>
+      <% if user.applicant? %>
+        <tr>
+          <td colspan="7">
+            <% user.demo_images.each do |image| %>
+              <%= image_tag image, style: "height: 100px; width: 100px" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

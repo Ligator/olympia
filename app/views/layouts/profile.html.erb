@@ -27,6 +27,7 @@
           </td>
         </div>
         <div class="list-group list-group-flush">
+          <%= link_to 'Users', profile_users_path, class: "list-group-item list-group-item-action bg-light" if current_user.admin? %>
           <%= link_to 'Perfil', profile_show_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Ventas', profile_shipments_path, class: "list-group-item list-group-item-action bg-light" %>
           <%= link_to 'Productos', profile_products_path, class: "list-group-item list-group-item-action bg-light" %>

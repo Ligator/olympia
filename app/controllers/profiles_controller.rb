@@ -3,6 +3,13 @@ class ProfilesController < ApplicationController
     render layout: 'profile'
   end
 
+  def users
+    redirect_to profile_show_path and return unless current_user.admin?
+    params[:role] = "applicant" unless %w[seller customer].include?params[:role]
+    @users = User.where(guest: false).where(role: params[:role])
+    render layout: 'profile'
+  end
+
   def show
     if current_user.blank?
       redirect_to new_user_session_path
