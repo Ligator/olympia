@@ -23,12 +23,6 @@
       <%= card.titular_name %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <h4>Vencimiento</h4>
-      <%= card.expiration_date %>
-    </div>
-  </div>
   <td>
     <%= link_to 'Edit', edit_card_path(card), class: "btn btn-warning m-2", :remote=>true %>
     <%= link_to 'Destroy', card, class: "btn btn-danger m-2", method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %>

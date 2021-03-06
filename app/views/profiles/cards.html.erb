@@ -5,11 +5,12 @@
     <% if current_user.card.present? %>
       <%= render current_user.card %>
     <% end %>
+    <% if current_user.card.nil? %>
+      <%= link_to "Nueva Tarjeta", new_card_path, :remote=>true %>
+    <% end %>
   </div>
 </table>
-  <% if current_user.card.nil? %>
-    <%= link_to "Nueva Tarjeta", new_card_path, :remote=>true %>
-  <% end %>
+
   <div id="new-card" style="display:none;"></div>
   <div id="edit-card" style="display:none;"></div>
 </div>

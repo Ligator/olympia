@@ -10,8 +10,9 @@
   </div>
 <% end %>
 
-<div class="row">
-  <div class="col-sm-6 col-12">
+<div class="row p-2">
+  <div class="col">
+    <h5 class="modal-title">Datos del Producto</h5>
     <div class="form-group">
       <%= form.label :images, "Fotos", class: "col-form-label" %>
       <div>
@@ -51,28 +52,6 @@
       <div>
         <%= form.text_field :quantity, class: 'form-control', required: :value %>
       </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-12">
-    <!-- Package -->
-    <div class="form-group">
-      <%= form.label :weight, "Peso en Kilogramos (Kg)", class: "col-form-label" %>
-      <%= form.text_field :weight, class: 'form-control', required: :value %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :height, "Altura en centímetros (cm)", class: "col-form-label" %>
-      <%= form.text_field :height, class: 'form-control', required: :value %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :width, "Ancho en centímetros (cm)", class: "col-form-label" %>
-      <%= form.text_field :width, class: 'form-control', required: :value %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :length, "Largo en centímetros (cm)", class: "col-form-label" %>
-      <%= form.text_field :length, class: 'form-control', required: :value %>
     </div>
   </div>
 </div>

@@ -21,34 +21,46 @@
             </div>
           <% end %>
 
-          <%= form.label :images, class: "p-2 " %>
-          <%= form.file_field :images, multiple: true, class: 'form-control', direct_upload: true %>
-
-          <div class="field">
-            <%= form.label :name %>
-            <%= form.text_field :name, required: :value %>
+          <div class="form-group">
+            <%= form.label :images, "Fotos", class: "col-form-label" %>
+            <div>
+              <%= form.file_field :images, multiple: true, class: 'form-control-file', direct_upload: true %>
+            </div>
           </div>
 
-          <div class="field">
-            <%= form.label :description %>
-            <%= form.text_field :description, required: :value %>
+          <div class="form-group">
+            <%= form.label :name, "Nombre del Producto", class: "col-form-label" %>
+            <div>
+              <%= form.text_field :name, class: 'form-control', required: :value %>
+            </div>
           </div>
 
-          <div class="field">
-            <%= form.label :price_in_cents %>
-            <%= form.number_field :price_in_cents, required: :value %>
+          <div class="form-group">
+            <%= form.label :description, "Detalles del Producto", class: "col-form-label" %>
+            <div>
+              <%= form.text_field :description, class: 'form-control', required: :value %>
+            </div>
           </div>
 
-          <div class="field">
-            <%= form.label :size %>
-            <%= form.text_field :size, required: :value %>
+          <div class="form-group">
+            <%= form.label :size, "Talla", class: "col-form-label" %>
+            <%= form.text_field :size, class: 'form-control', required: :value %>
           </div>
 
-          <div class="field">
-            <%= form.label :quantity %>
-            <%= form.number_field :quantity, required: :value %>
+          <!-- Inventario -->
+          <div class="form-group">
+            <%= form.label :price_in_cents, "Precio", class: "col-form-label" %>
+            <div>
+              <%= form.text_field :price_in_cents, class: 'form-control', required: :value %>
+            </div>
           </div>
 
+          <div class="form-group">
+            <%= form.label :quantity, "Cantidad disponible", class: "col-form-label" %>
+            <div>
+              <%= form.text_field :quantity, class: 'form-control', required: :value %>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
