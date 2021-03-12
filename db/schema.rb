@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_114224) do
+ActiveRecord::Schema.define(version: 2021_03_12_013656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,37 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "agremment_comments", force: :cascade do |t|
+    t.bigint "agremments_id", null: false
+    t.bigint "users_id", null: false
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agremments_id"], name: "index_agremment_comments_on_agremments_id"
+    t.index ["users_id"], name: "index_agremment_comments_on_users_id"
+  end
+
+  create_table "agremment_votes", force: :cascade do |t|
+    t.bigint "agremments_id", null: false
+    t.bigint "proposals_id", null: false
+    t.bigint "users_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agremments_id"], name: "index_agremment_votes_on_agremments_id"
+    t.index ["proposals_id"], name: "index_agremment_votes_on_proposals_id"
+    t.index ["users_id"], name: "index_agremment_votes_on_users_id"
+  end
+
+  create_table "agremments", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.text "state"
+    t.bigint "users_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_id"], name: "index_agremments_on_users_id"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -120,6 +151,18 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
+  create_table "proposals", force: :cascade do |t|
+    t.string "body"
+    t.integer "votes_count"
+    t.decimal "votes_porcentage"
+    t.bigint "users_id", null: false
+    t.bigint "agremments_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agremments_id"], name: "index_proposals_on_agremments_id"
+    t.index ["users_id"], name: "index_proposals_on_users_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -152,6 +195,12 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "agremment_comments", "agremments", column: "agremments_id"
+  add_foreign_key "agremment_comments", "users", column: "users_id"
+  add_foreign_key "agremment_votes", "agremments", column: "agremments_id"
+  add_foreign_key "agremment_votes", "proposals", column: "proposals_id"
+  add_foreign_key "agremment_votes", "users", column: "users_id"
+  add_foreign_key "agremments", "users", column: "users_id"
   add_foreign_key "cards", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
@@ -159,5 +208,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
+  add_foreign_key "proposals", "agremments", column: "agremments_id"
+  add_foreign_key "proposals", "users", column: "users_id"
   add_foreign_key "stores", "users"
 end

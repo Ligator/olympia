@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @agremment.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @agremment.description %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @agremment.state %>
+</p>
+
+<p>
+  <strong>Users:</strong>
+  <%= @agremment.users_id %>
+</p>
+
+<%= link_to 'Edit', edit_agremment_path(@agremment) %> |
+<%= link_to 'Back', agremments_path %>
