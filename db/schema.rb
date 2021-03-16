@@ -10,16 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_114224) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2021_03_15_212443) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -38,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -50,10 +47,41 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
     t.string "postal_code"
     t.string "city"
     t.string "state"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "agreement_comments", force: :cascade do |t|
+    t.integer "agreement_id", null: false
+    t.integer "user_id", null: false
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agreement_id"], name: "index_agreement_comments_on_agreement_id"
+    t.index ["user_id"], name: "index_agreement_comments_on_user_id"
+  end
+
+  create_table "agreement_votes", force: :cascade do |t|
+    t.integer "agreement_id", null: false
+    t.integer "proposal_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agreement_id"], name: "index_agreement_votes_on_agreement_id"
+    t.index ["proposal_id"], name: "index_agreement_votes_on_proposal_id"
+    t.index ["user_id"], name: "index_agreement_votes_on_user_id"
+  end
+
+  create_table "agreements", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "state"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_agreements_on_user_id"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -62,16 +90,16 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
     t.string "titular_name"
     t.date "expiration_date"
     t.string "type"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.text "body"
-    t.bigint "product_id", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_comments_on_product_id"
@@ -79,8 +107,8 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "product_id"
+    t.integer "order_id", null: false
+    t.integer "product_id"
     t.string "name"
     t.text "description"
     t.integer "price_in_cents"
@@ -93,7 +121,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
+    t.integer "user_id"
     t.integer "amount_in_cents"
     t.string "state", default: "pending"
     t.string "payment_method"
@@ -109,7 +137,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
     t.integer "price_in_cents"
     t.string "size"
     t.integer "quantity"
-    t.bigint "store_id", null: false
+    t.integer "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "weight"
@@ -120,10 +148,22 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
+  create_table "proposals", force: :cascade do |t|
+    t.string "body"
+    t.integer "votes_count"
+    t.decimal "votes_porcentage"
+    t.integer "user_id", null: false
+    t.integer "agreement_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agreement_id"], name: "index_proposals_on_agreement_id"
+    t.index ["user_id"], name: "index_proposals_on_user_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_stores_on_user_id"
@@ -152,6 +192,12 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "agreement_comments", "agreements"
+  add_foreign_key "agreement_comments", "users"
+  add_foreign_key "agreement_votes", "agreements"
+  add_foreign_key "agreement_votes", "proposals"
+  add_foreign_key "agreement_votes", "users"
+  add_foreign_key "agreements", "users"
   add_foreign_key "cards", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
@@ -159,5 +205,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_114224) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
+  add_foreign_key "proposals", "agreements"
+  add_foreign_key "proposals", "users"
   add_foreign_key "stores", "users"
 end
