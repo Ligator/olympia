@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id             :bigint           not null, primary key
+#  name           :string
+#  description    :string
+#  price_in_cents :integer
+#  size           :string
+#  quantity       :integer
+#  store_id       :bigint           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  weight         :integer
+#  height         :integer
+#  width          :integer
+#  length         :integer
+#  delivery_cost  :integer
+#
 class Product < ApplicationRecord
   has_many_attached :images, dependent: :destroy
   belongs_to :store

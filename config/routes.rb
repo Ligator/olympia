@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :proposals
+  resources :agreements
   resources :cards
   get 'profile/index', action: 'index', controller: 'profiles'
   get 'profile/show', action: 'show', controller: 'profiles'

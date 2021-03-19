@@ -33,6 +33,11 @@
         <li class="nav-item flex-grow-2 <%= 'active' if controller_name == 'statics' %>">
           <%= link_to t(:artesanos), statics_information_path, class: "nav-link mr-4" %>
         </li>
+        <%if current_user.present?%>
+          <li class="nav-item flex-grow-2 <%= 'active' if controller_name == 'statics' %>">
+            <%= link_to "Opiniones", agreements_path, class: "nav-link mr-4" %>
+          </li>
+        <% end %>
         <li class="nav-item flex-grow-1">
         </li>
         <li class="nav-item flex-grow-2">

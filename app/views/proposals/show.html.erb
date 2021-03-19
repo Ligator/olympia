@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @proposal.body %>
+</p>
+
+<p>
+  <strong>Votes count:</strong>
+  <%= @proposal.votes_count %>
+</p>
+
+<p>
+  <strong>Votes porcentage:</strong>
+  <%= @proposal.votes_porcentage %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @proposal.user_id %>
+</p>
+
+<p>
+  <strong>Agreement:</strong>
+  <%= @proposal.agreement_id %>
+</p>
+
+<%= link_to 'Edit', edit_proposal_path(@proposal) %> |
+<%= link_to 'Back', agreements_path %>
