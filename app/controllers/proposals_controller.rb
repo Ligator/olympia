@@ -12,7 +12,9 @@ class ProposalsController < ApplicationController
 
   # GET /proposals/new
   def new
+    @agreement = Agreement.find(params[:agreement_id])
     @proposal = Proposal.new
+
   end
 
   # GET /proposals/1/edit
@@ -21,15 +23,15 @@ class ProposalsController < ApplicationController
 
   # POST /proposals or /proposals.json
   def create
+
+    @agreement = Agreement.find(params[:proposal][:agreement_id])
     @proposal = Proposal.new(proposal_params)
 
     respond_to do |format|
       if @proposal.save
         format.html { redirect_to @proposal, notice: "Proposal was successfully created." }
-        format.json { render :show, status: :created, location: @proposal }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @proposal.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,6 +66,6 @@ class ProposalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def proposal_params
-      params.require(:proposal).permit(:body, :votes_count, :votes_porcentage, :user_id, :agreement_id)
+      params.require(:proposal).permit(:body, :votes_count, :votes_porcentage, :agreement_id).merge(user: current_user)
     end
 end

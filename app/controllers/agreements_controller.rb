@@ -8,10 +8,12 @@ class AgreementsController < ApplicationController
 
   # GET /agreements/1 or /agreements/1.json
   def show
+    @proposals = Proposal.all.where(agreement_id: @agreement.id)
   end
 
   # GET /agreements/new
   def new
+    # params(:user_id)
     @agreement = Agreement.new
   end
 
@@ -64,6 +66,6 @@ class AgreementsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def agreement_params
-      params.require(:agreement).permit(:title, :description, :state, :user_id)
+      params.require(:agreement).permit(:title, :description, :state).merge(user: current_user)
     end
 end

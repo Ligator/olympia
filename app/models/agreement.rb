@@ -12,4 +12,7 @@
 #
 class Agreement < ApplicationRecord
   belongs_to :user
+  has_many :proposal
+  has_many :agreement_comment
+  validates_presence_of :title, :description, :state
 end

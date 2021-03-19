@@ -19,7 +19,7 @@
         <td><%= agreement.title %></td>
         <td><%= agreement.description %></td>
         <td><%= agreement.state %></td>
-        <td><%= agreement.user_id %></td>
+        <td><%= agreement.user.email %></td>
         <td><%= link_to 'Show', agreement %></td>
         <td><%= link_to 'Edit', edit_agreement_path(agreement) %></td>
         <td><%= link_to 'Destroy', agreement, method: :delete, data: { confirm: 'Are you sure?' } %></td>

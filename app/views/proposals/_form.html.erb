@@ -26,17 +26,13 @@
     <%= form.text_field :votes_porcentage %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
 
   <div class="field">
     <%= form.label :agreement_id %>
-    <%= form.text_field :agreement_id %>
+    <%= form.text_field :agreement_id, value: @agreement.id %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit%>
   </div>
 <% end %>

@@ -19,6 +19,49 @@
   <strong>User:</strong>
   <%= @agreement.user_id %>
 </p>
+<p>
+  <strong>Agreement ID</strong>
+  <%= @agreement.id%>
+</p>
+
+
+
+<h1>Proposals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>Votes count</th>
+      <th>Votes porcentage</th>
+      <th>User</th>
+      <th>Agreement</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proposals.each do |proposal| %>
+      <tr>
+        <td><%= proposal.body %></td>
+        <td><%= proposal.votes_count %></td>
+        <td><%= proposal.votes_porcentage %></td>
+        <td><%= proposal.user_id %></td>
+        <td><%= proposal.agreement_id %></td>
+        <td><%= link_to 'Show', proposal %></td>
+        <td><%= link_to 'Edit', edit_proposal_path(proposal) %></td>
+        <td><%= link_to 'Destroy', proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Proposal', new_proposal_path(agreement_id: @agreement.id) %>
+
 
 <%= link_to 'Edit', edit_agreement_path(@agreement) %> |
 <%= link_to 'Back', agreements_path %>
+
+
